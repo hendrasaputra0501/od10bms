@@ -1,4 +1,5 @@
 # Odoo BMS Custom Excluded File/Folders
+# test tambah
 .hg/
 .hg*
 .ssh/
