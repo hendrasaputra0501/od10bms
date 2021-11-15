@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.module.category" id="module_category_c10i_bm">
+            <field name="name">Building Management</field>
+            <field name="description">Building Management</field>
+            <field name="sequence">900</field>
+        </record>
+
+        <record id="group_bm_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_category_c10i_bm"/>
+            <field name="comment">for Office User.</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+        <record id="group_bm_utility_user" model="res.groups">
+            <field name="name">User Utility </field>
+            <field name="category_id" ref="module_category_c10i_bm"/>
+            <field name="comment">for Utility User.</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+        <record id="group_bm_billing_user" model="res.groups">
+            <field name="name">User Billing</field>
+            <field name="category_id" ref="module_category_c10i_bm"/>
+            <field name="comment">for Billing User.</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+        <record id="group_bm_manager" model="res.groups">
+            <field name="name">User Manager</field>
+            <field name="comment">for Manager.</field>
+            <field name="category_id" ref="module_category_c10i_bm"/>
+            <field name="implied_ids" eval="[(4, ref('c10i_bm.group_bm_user')),(4, ref('c10i_bm.group_bm_utility_user')),(4, ref('c10i_bm.group_bm_utility_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+    </data>
+</odoo>

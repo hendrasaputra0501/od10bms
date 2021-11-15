@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- UOM CATEGORY -->
+        <record forcecreate="True" id="uom_categ_temperature" model="product.uom.categ">
+            <field name="name">Temperature</field>
+        </record>
+
+        <record forcecreate="True" id="uom_categ_lhp" model="product.uom.categ">
+            <field name="name">LHP</field>
+        </record>
+
+<!-- UOM -->
+
+        <!-- <record forcecreate="True" id="uom_length_mm" model="product.uom">
+            <field name="name">mm</field>
+            <field name="category_id" ref="product.uom_categ_length"/>
+            <field name="uom_type">smaller</field>
+            <field name="factor">1000</field>
+        </record> -->
+
+        <record forcecreate="True" id="uom_temperature_celcius" model="product.uom">
+            <field name="name">Celcius</field>
+            <field name="category_id" ref="uom_categ_temperature"/>
+            <field name="uom_type">reference</field>
+        </record>
+
+        <record forcecreate="True" id="uom_lori_lori" model="product.uom">
+            <field name="name">Lori</field>
+            <field name="category_id" ref="uom_categ_lhp"/>
+            <field name="uom_type">reference</field>
+        </record>
+
+        <record forcecreate="True" id="uom_lori_lori_kg" model="product.uom">
+            <field name="name">Kg/Lori</field>
+            <field name="category_id" ref="uom_categ_lhp"/>
+            <field name="uom_type">reference</field>
+        </record>
+
+        <record forcecreate="True" id="uom_kg_liter" model="product.uom">
+            <field name="name">Kg/Liter</field>
+            <field name="category_id" ref="uom_categ_lhp"/>
+            <field name="uom_type">reference</field>
+        </record>
+    </data>
+</odoo>

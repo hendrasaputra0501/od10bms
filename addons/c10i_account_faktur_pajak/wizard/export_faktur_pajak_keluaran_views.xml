@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_export_faktur_keluaran" model="ir.actions.act_window">
+            <field name="name">Export Faktur Pajak Keluaran</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">export.faktur.keluaran</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="export_faktur_keluaran_form" model="ir.ui.view">
+            <field name="name">export.faktur.keluaran.form</field>
+            <field name="model">export.faktur.keluaran</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Export Pajak Keluaran" >
+                    <p>
+                        Pilih Tagihan tertentu atau biarkan Odoo memilih Tagihan yang belum di Export saja.
+                    </p>
+                    <field name="invoice_ids" domain="[('state','=','open'),('faktur_keluaran_id','!=', False),('type','=','out_invoice')]">
+                        <tree>
+                            <field name="number" />
+                            <field name="nomer_seri_faktur_pajak" />
+                        </tree>
+                    </field>
+                    <p>
+                        Klik tombol Export di bawah untuk mulai export Faktur Pajak Keluaran.
+                        Data yang diexport adalah Customer Invoice yang berstatus Open dan belum diexport ke E-Faktur.
+                    </p>
+                    <p>
+                        Setelah proses export Faktur Pajak Keluaran selesai dilakukan,
+                        download file:
+                    </p>
+                    <p>
+                        <a href="/c10i_account_faktur_pajak/static/format_faktur_keluaran.csv" target='_blank'>
+                            <!-- <img src="/c10i_account_faktur_pajak/static/src/img/export.png"/> -->
+                            <b>format_faktur_keluaran.csv</b>
+                        </a>
+                    </p>
+                    <p>
+                        Lalu import ke program E-Faktur DJP melalui menu <b>Referensi - Pajak Keluaran - Import</b>
+                    </p>
+                    <footer>
+                        <button string="Export" name="confirm_button" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="menu_export_faktur_keluaran" parent="account.menu_finance_legal_statement" sequence="60"
+            name="Export Faktur Keluaran" action="action_export_faktur_keluaran"/>
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+id,name,display,second_attribute,with_attrs
+report_tag_attribute_1,t-field,False,,"class,style,groups,t-field,t-field-options,t-options,t-if"
+report_tag_attribute_3,t-foreach,True,t-as,"class,style,groups,t-foreach"
+report_tag_attribute_5,t-if,True,,"class,style,groups,t-if"
+report_tag_attribute_6,class,False,,"class,style,groups,t-field,t-foreach,t-if,t-esc,t-set,t-field-options,t-options,t-raw"
+report_tag_attribute_7,style,False,,"class,style,groups,t-field,t-foreach,t-if,t-esc,t-set,t-field-options,t-options,t-raw"
+report_tag_attribute_8,t-esc,False,,"class,style,groups,t-esc,t-options,t-if"
+report_tag_attribute_9,t-field-options,False,,"class,style,groups,t-field,t-field-options"
+report_tag_attribute_10,t-options,False,,"class,style,groups,t-esc,t-options"
+report_tag_attribute_12,t-set,True,t-value,"class,style,groups,t-set"
+report_tag_attribute_13,groups,False,,"class,style,groups,t-field,t-foreach,t-if,t-esc,t-set,t-field-options,t-options,t-raw"
+report_tag_attribute_14,t-raw,False,,"class,style,groups,t-raw,t-if"

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_weighbridge_recap_metro_form" model="ir.ui.view">
+        <field name="name">view.wizard.weighbridge.recap.metro.form</field>
+        <field name="model">wizard.weighbridge.recap.metro</field>
+        <field name="arch" type="xml">
+            <form string="Rekaptulasi Timbangan" create="false" delete="false">
+                <header>
+                    <button name="mark_as_valid" string="Mark as Valid" type="object" />
+                    <button name="print_internal_recap" string="Print Internal" type="object" class="oe_highlight"/>
+                    <button name="print_beacukai_recap" string="Print Beacukai" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="wb_picking_type_id" options="{'no_open': True, 'no_edit': True, 'no_create': True}"/>
+                            <field name="trans_type" invisible="1"/>
+                            <field name="target_data" />
+                        </group>
+                        <group>
+                            <field name="partner_id" options="{'no_open': True, 'no_edit': True, 'no_create': True}"/>
+                            <field name="sale_id" attrs="{'invisible': [('trans_type','!=','sale')]}" options="{'no_open': True, 'no_edit': True, 'no_create': True}" domain="[('partner_id','=',partner_id)]"/>
+                            <field name="purchase_id" attrs="{'invisible': [('trans_type','!=','purchase')]}" options="{'no_open': True, 'no_edit': True, 'no_create': True}" domain="[('partner_id','=',partner_id)]"/>
+                        </group>
+                    </group>
+                    <group string="Filter Lainnya jika perlu">
+                        <group>
+                            <field name="start_date" />
+                            <field name="stop_date" />
+                        </group>
+                        <group>
+                            <field name="vehicle_no" />
+                        </group>
+                    </group>
+                    <button name="generate_data_timbang" string="Generate Data Timbang" type="object" class="oe_highlight" />
+                    <field name="line_ids" nolabel="1">
+                        <tree editable="bottom" create="false">
+                            <field name="weighbridge_id" readonly="1"/>
+                            <field name="contract_id" readonly="1"/>
+                            <field name="partner_id" readonly="1"/>
+                            <!-- <field name="transporter_id" readonly="1"/> -->
+                            <field name="transporter_name" readonly="1"/>
+                            <field name="vehicle_number" readonly="1"/>
+                            <field name="driver_name" readonly="1"/>
+                            <field name="bruto" />
+                            <field name="tarra" />
+                            <field name="netto" />
+                            <field name="partner_bruto" />
+                            <field name="partner_tarra" />
+                            <field name="partner_netto" readonly="1"/>
+                            <field name="internal_quality_ffa" />
+                            <field name="internal_quality_ka" />
+                            <field name="internal_quality_kk" />
+                            <field name="vendor_quality_ffa" />
+                            <field name="vendor_quality_ka" />
+                            <field name="vendor_quality_kk" />
+                            <field name="valid" />
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_weighbridge_recap_metro" model="ir.actions.act_window">
+        <field name="name">Rekaptulasi Timbangan Metro</field>
+        <field name="res_model">wizard.weighbridge.recap.metro</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_weighbridge_recap_metro_form"/>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="menu_weighbridge_weighbridge_recap_metro" parent="menu_data_weighbridge_scale" action="action_weighbridge_recap_metro" sequence="2" />
+</odoo>

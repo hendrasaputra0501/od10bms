@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wizard_laba_rugi_report_form" model="ir.ui.view">
+            <field name="name">Wizard Laba Rugi Report</field>
+            <field name="model">wizard.laba.rugi.report</field>
+            <field name="arch" type="xml">
+                <form string="Laba Rugi Report">
+                    <p class="oe_grey">
+                        Please fill field below.
+                    </p>
+                    <group>
+                        <group>
+                            <field name="date_start" required="1"/>
+                        </group>
+                        <group>
+                            <field name="date_end" required="1"/>\
+                            <field name="report_type"/>
+                            <field name="company_id" options="{'no_create':True,'no_create_edit':True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Referensi Pengelompokan">
+                            <group string="Penjualan">
+                                <field
+                                    name="account_id_penjualan"
+                                    placeholder="Penjualan"
+                                    widget="many2many_tags"
+                                    options="{'no_create': True}"
+                                />
+                                <field
+                                    name="account_id_beban_pokok_penjualan"
+                                    placeholder="Beban Pokok Penjualan"
+                                    widget="many2many_tags"
+                                    options="{'no_create': True}"
+                                />
+                            </group>
+                            <group string="Beban Usaha">
+                                <field
+                                    name="account_id_beban_pemasaran"
+                                    placeholder="Beban Pemasaran"
+                                    widget="many2many_tags"
+                                    options="{'no_create': True}"
+                                />
+                                <field
+                                    name="account_id_beban_administrasi_umum"
+                                    placeholder="Beban Administrasi dan Umum"
+                                    widget="many2many_tags"
+                                    options="{'no_create': True}"
+                                />
+                            </group>
+                            <group string="Pendapatan / Beban Lain Lain">
+                                <field
+                                    name="account_id_pendapatan_lain_lain"
+                                    placeholder="Pendapatan Lain Lain"
+                                    widget="many2many_tags"
+                                    options="{'no_create': True}"
+                                />
+                                <field
+                                    name="account_id_beban_lain_lain"
+                                    placeholder="Beban Lain Lain"
+                                    widget="many2many_tags"
+                                    options="{'no_create': True}"
+                                />
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_laba_rugi_report" model="ir.actions.act_window">
+            <field name="name">Laba Rugi Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.laba.rugi.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_laba_rugi_report_form"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+        </record>
+
+        <report string  = "Laba Rugi Report"
+                model   = "wizard.laba.rugi.report"
+                auto    = "True"
+                report_type = "xlsx"
+                name    = "report_laba_rugi_xlsx"
+                id      = "report_laba_rugi_xlsx"
+                menu    = "True"
+        />
+
+      <menuitem id="menu_laba_rugi_report_bms"
+          name="Laba Rugi "
+          action="action_wizard_laba_rugi_report"
+          parent="account.menu_finance_legal_statement"
+          icon="fa-print"
+          sequence="20"/>
+          
+    </data>
+</odoo>

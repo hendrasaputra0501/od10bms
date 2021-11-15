@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_c10i_tax_payment_1,tax.payment accountant,model_tax_payment,group_c10i_tax_payment_user,1,1,1,1
+access_c10i_tax_payment_2,tax.payment accountant,model_tax_payment,module_c10i_tax_payment,1,0,0,0
+access_c10i_tax_payment_3,tax.payment.group accountant,model_tax_payment_group,module_c10i_tax_payment,1,1,1,1

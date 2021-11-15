@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acc_stock_price_loc_1,product_location_price,model_product_location_price,,1,1,1,0

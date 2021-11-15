@@ -1,0 +1,124 @@
+<odoo>
+    <data>
+        <!-- Water Rate -->
+        <record id="bm_water_usage_rate_tree" model="ir.ui.view">
+            <field name="name">bm.water.usage.rate.tree</field>
+            <field name="model">bm.water.usage.rate</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="product_id" required="1" options="{'no_create':True, 'no_edit':True, 'no_open': True}"/>
+                    <field name="date" required="1"/>
+                    <field name="rate" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_water_usage_rate_form" model="ir.ui.view">
+            <field name="name">bm.water.usage.rate.form</field>
+            <field name="model">bm.water.usage.rate</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="product_id" required="1"/>
+                            </group>
+                            <group>
+                                <field name="rate"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_water_usage_rate_filter" model="ir.ui.view">
+            <field name="name">bm.water.usage.rate.filter</field>
+            <field name="model">bm.water.usage.rate</field>
+            <field name="arch" type="xml">
+                <search string="Cari Water Cost">
+                    <field name="date" string="Search" filter_domain="[('date','=',self)]"/>
+                    <field name="product_id" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_bm_water_rate">
+            <field name="name">Water Rate</field>
+            <field name="res_model">bm.water.usage.rate</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="bm_water_usage_rate_filter"/>
+        </record>
+
+        <!-- Water Usage -->
+        <record id="bm_water_usage_tree" model="ir.ui.view">
+            <field name="name">bm.water.usage.tree</field>
+            <field name="model">bm.water.usage</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" delete="false">
+                    <field name="unit_id"/>
+                    <field name="date_start"/>
+                    <field name="date_stop"/>
+                    <field name="meter_start"/>
+                    <field name="meter_stop"/>
+                    <field name="total_amount"/>
+                    <field name="state"/>
+                    <field name="invoice_state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_water_usage_form" model="ir.ui.view">
+            <field name="name">bm.water.usage.form</field>
+            <field name="model">bm.water.usage</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="true" delete="false">
+                    <header>
+                        <field name="state" status_visibility="draft,confirmed" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="unit_id"/>
+                                <field name="date_start"/>
+                                <field name="date_stop"/>
+                            </group>
+                            <group>
+                                <field name="meter_start"/>
+                                <field name="meter_stop"/>
+                                <field name="rate"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group></group>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="total_amount" class="oe_subtotal_footer_separator"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_water_usage_filter" model="ir.ui.view">
+            <field name="name">bm.water.usage.filter</field>
+            <field name="model">bm.water.usage</field>
+            <field name="arch" type="xml">
+                <search string="Search Water Usage">
+                    <field name="unit_id" string="Search" filter_domain="[('unit_id','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_bm_water_usage">
+            <field name="name">Water Usage</field>
+            <field name="res_model">bm.water.usage</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+            <field name="search_view_id" ref="bm_water_usage_filter"/>
+        </record>
+    </data>
+</odoo>

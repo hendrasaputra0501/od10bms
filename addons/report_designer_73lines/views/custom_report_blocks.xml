@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Part of Odoo Module Developed by 73lines
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <!-- Custom Report Layout 1 -->
+    <template id="custom_block_1" name="Custom Block 1">
+        <!--<t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />-->
+        <div class="container-fluid report-container quadruple_block mt16 mb16">
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <div class="d_block mt8 mb8">
+                        <div class="report-well"><span class="report-well"><b>Address: </b></span></div>
+                        <div class="report-well"><span class="report-well">Address Street 1</span></div>
+                        <div class="report-well"><span class="report-well">Address Street 2</span></div>
+                        <div class="report-well"><span class="report-well">Landmark</span><span> </span><span class="report-well">city</span><span> </span><span class="report-well">State</span></div>
+                        <div class="report-well"><span class="report-well">Country </span><span> </span><span class="report-well"> Pin Code</span></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-6 col-md-6">
+                    <div class="d_block mt8 mb8"/>
+                </div>
+            </div>
+
+            <h2 class="report-well s_block">
+                <span>Refernce1 # </span>
+
+                <span>Refernce2 # </span>
+                <span>span name</span>
+            </h2>
+
+            <div class="row mt32 mb32">
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8">
+                        <strong>
+                            <span>Date Header:</span>
+                        </strong>
+                        <p>P Tag </p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8">
+                        <strong>
+                            <span>Header 1:</span>
+                        </strong>
+                        <p>P Tag </p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8">
+                        <strong>
+                            <span>Header 2:</span>
+                        </strong>
+                        <p>P Tag </p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8">
+                        <strong>
+                            <span>Header 3:</span>
+                        </strong>
+                        <p>P Tag </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="s_block mt8 mb8">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><span class="report-well"><b>Description</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Quantity</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Unit Price</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Taxes</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Price</b></span></td>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'>span name</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8"/>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8"/>
+                </div>
+                <div class="col-xs-4 col-md-4 pull-right">
+                    <div class="t_block mt8 mb8">
+                        <table class="table table-condensed">
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="s_block mt8 mb8">
+                        <p>
+                            <strong>
+                                <span>Comment Header:</span>
+                            </strong>
+                            <span>span tag</span>
+                        </p>
+                        <p>
+                            <strong>
+                                <span>Footer 1:</span>
+                            </strong>
+                            <p>P Tag </p>
+                        </p>
+                        <p>
+                            <strong>
+                                <span>Footer 1:</span>
+                            </strong>
+                            <p>P Tag </p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="oe_structure" />
+        </div>
+    </template>
+
+    <!-- Custom Report Layout 2 -->
+    <template id="custom_block_2" name="Custom Block 2">
+        <!--<t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />-->
+        <div class="container-fluid report-container quadruple_block mt16 mb16">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="s_block mt8 mb8">
+                        <div class="report-well">
+                            <span>Invoice To:</span>
+                        </div>
+                        <h3 class="report-well">
+                            <strong>
+                                <span>Cutomer Name</span>
+                            </strong>
+                        </h3>
+                        <div class="report-well">
+                            <strong>
+                                <span>Address: </span>
+                            </strong>
+                            <span>span tag</span>
+                        </div>
+                        <div class="report-well">
+                            <strong>
+                                <span>Phone: </span>
+                            </strong>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <strong>
+                                <span>Email: </span>
+                            </strong>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <strong>
+                                <span>Other Header:</span>
+                            </strong>
+                            <span>span name</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <table class="col-xs-12">
+                        <tr style="border-bottom: 1px solid #000;">
+                            <td class="col-xs-6 col-md-6">
+                                <h3>
+                                    <strong>
+                                        <span>Header</span>
+                                    </strong>
+                                </h3>
+                            </td>
+                            <td class="col-xs-6 col-md-6">
+                                <h3>
+                                    <strong>
+                                        <span>Total</span>
+                                    </strong>
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-6 col-md-6" style='padding-top:10px;'>
+                                <div class="report-well">
+                                    <strong>
+                                        <span>Refernce No. :</span>
+                                    </strong>
+                                    <span>span name</span>
+                                </div>
+                                <div class="report-well">
+                                    <strong>
+                                        <span>Date Header:</span>
+                                    </strong>
+                                    <span>span name</span>
+                                </div>
+                                <div class="report-well">
+                                    <strong>
+                                        <span>Other Header:</span>
+                                    </strong>
+                                    <span>span name</span>
+                                </div>
+                            </td>
+                            <td class="col-xs-6 col-md-6">
+                                <h2 class="report-well">
+                                    <strong>
+                                        <span>Total Amount</span>
+                                    </strong>
+                                    <span>$ 0000</span>
+                                </h2>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="s_block mt8 mb8">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><span class="report-well"><b>Description</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Quantity</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Unit Price</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Taxes</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Price</b></span></td>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'>span name</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8">
+                        <h3 class="report-well">
+                            <strong>
+                                <span>Payment Header</span>
+                            </strong>
+                        </h3>
+                        <hr/>
+                        <div class="report-well">
+                            <strong>
+                                <span>Payment field 1: </span>
+                            </strong>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <strong>
+                                <span>Payment field 2: </span>
+                            </strong>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <strong>
+                                <span>Payment field 3: </span>
+                            </strong>
+                            <span>span name</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8"/>
+                </div>
+                <div class="col-xs-4 col-md-4 pull-right">
+                    <div class="t_block mt8 mb8">
+                        <table class="table table-condensed">
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="s_block pull-left">
+                        <h3>
+                            <span>Terms and Condition Header</span>
+                        </h3>
+                        <hr/>
+                        <div class="report-well">
+                            <span>span name</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="oe_structure" />
+    </template>
+
+    <!-- Custom Report Layout 3 -->
+    <template id="custom_block_3" name="Custom Block 3">
+        <!--<t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />-->
+        <div class="container-fluid report-container quadruple_block mt16 mb16">
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8"/>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8"/>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8">
+                        <h3 class="report-well" style="border-top: 2px solid #000;padding-top:10px;">
+                            <span>INVOICE TO</span>
+                        </h3>
+                        <div class="report-well">
+                            <span><b>Company name</b></span>
+                        </div>
+                        <div class="report-well">
+                            <span><b>Address Field</b></span>
+                        </div>
+                        <div class="report-well">
+                            <span><b>Tel.: </b></span>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <span>website field</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8">
+                        <h3 class="report-well" style="border-top: 2px solid #000;padding-top:10px;">
+                            <span>INVOICE DETAILS</span>
+                        </h3>
+                        <div class="report-well">
+                            <span><b>INVOICE NO: </b></span>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <span><b>INVOICE DATE: </b></span>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <span><b>ACCOUNT NO.: </b></span>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <span><b>TOTAL DUE:</b></span>
+                            <span>span name</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="s_block mt8 mb8">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><span class="report-well"><b>Description</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Quantity</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Unit Price</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Taxes</b></span></td>
+                                    <td class="text-right"><span class="report-well"><b>Price</b></span></td>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well">span name</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="report-well" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'>span name</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8">
+                        <h3 class="report-well">
+                            <strong>
+                                <span>Payment Method</span>
+                            </strong>
+                        </h3>
+                        <hr/>
+                        <div class="report-well">
+                            <strong>
+                                <span>Company Name</span>
+                            </strong>
+                        </div>
+                        <div class="report-well">
+                            <span>A/C: </span>
+                            <span>span name</span>
+                        </div>
+                        <div class="report-well">
+                            <span>span name</span>
+                            <span>country field</span>
+                        </div>
+                        <div class="report-well">
+                            <span>payment method name</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8"/>
+                </div>
+                <div class="col-xs-4 col-md-4 pull-right">
+                    <div class="t_block mt8 mb8">
+                        <table class="table table-condensed">
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td>
+                                    <strong>
+                                        <span>span name</span>
+                                    </strong>
+                                </td>
+                                <td class="text-right">
+                                    <span>span name</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="oe_structure" />
+        </div>
+    </template>
+
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="c10i_adjustments_advance_form" model="ir.ui.view">
+			<field name="name">c10i.adjustments.advance.form</field>
+			<field name="model">stock.inventory</field>
+			<field name="inherit_id" ref="stock.view_inventory_form"/>
+			<field name="arch" type="xml">
+
+				<!-- replace date field -->
+				<!-- add field:  use_adjustment_date,adjustment_date, date   -->
+				<xpath expr="//field[@name='date']" position="replace">
+					<field name="use_adjustment_date" attrs="{'readonly': [('state', 'in', ['confirm','done'])]}"/>
+					<field name="adjustment_date" attrs="{'invisible': [('use_adjustment_date', '=', False)], 'required': [('use_adjustment_date', '=', True)],'readonly': [('state', 'not in', ['draft'])]}"/>
+					<field name="date" attrs="{'invisible': [('use_adjustment_date','=', True)], 'required': [('use_adjustment_date','=', True)]}"/>
+				</xpath>
+				<xpath expr="//field[@name='date']" position="after">
+					<field name='default_account_id' attrs="{'readonly': [('state', 'not in', ['draft'])]}" options="{'no_create': True, 'no_quick_create ': True, 'no_create_edit': True}"/>
+				</xpath>
+				<xpath expr="//page[1]/field/tree/field[@name='location_id']" position="after">
+					<field name='account_id' options="{'no_create': True, 'no_quick_create ': True, 'no_create_edit': True}"/>
+				</xpath>
+				<xpath expr="//page[1]/field/tree/field[@name='theoretical_qty']" position="after">
+					<field name='current_price_unit' invisible="1"/>
+					<field name='new_price_unit' />
+				</xpath>
+	
+			</field>
+		</record>
+
+	</data>
+</odoo>

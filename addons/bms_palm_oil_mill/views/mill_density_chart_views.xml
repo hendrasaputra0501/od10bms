@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+    
+        <record id="mill_density_chart_tree_view" model="ir.ui.view">
+            <field name="name">mill.density.chart.tree.view</field>
+            <field name="model">mill.density.chart</field>
+            <field name="arch" type="xml">
+                <tree string="Master Density Chart">
+                    <field name="temperature"/>
+                    <field name="density"/>
+                </tree>
+            </field>
+        </record>   
+        
+
+        <record id="view_mill_density_chart_search" model="ir.ui.view">
+            <field name="name">mill.density.chart.search</field>
+            <field name="model">mill.density.chart</field>
+            <field name="arch" type="xml">
+                <search string="Search Density Chart">
+                    <field name="temperature"/>
+                    <field name="density"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mill_density_chart_form_view">
+            <field name="name">mill.density.chart.form</field>
+            <field name="model">mill.density.chart</field>
+            <field name="arch" type="xml">
+                <form string="Master Density Chart">
+                    <group>
+                        <field name="temperature"/>
+                        <field name="density"/>
+                    </group>        
+                </form>
+            </field>
+        </record>
+
+        <record id="mill_koreksi_suhu_tree_view" model="ir.ui.view">
+            <field name="name">mill.koreksi.suhu.tree.view</field>
+            <field name="model">mill.koreksi.suhu</field>
+            <field name="arch" type="xml">
+                <tree string="Master Koreksi Suhu">
+                    <field name="mill_storage_id"/>
+                    <field name="temperature_calibrated"/>
+                    <field name="uom_id"/>
+                    <field name="faktor_koreksi"/>
+                </tree>
+            </field>
+        </record>   
+        
+
+        <record id="view_mill_koreksi_suhu_search" model="ir.ui.view">
+            <field name="name">mill.koreksi.suhu.search</field>
+            <field name="model">mill.koreksi.suhu</field>
+            <field name="arch" type="xml">
+                <search string="Search Koreksi Suhu">
+                    <field name="mill_storage_id"/>
+                    <field name="temperature_calibrated"/>
+                    <field name="uom_id"/>
+                    <field name="faktor_koreksi"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mill_koreksi_suhu_form_view">
+            <field name="name">mill.koreksi.suhu.form</field>
+            <field name="model">mill.koreksi.suhu</field>
+            <field name="arch" type="xml">
+                <form string="Master Koreksi Suhu">
+                    <group>
+                        <field name="mill_storage_id"/>
+                    <field name="temperature_calibrated"/>
+                    <field name="uom_id"/>
+                    <field name="faktor_koreksi"/>
+                    </group>        
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mill_density_chart">
+            <field name="name">Master Density Chart</field>
+            <field name="res_model">mill.density.chart</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mill_koreksi_suhu">
+            <field name="name">Koreksi Suhu</field>
+            <field name="res_model">mill.koreksi.suhu</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="master_density_chart_menu" name="Master Density Chart" parent="c10i_palm_oil_mill.master_mills_menu" action="action_mill_density_chart"/>
+
+        <menuitem id="master_koreksi_suhu_menu" name="Koreksi Suhu" parent="c10i_palm_oil_mill.master_mills_menu" action="action_mill_koreksi_suhu"/>
+    </data>
+</odoo>

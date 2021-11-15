@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="c10i_product_category_avg_cost_loc" model="ir.ui.view">
+            <field name="name">c10i.product.category.avg.cost.loc</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="stock_account.view_category_property_form" />
+            <field name="arch" type="xml">
+                <field name="property_cost_method" position="after">
+                    <field name="average_cost_type" attrs="{'invisible': [('property_cost_method','!=','average')]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_location_price_tree" model="ir.ui.view">
+            <field name="name">product.location.price.tree</field>
+            <field name="model">product.location.price</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id" />
+                    <field name="location_id" />
+                    <field name="standard_price" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_location_price_action" model="ir.actions.act_window">
+            <field name="name">Product Price per Location</field>
+            <field name="res_model">product.location.price</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <!-- <field name="view_id" ref="view_move_tree"/> -->
+            <!-- <field name="search_view_id" ref="view_move_search"/> -->
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_product_price_loc" name="Product Price Location" action="product_location_price_action"
+        parent="stock.menu_stock_inventory_control" sequence="1" groups="base.group_no_one"/>
+    </data>
+</odoo>

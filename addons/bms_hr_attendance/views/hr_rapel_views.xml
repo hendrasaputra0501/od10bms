@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="attendance_rapel_tree" model="ir.ui.view">
+            <field name="name">attendance.rapel.tree</field>
+            <field name="model">hr.attendance.rapel</field>
+            <field name="arch" type="xml">
+                <tree string="Rapel">
+                    <field name="name"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pinjaman_karyawan_form" model="ir.ui.view">
+            <field name="name">attendance.rapel.form</field>
+            <field name="model">hr.attendance.rapel</field>
+            <field name="arch" type="xml">
+                <form string="Rapel">
+                    <header>
+                        <field name="state" widget="statusbar" readonly="1"/>
+                        <button name='confirm' type="object" string="Confirm" class="oe_highlight" states="draft"/>
+                        <button name='set_draft' string="Set Draft" type="object" states="confirm"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" readonly="0"/></h1>
+                        </div>
+                        <group name="rab_info">
+                            <group>
+                                <field name="date"/>
+                                <field widget="binary" name="book" filename="book_filename" placeholder="Upload XLS file..." attrs="{'readonly': [('state','not in',('draft'))]}"/>
+                                <field name="book_filename" invisible="1"/>
+                                <button name="import_rapel" string="Import Excel" icon="fa-print" type="object" class="oe_edit_only" states="draft"/>
+                            </group>
+                            <group>
+                                <field name="import_error_note" readonly="1" states="draft"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <field name="line_ids" nolabel="1" attrs="{'readonly': [('state','not in',('draft'))]}">
+                                    <tree string="Details" editable="bottom">
+                                        <field name="nik"/>
+                                        <field name="employee_id" />
+                                        <field name="total" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="attendance_rapel_filter" model="ir.ui.view">
+            <field name="name">pinjaman.karyawan.filter</field>
+            <field name="model">hr.attendance.rapel</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_attendance_rapel">
+            <field name="name">Rapel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.attendance.rapel</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="attendance_rapel_filter"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_hr_attendance_rapel" name="Rapel" action="action_attendance_rapel" parent="c10i_hr_attendance.menu_hr_attendance_manage_payroll" sequence="25"/>
+    </data>
+</odoo>

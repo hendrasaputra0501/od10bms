@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="wizard_asset_depreciation_report_form">
+        <field name="name">wizard.asset.depreciation.report.form</field>
+        <field name="model">wizard.asset.depreciation.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="as_of_date" />
+                        <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_report" string="Excel" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_wizard_asset_depreciation_report" model="ir.actions.act_window">
+        <field name="name">Asset Depreciation</field>
+        <field name="res_model">wizard.asset.depreciation.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="wizard_asset_depreciation_report_form"/>
+        <field name="target">new</field>
+   </record>
+
+    <report id="asset_depreciation_report"
+        model="wizard.asset.depreciation.report"
+        string="Asset Depreciation Report XLSX"
+        report_type="xlsx"
+        name="asset_depreciation_report"
+        file="asset_depreciation_report"
+        attachment_use="False"
+    />
+
+    <menuitem name="Asset Depreciation Report" parent="account.account_reports_management_menu" action="action_wizard_asset_depreciation_report" id="menu_report_asset" icon="fa-print" sequence="15"/>
+</odoo>

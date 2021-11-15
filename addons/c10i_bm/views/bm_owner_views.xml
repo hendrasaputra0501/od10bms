@@ -1,0 +1,83 @@
+<odoo>
+    <data>
+        <record id="bm_owner_tree" model="ir.ui.view">
+            <field name="name">bm.owner.tree</field>
+            <field name="model">bm.owner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="company_id"/>
+                    <field name="unit_id"/>
+                    <field name="partner_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_owner_form" model="ir.ui.view">
+            <field name="name">bm.owner.form</field>
+            <field name="model">bm.owner</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_not_valid" type="object" string="Not Valid" states='valid'/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_id" options="{'no_create':True,'no_edit':True}" groups="base.group_multi_company"/>
+                                <field name="unit_id"/>
+                                <field name="partner_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_owner_form_unit" model="ir.ui.view">
+            <field name="name">bm.owner.form.unit</field>
+            <field name="model">bm.owner</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="button_not_valid" type="object" string="Not Valid" states='valid'/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_owner_filter" model="ir.ui.view">
+            <field name="name">bm.owner.filter</field>
+            <field name="model">bm.owner</field>
+            <field name="arch" type="xml">
+                <search string="Cari owner">
+                    <field name="partner_id" string="Search" filter_domain="[('partner_id','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="action_bm_owner">
+            <field name="name">Owner</field>
+            <field name="res_model">bm.owner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="bm_owner_filter"/>
+        </record>
+    </data>
+</odoo>

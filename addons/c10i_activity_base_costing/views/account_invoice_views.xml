@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="abc_invoice_supplier_form_inhrt">
+        <field name="name">abc.invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="c10i_account_location.invoice_supplier_form_inherit_plantation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_location_id']" position="after">
+                <field name="account_activity_id" options="{'no_create_edit':True, 'no_create':True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

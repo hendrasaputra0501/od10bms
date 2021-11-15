@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data> 
+		<record id="mill_valuation_bms_tree" model="ir.ui.view">
+			<field name="name">mill.valuation.bms.tree</field>
+			<field name="model">mill.valuation.bms</field>
+			<field name="arch" type="xml">
+				<tree string="Harga Pokok Penjualan dan Produksi" >
+					<field name="date_start"/>
+					<field name="date_stop"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>   
+
+		<record id="mill_valuation_bms_search" model="ir.ui.view">
+			<field name="name">mill.valuation.bms.search</field>
+			<field name="model">mill.valuation.bms</field>
+			<field name="arch" type="xml">
+				<search string="Harga Pokok Penjualan dan Produksi">
+					<field name="date_start"/>
+					<field name="date_stop"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="mill_valuation_bms_form" model="ir.ui.view">
+			<field name="name">mill.valuation.bms.form</field>
+			<field name="model">mill.valuation.bms</field>
+			<field name="arch" type="xml">
+				<form string="Harga Pokok Penjualan dan Produksi" >
+					<header>
+						<button name="compute_tbs_consumption" string="Compute TBS Consumption" states="draft" class="oe_highlight" type="object"/>
+						<button name="compute_tbs_cogm" string="Compute Manufacture Cost" states="compute1" class="oe_highlight" type="object"/>
+						<button name="compute1_to_draft" string="Set Back to Consumption" states="compute1" type="object"/>
+						<button name="compute_finish_goods" string="Compute Finish Goods Valuation" states="compute2" class="oe_highlight" type="object"/>
+						<button name="compute2_to_draft" string="Set Back to Costing" states="compute2" type="object"/>
+						<button name="action_validate" string="Validate" states="compute3" class="oe_highlight" type="object"/>
+						<button name="compute3_to_draft" string="Set Back to Valuation" states="compute3" type="object"/>
+						<button name="button_cancel" string="Cancel" states="posted" type="object"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,posted" />
+					</header>
+					<sheet>
+						<div class="oe_title">
+                        <h1><field name="name" placeholder="Mill Order" nolabel="1"/></h1>
+	                    </div>
+	                    <group>
+	                        <group>
+	                            <field name="valuation_categ_id" options="{'no_create':True}" attrs="{'readonly': [('state','!=','draft')]}"/>
+	                            <field name="journal_id" options="{'no_create':True, 'no_edit':True}" />
+	                            <field name="total_production_hours" required="True" />
+	                        </group>
+	                        <group>
+	                            <field name="date_start" groups="base.group_no_one"/>
+	                            <field name="date_stop" />
+	                        </group>
+	                    </group>
+	                    <group>
+	                        <field name="production_cost_account_ids" options="{'no_create':True, 'no_edit':True}" domain="[('deprecated', '=', False)]"
+	                                attrs="{'invisible': [('state','!=','draft')]}">
+	                            <tree>
+	                                <field name="code" />
+	                                <field name="name" />
+	                            </tree>
+	                        </field>
+	                        <!-- <field name="production_cost_location_ids" options="{'no_create':True, 'no_edit':True}">
+	                            <tree>
+	                                <field name="code" />
+	                                <field name="name" />
+	                            </tree>
+	                        </field> -->
+	                    </group>
+						<notebook>
+							<page name="tbs_consume" attrs="{'invisible': [('state','=','draft')]}" string="TBS - CPO - Kernel">
+								<section>
+								<table style="width:100%;">
+									<tr>
+										<th width="40%">Description</th>
+										<th width="8%">Manufacture Hours</th>
+										<th width="20%">Qty</th>
+										<th width="12%">Price</th>
+										<th width="20%">Value</th>
+									</tr>
+									<tr>
+										<td><label string="TBS Saldo Awal"/></td>
+										<td> </td>
+										<td><field name="tbs_opening_qty"/></td>
+										<td> </td>
+										<td><field name="tbs_opening_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Pembelian PT. BMS"/></td>
+										<td> </td>
+										<td><field name="tbs_purchase_qty"/></td>
+										<td> </td>
+										<td><field name="tbs_purchase_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Pembelian PTPN"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_purchase_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Persediaan siap untuk di Produksi"/></td>
+										<td> </td>
+										<td><field name="tbs_onhand_qty"/></td>
+										<td><field name="tbs_average_cost_price"/></td>
+										<td><field name="tbs_onhand_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Produksi BMS"/></td>
+										<td><field name="tbs_consume_hour_proportion"/></td>
+										<td><field name="tbs_consume_qty"/></td>
+										<td> </td>
+										<td><field name="tbs_consume_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Produksi PTPN"/></td>
+										<td><field name="tbs_ptpn_consume_hour_proportion"/></td>
+										<td><field name="tbs_ptpn_consume_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Saldo Akhir"/></td>
+										<td></td>
+										<td><field name="tbs_closing_qty"/></td>
+										<td> </td>
+										<td><field name="tbs_closing_value"/></td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td></td>
+										<td><field name="tbs_opname_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr style="font-color: #b91ad9;">
+										<td><label string="Total Produksi CPO"/></td>
+										<td></td>
+										<td><field name="tbs_total_cpo_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr style="font-color: #b91ad9;">
+										<td><label string="OER % Produksi CPO"/></td>
+										<td></td>
+										<td><field name="tbs_total_cpo_tbs_pct"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr style="font-color: #b91ad9;">
+										<td><label string="Total Produksi Kernel"/></td>
+										<td></td>
+										<td><field name="tbs_total_kernel_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr style="font-color: #b91ad9;">
+										<td><label string="OER % Produksi Kernel"/></td>
+										<td></td>
+										<td><field name="tbs_total_kernel_tbs_pct"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr style="font-color: #b91ad9;">
+										<td><label string="Total Produksi Cangkang"/></td>
+										<td></td>
+										<td><field name="tbs_total_shell_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr style="font-color: #b91ad9;">
+										<td><label string="OER % Produksi Cangkang"/></td>
+										<td></td>
+										<td><field name="tbs_total_shell_tbs_pct"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr style="font-color: #b91ad9;">
+										<td><label string="Direct Material Used"/></td>
+										<td></td>
+										<td><field name="tbs_total_prod_tbs_pct"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr style='border-bottom: 1px;'>
+										<td><label string="BMS (atas OER Total)"/></td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi CPO"/></td>
+										<td> </td>
+										<td><field name="tbs_pct_cpo_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Kernel"/></td>
+										<td> </td>
+										<td><field name="tbs_pct_kernel_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Cangkang"/></td>
+										<td> </td>
+										<td><field name="tbs_pct_shell_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr style='border-bottom: 1px;'>
+										<td><label string="Produksi PTPN (atas OER Total)"/></td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi CPO"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_pct_cpo_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Kernel"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_pct_kernel_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Cangkang"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_pct_shell_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr style='border-bottom: 1px;'>
+										<td><label string="Produksi PTPN (dari LHP)"/></td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi CPO"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_actual_cpo_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Kernel"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_actual_kernel_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Cangkang"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_actual_shell_produce_qty"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr style='border-bottom: 1px;'>
+										<td><label string="Bonus Produksi PTPN (Selisih LHP dan atas OER)"/></td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi CPO"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_cpo_produce_qty_bonus"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Kernel"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_kernel_produce_qty_bonus"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Cangkang"/></td>
+										<td> </td>
+										<td><field name="tbs_ptpn_shell_produce_qty_bonus"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+								</table>
+								</section>
+							</page>
+							<page name="cogm_value" attrs="{'invisible': [('state','in',('draft','compute1'))]}" string="Manufacture Cost">
+								<section>
+								<table style="width:100%;">
+									<tr>
+										<th width="10%"> </th>
+										<th width="30%">Description</th>
+										<th width="20%">BMS</th>
+										<th width="20%">PTPN</th>
+										<th width="20%"></th>
+									</tr>
+									<tr>
+										<td> </td>
+										<td><label string="Machine Hour"/></td>
+										<!-- <td><field name="tbs_consume_hour_proportion"/></td> -->
+										<!-- <td><field name="tbs_ptpn_consume_hour_proportion"/></td> -->
+										<!-- <td><field name="total_production_hours"/></td> -->
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr>
+										<td> </td>
+										<td><label string="TBS Terpakai"/></td>
+										<td><field name="cogm_tbs_consume_value"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr>
+										<td colspan="5">
+											<field name="cogm_production_cost_ids" readonly="1">
+												<tree editable="bottom">
+													<field name="account_id"/>
+													<field name="amount" sum="amount"/>
+													<field name="amount_ptpn" sum="amount_ptpn"/>
+													<field name="subtotal" sum="subtotal"/>
+												</tree>
+											</field>
+										</td>
+									</tr>
+									<tr>
+										<th width="10%"> </th>
+										<th width="30%">Description</th>
+										<th width="20%">BMS</th>
+										<th width="20%">PTPN</th>
+										<th width="20%"></th>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr>
+										<td> </td>
+										<td style="font-weight:bold;"><label string="Manufacture Cost"/></td>
+										<td><field name="cogm_value"/></td>
+										<td><field name="cogm_ptpn_value"/></td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr>
+										<td> </td>
+										<td><label string="Bonus CPO PTPN"/></td>
+										<td><field name="cogm_ptpn_cpo_bonus_price"/></td>
+										<td><field name="cogm_ptpn_cpo_bonus_value"/></td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td><label string="Bonus Kernel PTPN"/></td>
+										<td><field name="cogm_ptpn_kernel_bonus_price"/></td>
+										<td><field name="cogm_ptpn_kernel_bonus_value"/></td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr>
+										<td> </td>
+										<td><label string="Manufacture Cost + Bonus"/></td>
+										<td><field name="cogm_value2"/></td>
+										<td><field name="cogm_ptpn_value2"/></td>
+										<td> </td>
+									</tr>
+									<!-- <tr>
+										<td> </td>
+										<td> </td>
+										<td><label string="PTPN COGM Account"/></td>
+										<td><field name="production_cost_ptpn_account" attrs="{'required': [('state','=','compute2')]}"/></td>
+										<td> </td>
+									</tr> -->
+									<tr><td colspan="5"> </td></tr>
+									<tr>
+										<td> </td>
+										<td style="font-weight:bold;"><label string="Harga Jual"/></td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td><label string="CPO"/></td>
+										<td><field name="cogm_cpo_sale_price" attrs="{'required': [('state','=','compute2')]}"/></td>
+										<td><field name="cogm_ptpn_cpo_sale_price" attrs="{'required': [('state','=','compute2')]}"/></td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td><label string="Kernel"/></td>
+										<td><field name="cogm_kernel_sale_price" attrs="{'required': [('state','=','compute2')]}"/></td>
+										<td><field name="cogm_ptpn_kernel_sale_price" attrs="{'required': [('state','=','compute2')]}"/></td>
+										<td> </td>
+									</tr>
+
+									<tr><td colspan="5"> </td></tr>
+									<tr>
+										<td> </td>
+										<td style="font-weight:bold;"><label string="Qty Produksi"/></td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td><label string="CPO"/></td>
+										<td><field name="cogm_cpo_produce_qty"/></td>
+										<td><field name="cogm_ptpn_cpo_produce_qty"/></td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td><label string="Kernel"/></td>
+										<td><field name="cogm_kernel_produce_qty"/></td>
+										<td><field name="cogm_ptpn_kernel_produce_qty"/></td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td> </td>
+										<td style="font-weight:bold;"><field name="cogm_total_produce_qty"/></td>
+										<td style="font-weight:bold;"><field name="cogm_ptpn_total_produce_qty"/></td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td style="font-weight:bold;"><label string="Value Produksi"/></td>
+										<td> </td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<!-- <tr>
+										<td> </td>
+										<td><label string="CPO Pabrikasi"/></td>
+										<td><field name="cogm_cpo_production_cost"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td><label string="CPO TBS"/></td>
+										<td><field name="cogm_cpo_consume_tbs_cost"/></td>
+										<td><field name="cogm_cpo_consume_tbs_rate"/></td>
+										<td> </td>
+									</tr> -->
+									<tr>
+										<td> </td>
+										<td><label string="CPO"/></td>
+										<!-- <td style="font-weight:bold;"><field name="cogm_cpo_total_cogm"/></td> -->
+										<td><field name="cogm_cpo_total_cogm"/></td>
+										<td><field name="cogm_ptpn_cpo_total_cogm"/></td>
+										<td> </td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<!-- <tr>
+										<td> </td>
+										<td><label string="Kernel Pabrikasi"/></td>
+										<td><field name="cogm_kernel_production_cost"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td> </td>
+										<td><label string="Kernel TBS"/></td>
+										<td><field name="cogm_kernel_consume_tbs_cost"/></td>
+										<td><field name="cogm_kernel_consume_tbs_rate"/></td>
+										<td> </td>
+									</tr> -->
+									<tr>
+										<td> </td>
+										<td><label string="Kernel"/></td>
+										<!-- <td style="font-weight:bold;"><field name="cogm_kernel_total_cogm"/></td> -->
+										<td><field name="cogm_kernel_total_cogm"/></td>
+										<td><field name="cogm_ptpn_kernel_total_cogm"/></td>
+										<td> </td>
+									</tr>
+								</table>
+								</section>
+							</page>
+							<page name="fg_value" attrs="{'invisible': [('state','in',('draft','compute1','compute2'))]}" string="Finish Goods">
+								<section>
+								<table style="width:100%;">
+									<tr>
+										<th width="35%">Description</th>
+										<th width="25%">Quantity</th>
+										<th width="15%">Price</th>
+										<th width="25%">Value</th>
+									</tr>
+									<tr>
+										<td><label string="Persediaan Awal CPO"/></td>
+										<td><field name="cpo_opening_qty"/></td>
+										<td> </td>
+										<td><field name="cpo_opening_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Produksi CPO"/></td>
+										<td><field name="cpo_produce_qty"/></td>
+										<td> </td>
+										<td><field name="cpo_produce_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Produksi CPO PTPN"/></td>
+										<td><field name="cpo_produce_qty_ptpn"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Tersedian untuk di Jual"/></td>
+										<td><field name="cpo_onhand_qty"/></td>
+										<td><field name="cpo_average_price_cost"/></td>
+										<td><field name="cpo_onhand_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Penjualan CPO"/></td>
+										<td><field name="cpo_sale_qty"/></td>
+										<td> </td>
+										<td><field name="cpo_sale_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Penyesuaian CPO"/></td>
+										<td><field name="cpo_opname_qty"/></td>
+										<td> </td>
+										<td> </td>
+										<!-- <td><field name="cpo_sale_diff_value"/></td> -->
+									</tr>
+									<tr>
+										<td><label string="Saldo Akhir"/></td>
+										<td><field name="cpo_closing_qty"/></td>
+										<td> </td>
+										<td><field name="cpo_closing_value"/></td>
+									</tr>
+									<tr><td colspan="5"> </td></tr>
+									<tr>
+										<td><label string="Persediaan Awal Kernel"/></td>
+										<td><field name="kernel_opening_qty"/></td>
+										<td> </td>
+										<td><field name="kernel_opening_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Kernel"/></td>
+										<td><field name="kernel_produce_qty"/></td>
+										<td> </td>
+										<td><field name="kernel_produce_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Produksi Kernel PTPN"/></td>
+										<td><field name="kernel_produce_qty_ptpn"/></td>
+										<td> </td>
+										<td> </td>
+									</tr>
+									<tr>
+										<td><label string="Tersedian untuk di Jual"/></td>
+										<td><field name="kernel_onhand_qty"/></td>
+										<td><field name="kernel_average_price_cost"/></td>
+										<td><field name="kernel_onhand_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Penjualan Kernel"/></td>
+										<td><field name="kernel_sale_qty"/></td>
+										<td> </td>
+										<td><field name="kernel_sale_value"/></td>
+									</tr>
+									<tr>
+										<td><label string="Penyesuaian Kernel"/></td>
+										<td><field name="kernel_opname_qty"/></td>
+										<td> </td>
+										<td> </td>
+										<!-- <td><field name="kernel_sale_diff_value"/></td> -->
+									</tr>
+									<tr>
+										<td><label string="Saldo Akhir"/></td>
+										<td><field name="kernel_closing_qty"/></td>
+										<td> </td>
+										<td><field name="kernel_closing_value"/></td>
+									</tr>
+								</table>
+								</section>
+							</page>
+							<page name="move" attrs="{'invisible': [('state','!=','posted')]}" string="Journal Entries">
+								<field name="move_ids" />
+							</page>
+							<page name="initial_value" string="Initial Value" groups="base.group_no_one">
+								<group>
+									<group>
+										<field name="initial_value" groups="base.group_no_one"/>
+										<field name="tbs_initial_qty" attrs="{'invisible': [('initial_value','=',False)]}"/>
+										<field name="tbs_initial_value"  attrs="{'invisible': [('initial_value','=',False)]}"/>
+										<field name="cpo_initial_qty"  attrs="{'invisible': [('initial_value','=',False)]}"/>
+										<field name="cpo_initial_value"  attrs="{'invisible': [('initial_value','=',False)]}"/>
+										<field name="kernel_initial_qty"  attrs="{'invisible': [('initial_value','=',False)]}"/>
+										<field name="kernel_initial_value"  attrs="{'invisible': [('initial_value','=',False)]}"/>
+									</group>
+									<group></group>
+								</group>
+							</page>
+						</notebook>
+					</sheet>            
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_mill_valuation_bms">
+			<field name="name">Mill Valuation</field>
+			<field name="res_model">mill.valuation.bms</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<!-- <menuitem id="menu_mill_valuation_bms" parent="c10i_palm_oil_mill.menu_mill_periodic" action="action_mill_valuation_bms"/> -->
+		<menuitem id="c10i_palm_oil_mill.menu_mill_valuation" parent="c10i_palm_oil_mill.menu_mill_periodic" action="action_mill_valuation_bms"/>
+	</data>
+</odoo>

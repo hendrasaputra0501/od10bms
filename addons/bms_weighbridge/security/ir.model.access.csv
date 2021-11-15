@@ -1,0 +1,24 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_weighbridge_scale_1,weighbridge.partner wbadmin,model_weighbridge_partner,group_odoo_weighbridge_admin,1,1,1,1
+access_weighbridge_scale_2,weighbridge.product wbadmin,model_weighbridge_product,group_odoo_weighbridge_admin,1,1,1,1
+access_weighbridge_scale_3,weighbridge.picking.type wbadmin,model_weighbridge_picking_type,group_odoo_weighbridge_admin,1,1,1,1
+access_weighbridge_scale_4,weighbridge.contract wbadmin,model_weighbridge_contract,group_odoo_weighbridge_admin,1,1,1,1
+access_weighbridge_scale_5,product.product wbadmin,product.model_product_product,group_odoo_weighbridge_admin,1,0,0,0
+access_weighbridge_scale_6,res.partner wbadmin,base.model_res_partner,group_odoo_weighbridge_admin,1,0,0,0
+access_weighbridge_scale_7,picking.type wbadmin,stock.model_stock_picking_type,group_odoo_weighbridge_admin,1,0,0,0
+access_weighbridge_scale_8,sale.order wbadmin,sale.model_sale_order,group_odoo_weighbridge_admin,1,0,0,0
+access_weighbridge_scale_9,purchase.order wbadmin,purchase.model_purchase_order,group_odoo_weighbridge_admin,1,0,0,0
+access_weighbridge_scale_10,weighbridge.scale.metro admin,model_weighbridge_scale_metro,group_odoo_weighbridge_admin,1,1,1,0
+access_weighbridge_scale_11,weighbridge.partner billing,model_weighbridge_partner,account.group_account_invoice,1,0,0,0
+access_weighbridge_scale_12,weighbridge.product billing,model_weighbridge_product,account.group_account_invoice,1,0,0,0
+access_weighbridge_scale_13,weighbridge.picking.type billing,model_weighbridge_picking_type,account.group_account_invoice,1,0,0,0
+access_weighbridge_scale_14,weighbridge.contract billing,model_weighbridge_contract,account.group_account_invoice,1,0,0,0
+access_weighbridge_scale_15,weighbridge.scale.metro billing,model_weighbridge_scale_metro,account.group_account_invoice,1,1,0,0
+access_weighbridge_scale_16,tbs.pricelist billing,model_tbs_pricelist,account.group_account_invoice,1,1,1,0
+access_weighbridge_scale_17,invoice.tbs billing,model_invoice_tbs,account.group_account_invoice,1,1,1,1
+access_weighbridge_scale_18,invoice.pricelist.tbs.line billing,model_invoice_pricelist_tbs_line,account.group_account_invoice,1,1,1,1
+access_weighbridge_scale_19,invoice.tbs.line billing,model_invoice_tbs_line,account.group_account_invoice,1,1,1,1
+access_cpo_ongkir,access_cpo_ongkir,model_cpo_ongkir,account.group_account_invoice,1,1,1,1
+access_invoice_angkut_cpo,access_invoice_angkut_cpo,model_invoice_angkut_cpo,account.group_account_invoice,1,1,1,1
+access_invoice_ongkir_line,access_invoice_ongkir_line,model_invoice_ongkir_line,account.group_account_invoice,1,1,1,1
+access_invoice_angkut_cpo_line,access_invoice_angkut_cpo_line,model_invoice_angkut_cpo_line,account.group_account_invoice,1,1,1,1

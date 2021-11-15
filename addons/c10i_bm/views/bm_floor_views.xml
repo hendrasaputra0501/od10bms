@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="bm_floor_tree" model="ir.ui.view">
+            <field name="name">bm.floor.tree</field>
+            <field name="model">bm.floor</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="tower_id"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_floor_form" model="ir.ui.view">
+            <field name="name">bm.floor.form</field>
+            <field name="model">bm.floor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="tower_id"/>
+                                <field name="company_id" options="{'no_create':True,'no_edit':True}" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_floor_filter" model="ir.ui.view">
+            <field name="name">bm.floor.filter</field>
+            <field name="model">bm.floor</field>
+            <field name="arch" type="xml">
+                <search string="Cari weighbridge">
+                    <field name="name" string="Search" filter_domain="[('name','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="action_bm_floor">
+            <field name="name">Floor</field>
+            <field name="res_model">bm.floor</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="bm_floor_filter"/>
+        </record>
+    </data>
+</odoo>

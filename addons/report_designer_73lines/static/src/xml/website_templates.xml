@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Part of Odoo Module Developed by 73lines
+    See LICENSE file for full copyright and licensing details.
+    c : container
+    m : main
+    fld : field
+    fn : function
+    rel: relation field
+    chld: child
+    attr-1 : first attribute
+    attr-2 : second attribute
+    val: value
+    sel: selection
+-->
+<templates xml:space="preserve">
+    <t t-name="report_designer_dialogbox">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label class="control-label" for="attribute_type">Attribute Name :</label>
+                <select id="attribute_type" class="form-control" required="required">
+                    <option value=""></option>
+                    <t t-foreach="attribute_types" t-as="attribute">
+                        <option t-att-value="attribute_types[attribute]"><t t-esc="attribute" /></option>
+                    </t>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group attr-1 hidden">
+            <div class="attr-inner hidden">
+                <div class="c-m-sel">
+                    <h5 class="text-center">Main Object</h5>
+
+                    <!-- Main Fields (Normal and many2one) -->
+                    <div class="col-sm-6 hidden c-m-fld-normal-m2o">
+                        <label class="control-label" for="m-fld-normal-m2o">Fields(Normal &amp; m2o) :</label>
+                        <select id="m-fld-normal-m2o" class="form-control">
+                            <option value=""></option>
+                            <t t-foreach="field_names" t-as="field">
+                                <option t-if="field_names[field]['type'] !== 'many2many' and field_names[field]['type'] !== 'one2many'" t-att-value="'doc.' + field"><t t-esc="field_names[field]['label'] + ' (' + field + ')'" /></option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Main Relation Fields -->
+                    <div class="col-sm-6 hidden c-m-rel-fld">
+                        <label class="control-label" for="m-rel-fld">Relation Fields :</label>
+                        <select id="m-rel-fld" class="form-control">
+                            <option value=""/>
+                        </select>
+                    </div>
+
+                    <!-- Main Fields (many2many and one2many) -->
+                    <div class="col-sm-6 hidden c-m-fld-m2m-o2m">
+                        <label class="control-label" for="m-fld-m2m-o2m">Fields(o2m &amp; m2m) :</label>
+                        <select id="m-fld-m2m-o2m" class="form-control">
+                            <option value=""></option>
+                            <t t-foreach="field_names" t-as="field">
+                                <option t-if="field_names[field]['type'] === 'many2many' or field_names[field]['type'] === 'one2many'" t-att-value="'doc.' + field"><t t-esc="field_names[field]['label'] + ' (' + field + ')'" /></option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Main Functions -->
+                    <div class="col-sm-6 hidden c-m-fn">
+                        <label class="control-label" for="m-fn"> Functions :</label>
+                        <select id="m-fn" class="form-control">
+                            <option value=""></option>
+                            <t t-foreach="function_names" t-as="func">
+                                <option t-att-value="'doc.' + func + '()'"><t t-esc="func + '()'" /></option>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+
+                <t t-if="relation_field_names">
+                    <!-- Relational Fields Name -->
+                    <div class="col-sm-12 c-chld-fld">
+                        <h5 class="text-center">Child Object</h5>
+                        <label class="control-label" for="chld-fld">Fields:</label>
+                        <select id="chld-fld" class="form-control">
+                            <option value=""></option>
+                            <t t-foreach="relation_field_names" t-as="field">
+                                <option t-att-value="as + '.' + field">
+                                    <t t-esc="relation_field_names[field] + ' (' + field + ')'" />
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </t>
+            </div>
+
+            <div class="col-sm-12 hidden c-class-list">
+                <label class="control-label" for="class-list">Attribute Value :</label>
+                <input type="text" id="class-list" class="form-control"/>
+            </div>
+
+            <div class="col-sm-12 c-attr-1-val">
+                <label class="control-label" for="attribute_value">Attribute Value :</label>
+                <input type="text" id="attribute_value" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group attr-2 hidden">
+            <h4 class="text-center">Second Attribute</h4>
+            <div class="col-sm-6">
+                <label class="control-label" for="second_attribute_type">Name :</label>
+                <input type="text" id="second_attribute_type" class="form-control" disabled="disabled"/>
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label" for="second_attribute_value">Value :</label>
+                <input type="text" id="second_attribute_value" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group c-add-remove hidden">
+            <div class="col-sm-12 text-right">
+                <button class="btn btn-primary" id="save_close">Save &amp; Close</button>
+                <button class="btn btn-danger" id="remove_attr" disabled="disabled">Remove</button>
+                <button class="btn btn-success" id="add_update_attr" disabled="disabled">Add</button>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="MainObjectRelationFields">
+        <option value=""></option>
+        <t t-foreach="fields" t-as="field">
+            <option t-att-value="'doc.' + obj + '.' + field['name']"><t t-esc="field['field_description'] + ' (' + field['name'] + ')'" /></option>
+        </t>
+    </t>
+
+    <t t-name="WidgetGeneratorSelection">
+        <div class="col-sm-4 hidden" id="widget-selection">
+            <label class="control-label" for="widget_name">Widget :</label>
+            <select id="widget_name" class="form-control">
+                <option value=""></option>
+                <t t-foreach="widgets" t-as="widget">
+                    <option t-att-value="widgets[widget]">
+                        <t t-esc="widget" />
+                    </option>
+                </t>
+            </select>
+        </div>
+    </t>
+
+    <t t-extend="DashboardMain">
+        <t t-jquery=".o_web_settings_dashboard_apps" t-operation="after">
+            <div class="text-center o_web_settings_dashboard_report_designer"></div>
+        </t>
+    </t>
+
+    <t t-name="DashboardReportDesigner">
+        <div class="text-center o_web_settings_dashboard_report_designer mt8">
+            <a class="text-center inside_a_org_uuid" href="https://www.73Lines.com" target="_blank">
+                <img class="img img-responsive org_logo_with_uuid_name text-center"
+                     data-app-name="report_designer_73lines"
+                     style="margin:  auto;"
+                     src=""/>
+            </a>
+            <div class="col-md-6 col-xs-12" style="padding-left: 0;">
+                <a href="https://www.73lines.com/shop"
+                   target="_blank"
+                   class="btn btn-primary btn-block mt8 mb8">
+                    <i class="fa fa-shopping-cart"/> Store
+                </a>
+            </div>
+            <div class="col-md-6 col-xs-12" style="padding-right: 0;">
+                <a href="https://www.73lines.com/page/contactus"
+                   target="_blank"
+                   class="btn btn-primary btn-block mt8 mb8">
+                    <i class="fa fa-envelope"/> Contact us
+                </a>
+            </div>
+            <div class="o_web_settings_dashboard_header o_report_list mt16 mb16" style="cursor: pointer;">
+                0 Reports
+            </div>
+            <div>
+                <a class="btn btn-primary btn-block o_start_report_designing" role="button"><strong>Start Report Designing</strong></a>
+            </div>
+        </div>
+    </t>
+
+
+</templates>

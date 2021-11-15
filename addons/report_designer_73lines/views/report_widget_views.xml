@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Part of Odoo Module Developed by 73lines
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <!-- Report Widget Tree View -->
+    <record id="report_widget_tree" model="ir.ui.view">
+        <field name="name">Report Widget Tree</field>
+        <field name="model">report.widget</field>
+        <field name="arch" type="xml">
+            <tree string="Tag Attributes" editable="bottom">
+                <field name="name" string="Name"/>
+                <field name="widget_json" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Report Widget Action -->
+    <record id="report_widget_action" model="ir.actions.act_window">
+        <field name="name">Report Widget</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.widget</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Report Widget Menu -->
+    <menuitem id="report_widget"
+              name="Report Widgets"
+              parent="report_designer_73lines.report_designer_config"
+              action="report_widget_action"
+              sequence="20" />
+
+</odoo>

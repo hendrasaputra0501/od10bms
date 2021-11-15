@@ -1,0 +1,26 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acc_bm_tower_bm_user,acc_bm_tower bm_user,model_bm_tower,group_bm_user,1,1,0,0
+acc_bm_floor_bm_user,acc_bm_floor bm_user,model_bm_floor,group_bm_user,1,1,0,0
+acc_bm_unit_bm_user,acc_bm_unit bm_user,model_bm_unit,group_bm_user,1,1,0,0
+acc_bm_owner_bm_user,acc_bm_owner bm_user,model_bm_owner,group_bm_user,1,1,0,0
+acc_bm_unit_tenancy_bm_user,acc_bm_unit_tenancy bm_user,model_bm_unit_tenancy,group_bm_user,1,1,0,0
+acc_bm_elect_usage_bm_utility,acc_bm_elect_usage bm_utility,model_bm_electricity_usage,group_bm_utility_user,1,1,1,1
+acc_bm_water_usage_bm_utility,acc_bm_water_usage bm_utility,model_bm_water_usage,group_bm_utility_user,1,1,1,1
+acc_bm_utility_entry_bm_utility,acc_bm_utility_entry bm_utility,model_bm_utility_entry,group_bm_utility_user,1,1,1,1
+acc_bm_tower_billing,acc_bm_tower billing_user,model_bm_tower,group_bm_billing_user,1,1,0,0
+acc_bm_floor_billing,acc_bm_floor billing_user,model_bm_floor,group_bm_billing_user,1,1,0,0
+acc_bm_unit_billing,acc_bm_unit billing_user,model_bm_unit,group_bm_billing_user,1,1,0,0
+acc_bm_owner_billing,acc_bm_owner billing_user,model_bm_owner,group_bm_billing_user,1,1,0,0
+acc_bm_unit_tenancy_billing,acc_bm_unit_tenancy billing_user,model_bm_unit_tenancy,group_bm_billing_user,1,1,0,0
+acc_bm_tuition_rate_billing,acc_bm_tuition_rate billing_user,model_bm_tuition_rate,group_bm_billing_user,1,1,1,0
+acc_bm_elect_usage_rate_billing,acc_bm_elect_usage_rate billing_user,model_bm_electricity_usage_rate,group_bm_billing_user,1,1,1,0
+acc_bm_water_usage_rate_billing,acc_bm_water_usage_rate billing_user,model_bm_water_usage_rate,group_bm_billing_user,1,1,1,0
+acc_bm_tuition_billing,acc_bm_tuition billing_user,model_bm_tuition,group_bm_billing_user,1,1,0,0
+acc_bm_elect_usage_billing,acc_bm_elect_usage billing_user,model_bm_electricity_usage,group_bm_billing_user,1,1,0,0
+acc_bm_water_usage_billing,acc_bm_water_usage billing_user,model_bm_water_usage,group_bm_billing_user,1,1,0,0
+acc_bm_billing_entry_billing,acc_bm_billing_entry billing_user,model_bm_utility_entry,group_bm_billing_user,1,1,0,0
+acc_bm_tower_bm_manager,acc_bm_tower_bm_manager,model_bm_tower,group_bm_manager,1,1,1,0
+acc_bm_floor_bm_manager,acc_bm_floor_bm_manager,model_bm_floor,group_bm_manager,1,1,1,0
+acc_bm_unit_bm_manager,acc_bm_unit_bm_manager,model_bm_unit,group_bm_manager,1,1,1,0
+acc_bm_owner_bm_manager,acc_bm_owner_bm_manager,model_bm_owner,group_bm_manager,1,1,1,0
+acc_bm_unit_tenancy_bm_manager,acc_bm_unit_tenancy_bm_manager,model_bm_unit_tenancy,group_bm_manager,1,1,1,0

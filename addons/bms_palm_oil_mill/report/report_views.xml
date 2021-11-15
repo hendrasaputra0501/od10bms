@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="paperformat_lhp" model="report.paperformat">
+        <field name="name">A4 Laporan Harian Produksi</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">30</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report 
+        id="report_lhp"
+        string="Laporan Harian Produksi"
+        model="mill.lhp" 
+        report_type="qweb-html"
+        file="bms_palm_oil_mill.report_lhp_qweb" 
+        name="bms_palm_oil_mill.report_lhp_qweb"
+        paperformat="bms_palm_oil_mill.paperformat_lhp" 
+    />
+
+	<data>
+		<report string  = "Laporan Harian Produksi"
+			model   = "mill.lhp"
+			auto    = "True"
+			name    = "report_mill_lhp_xlsx"
+			id      = "report_mill_lhp_xlsx"
+			menu    = "True"
+			report_type = "xlsx"
+		/>
+        <report string  = "LHP Kumulatif"
+            model   = "mill.lhp"
+            auto    = "True"
+            name    = "report_lhp_kumulatif_xlsx"
+            id      = "report_lhp_kumulatif_xlsx"
+            menu    = "True"
+            report_type = "xlsx"
+        />
+
+	</data>
+</odoo>

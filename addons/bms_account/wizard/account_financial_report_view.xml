@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="account.menu_account_report_pl" name="Balance Sheet" action="c10i_account.action_account_legal_report_bs" parent="account.menu_finance_legal_statement" groups="group_invisible"/>
+    <menuitem id="account.menu_account_report_bs" name="Profit and Loss" action="c10i_account.action_account_legal_report_pl" parent="account.menu_finance_legal_statement" groups="group_invisible"/>
+</odoo>

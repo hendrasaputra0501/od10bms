@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bms_hr_attendance_view_tree" model="ir.ui.view">
+            <field name="name">bms.hr.attendance.view.tree</field>
+            <field name="model">hr.attendance</field>
+      		<field name="inherit_id" ref="hr_attendance.view_attendance_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='check_out']" position="after">
+                    <field name="attendance_type_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

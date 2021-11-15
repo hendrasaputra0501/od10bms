@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="abc_account_move_form" model="ir.ui.view">
+        <field name="name">view.account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="priority">25</field>
+        <field name="inherit_id" ref="c10i_account_location.view_account_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='account_location_id']" position="after">
+                <field name="account_activity_id" options="{'no_create_edit':True, 'no_create':True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="abc_account_move_line_form" model="ir.ui.view">
+        <field name="name">view.account.move.line.form</field>
+        <field name="model">account.move.line</field>
+        <field name="priority">25</field>
+        <field name="inherit_id" ref="c10i_account_location.view_account_move_line_form"/>
+        <field name="arch" type="xml">
+            <field name="account_location_id" position="after">
+                <field name="account_activity_id" options="{'no_create_edit':True, 'no_create':True}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

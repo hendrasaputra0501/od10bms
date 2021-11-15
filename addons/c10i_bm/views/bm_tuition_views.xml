@@ -1,0 +1,113 @@
+<odoo>
+    <data>
+        <!-- Service Charge Rate -->
+        <record id="bm_tuition_rate_tree" model="ir.ui.view">
+            <field name="name">bm.tuition.rate.tree</field>
+            <field name="model">bm.tuition.rate</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="product_id" required="1"/>
+                    <field name="date" required="1"/>
+                    <field name="rate" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_tuition_rate_form" model="ir.ui.view">
+            <field name="name">bm.tuition.rate.form</field>
+            <field name="model">bm.tuition.rate</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date" required="1"/>
+                                <field name="product_id" required="1"/>
+                            </group>
+                            <group>
+                                <field name="rate" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_tuition_rate_filter" model="ir.ui.view">
+            <field name="name">bm.tuition.rate.filter</field>
+            <field name="model">bm.tuition.rate</field>
+            <field name="arch" type="xml">
+                <search string="Cari Service Charge Cost">
+                    <field name="date" string="Search" filter_domain="[('date','=',self)]"/>
+                    <field name="product_id" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_bm_tuition_rate">
+            <field name="name">Tuition Rate</field>
+            <field name="res_model">bm.tuition.rate</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="bm_tuition_rate_filter"/>
+        </record>
+
+        <!-- Service Charge Tuition -->
+        <record id="bm_tuition_tree" model="ir.ui.view">
+            <field name="name">bm.tuition.tree</field>
+            <field name="model">bm.tuition</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" delete="false">
+                    <field name="unit_id"/>
+                    <field name="product_id"/>
+                    <field name="date"/>
+                    <field name="amount"/>
+                    <field name="invoice_state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_tuition_form" model="ir.ui.view">
+            <field name="name">bm.tuition.form</field>
+            <field name="model">bm.tuition</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="true" delete="false">
+                    <header>
+                        <field name="invoice_state" status_visibility="draft,open,invoiced,paid" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="unit_id" options="{'no_create': True}"/>
+                                <field name="product_id"/>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="amount"/>
+                            </group>
+                        </group>
+                        <field name="invoice_id" invisible="1"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_tuition_filter" model="ir.ui.view">
+            <field name="name">bm.tuition.filter</field>
+            <field name="model">bm.tuition</field>
+            <field name="arch" type="xml">
+                <search string="Search Service Charge Cost">
+                    <field name="unit_id" string="Search" filter_domain="[('unit_id','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- <record model="ir.actions.act_window" id="action_bm_tuition">
+        <field name="name">Service Charge Cost</field>
+        <field name="res_model">bm.tuition</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="search_view_id" ref="bm_tuition_filter"/>
+        </record> -->
+    </data>
+</odoo>

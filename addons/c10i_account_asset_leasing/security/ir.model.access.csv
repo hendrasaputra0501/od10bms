@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account_asset_leasing,account_asset.leasing,model_account_asset_leasing,account.group_account_user,1,1,1,1
+account_asset_installment_line,account_asset.installment.line,model_account_asset_installment_line,account.group_account_user,1,1,1,1
+
+access_wizard_leasing_user,wizard.leasing user,model_wizard_leasing,base.group_user,1,1,1,0

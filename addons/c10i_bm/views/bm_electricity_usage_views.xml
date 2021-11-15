@@ -1,0 +1,144 @@
+<odoo>
+    <data>
+        <!-- Electricity Rate -->
+        <record id="bm_electricity_usage_rate_tree" model="ir.ui.view">
+            <field name="name">bm.electricity.usage.rate.tree</field>
+            <field name="model">bm.electricity.usage.rate</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="product_id" required="1" options="{'no_create':True, 'no_edit':True, 'no_open': True}"/>
+                    <field name="date" required="1"/>
+                    <field name="rate" required="1"/>
+                    <field name="subsidized_rate" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_electricity_usage_rate_form" model="ir.ui.view">
+            <field name="name">bm.electricity.usage.rate.form</field>
+            <field name="model">bm.electricity.usage.rate</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date" required="1"/>
+                                <field name="product_id" required="1"/>
+                            </group>
+                            <group>
+                                <field name="rate" required="1"/>
+                                <field name="subsidized_rate" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_electricity_usage_rate_filter" model="ir.ui.view">
+            <field name="name">bm.electricity.usage.rate.filter</field>
+            <field name="model">bm.electricity.usage.rate</field>
+            <field name="arch" type="xml">
+                <search string="Cari Electricity Cost">
+                    <field name="date" string="Search" filter_domain="[('date','=',self)]"/>
+                    <field name="product_id" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_bm_electricity_rate">
+            <field name="name">Electricity Rate</field>
+            <field name="res_model">bm.electricity.usage.rate</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="bm_electricity_usage_rate_filter"/>
+        </record>
+
+        <!-- Electricity Usage -->
+        <record id="bm_electricity_usage_tree" model="ir.ui.view">
+            <field name="name">bm.electricity.usage.tree</field>
+            <field name="model">bm.electricity.usage</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" delete="false">
+                    <field name="unit_id"/>
+                    <field name="date_start"/>
+                    <field name="date_stop"/>
+                    <field name="meter_start"/>
+                    <field name="meter_stop"/>
+                    <field name="total_amount"/>
+                    <field name="state"/>
+                    <field name="invoice_state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_electricity_usage_form" model="ir.ui.view">
+            <field name="name">bm.electricity.usage.form</field>
+            <field name="model">bm.electricity.usage</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="true" delete="false">
+                    <header>
+                        <field name="state" status_visibility="draft,confirmed" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="unit_id" options="{'no_create': True}"/>
+                                <field name="load_voltage"/>
+                                <field name="saving_limit"/>
+                                <field name="date_start"/>
+                                <field name="date_stop"/>
+                            </group>
+                            <group>
+                                <field name="meter_start"/>
+                                <field name="meter_stop"/>
+                                <field name="usage_meter"/>
+                                <field name="meter_factor" readonly="1"/>
+                                <field name="consumption_meter"/>
+                            </group>
+                        </group>
+                        <group name="compute_cost" string="Cost Detail">
+                            <group>
+                                <field name="subsidized_meter"/>
+                                <field name="subsidized_rate"/>
+                                <field name="subsidized_cost"/>
+                            </group>
+                            <group>
+                                <field name="unsubsidized_meter"/>
+                                <field name="unsubsidized_rate"/>
+                                <field name="unsubsidized_cost"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group></group>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="cost_amount"/>
+                                <field name="tax_amount"/>
+                                <field name="total_amount" class="oe_subtotal_footer_separator"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_electricity_usage_filter" model="ir.ui.view">
+            <field name="name">bm.electricity.usage.filter</field>
+            <field name="model">bm.electricity.usage</field>
+            <field name="arch" type="xml">
+                <search string="Search Electricity Cost">
+                    <field name="unit_id" string="Search" filter_domain="[('unit_id','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_bm_electricity_usage">
+            <field name="name">Electricity Cost</field>
+            <field name="res_model">bm.electricity.usage</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+            <field name="search_view_id" ref="bm_electricity_usage_filter"/>
+        </record>
+    </data>
+</odoo>

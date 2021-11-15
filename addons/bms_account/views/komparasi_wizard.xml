@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_komparasi_wizard" model="ir.ui.view">
+            <field name="name">komparasi.wizard.form</field>
+            <field name="model">komparasi.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Account charts">
+                    <group>
+                        <field name="periode"/>
+                    </group>
+                    <footer>
+                        <button string="Open" name="komparasi_wizard_open_window" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_komparasi_wizard" model="ir.actions.act_window">
+            <field name="name">Komparasi Account</field>
+            <field name="res_model">komparasi.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_komparasi_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem icon="STOCK_INDENT" action="action_komparasi_wizard"
+            id="menu_action_komparasi_wizard"
+            parent="account.account_reports_business_intelligence_menu" sequence="20"/>
+            
+        
+
+
+    </data>
+</odoo>

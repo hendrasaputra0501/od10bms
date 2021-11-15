@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<!-- main menu -->
+    <!-- <menuitem id="main_menu_office_rent" name="Office Rent" sequence="1"/> -->
+    <!-- sub menu -->
+<!--     <menuitem id="menu_orent" name="Office Rents" parent="main_menu_office_rent" sequence="1" groups="base.group_no_user"/> 
+    <menuitem id="menu_orent_billing" name="Invoicing" parent="main_menu_office_rent" sequence="2" groups="base.group_no_user"/> 
+    <menuitem id="menu_orent_reports" name="Reports" parent="main_menu_office_rent" sequence="3" groups="base.group_no_user"/> 
+    
+    <menuitem id="menu_orent_config" name="Configuration" parent="main_menu_office_rent" sequence="10" groups="base.group_no_user"/>  -->
+    <!-- actions -->
+<!--     <menuitem id="menu_orent_unit" name="Rent Unit" parent="menu_orent" sequence="10" groups="base.group_no_user"
+    	action="action_office_rent_unit"/>  -->
+
+	<!-- main menu -->
+    <menuitem id="main_menu_office_rent" name="Office Rent" sequence="1"/>
+    <!-- sub menu -->
+    <menuitem id="menu_orent" name="Office Rents" parent="main_menu_office_rent" sequence="1"/> 
+    <menuitem id="menu_orent_billing" name="Invoicing" parent="main_menu_office_rent" sequence="2"/> 
+    <menuitem id="menu_orent_reports" name="Reports" parent="main_menu_office_rent" sequence="3"/> 
+    
+    <menuitem id="menu_orent_config" name="Configuration" parent="main_menu_office_rent" sequence="10"/> 
+    <menuitem id="menu_product_pricelist_main" name="Pricelists" parent="menu_orent_config" sequence="3"/>
+    <!-- actions -->
+    <menuitem id="menu_orent_unit" name="Rent Unit" parent="menu_orent" sequence="10"
+    	action="action_office_rent_unit"/> 
+    <menuitem id="menu_orent_unit_tenancy" name="Rent Unit Tenancy" parent="menu_orent" sequence="11"
+    	action="action_office_rent_unit_tenancy"/> 
+    <menuitem id="menu_orent_order" name="Rent Order" parent="menu_orent" sequence="12"
+    	action="action_office_rent_order"/>
+    <menuitem action="product.product_pricelist_action2" id="menu_product_pricelist_action2" parent="menu_product_pricelist_main" sequence="1"/>
+    <menuitem id="menu_orent_tuition_bill" parent="menu_orent_billing" sequence="1"
+        action="action_orent_tuition_bill" />
+    <menuitem id="menu_orent_rental_bill" parent="menu_orent_billing" sequence="2"
+        action="action_orent_rental_bill" />
+</odoo>

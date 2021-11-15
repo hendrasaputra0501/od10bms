@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_operation_type_form" model="ir.ui.view">
+            <field name="name">hr.operation.type.form</field>
+            <field name="model">hr.operation.type</field>
+            <field name="arch" type="xml">
+                <form string="Type">
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group></group>
+                    </group>
+                    <field name="user_ids" />
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_operation_type_tree" model="ir.ui.view">
+            <field name="name">hr.operation.type.tree</field>
+            <field name="model">hr.operation.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_operation_type_filter" model="ir.ui.view">
+            <field name="name">hr.operation.type.filter</field>
+            <field name="model">hr.operation.type</field>
+            <field name="arch" type="xml">
+                <search string="Type">
+                    <field name="name"/>
+                </search>
+             </field>
+         </record>
+
+        <record id="action_hr_operation_type" model="ir.actions.act_window">
+            <field name="name">HR Operation Type</field>
+            <field name="res_model">hr.operation.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+            <field name="search_view_id" ref="view_hr_operation_type_filter"/>
+        </record>
+
+        <menuitem id="menu_hr_operation_type" action="action_hr_operation_type" parent="hr.menu_human_resources_configuration" groups="hr.group_hr_manager" sequence="24"/>
+
+        <record id="bms_minimum_wage_form" model="ir.ui.view">
+            <field name="name">bms.minimum.wage.form</field>
+            <field name="model">hr.minimum.wage</field>
+            <field name="inherit_id" ref="c10i_hr.view_minimum_wage_form" />
+            <field name="arch" type="xml">
+                <field name="year" position="after">
+                    <field name="operation_type_id" required="True" />
+                </field>
+                <field name="umr_month" position="after">
+                    <field name="amount_natura" />
+                    <field name="allowance_structural" />
+                    <field name="allowance_production" />
+                </field>
+            </field>
+        </record>
+
+                <!-- HR Minimum Wage -->
+        <record id="c10i_hr_attendance_palm_oil.view_hr_minimum_wage_attendance_form" model="ir.ui.view">
+            <field name="name">view.hr.minimum.wage.attendance.form</field>
+            <field name="model">hr.minimum.wage</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="c10i_hr.view_minimum_wage_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_from']" position="before">
+                    <field name="basic_salary_type" required="1"/>
+                    <field name="work_day" required="1"/>
+                </xpath>
+                <xpath expr="//field[@name='date_from']" position="after">
+                    <field name="dasar_bpjs"/>
+                </xpath>
+                <xpath expr="//field[@name='date_to']" position="before">
+                    <field name="no_induk" attrs="{'invisible':[('basic_salary_type','!=','employee')], 'required':[('basic_salary_type','=','employee')]}"/>
+                    <field name="employee_type_id" attrs="{'invisible':[('basic_salary_type','!=','employee_type')], 'required':[('basic_salary_type','=','employee_type')]}" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                    <field name="employee_id" attrs="{'invisible':[('basic_salary_type','!=','employee')], 'required':[('basic_salary_type','=','employee')]}" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}" domain="[('basic_salary_type','=','employee'),('no_induk','=',no_induk)]"/>
+                    <field name="umr_day" required="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

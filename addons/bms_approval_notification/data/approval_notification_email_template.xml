@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="approval_notification_email_template" model="mail.template">
+            <field name="name">Approval Notification - Send by Email</field>
+            <field name="model_id" ref="bms_approval_notification.model_purchase_order"/>
+            <field name="email_from">admin@bumimajusawit.co.id</field>
+            <field name="email_to">${ctx.get('to')}</field>
+            <field name="subject">Approval Notification - Purchase Order ${object.name or 'n/a'}</field>
+            <field name="body_html"><![CDATA[
+                <p>Dear ,
+                % set access_action = object.get_access_action()
+                % set access_url = access_action['type'] == 'ir.actions.act_window' and access_action['url'] or '/web#id=' + str(object.id) + '&view_type=form&model=purchase.order&menu_id=293&action=423'
+
+                <p>PO <strong>${object.name}</strong> ${object.amount_total} membutuhkan persetujuan anda untuk diproses lebih lanjut.</p>
+
+                <p>Klik link berikut untuk melanjutkan proses :
+                <br/>
+                <a href="${access_url}">Purchase Order ${object.name or 'n/a'}</a>
+                <br/>
+                </p>
+
+                <p>Thank you,</p>
+                ]]></field>
+        </record>
+    </data>
+</odoo>

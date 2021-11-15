@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="tax_account_group_list">
+            <field name="name">tax.account.group.list</field>
+            <field name="model">tax.account.group</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="account_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="tax_account_group_list_form">
+            <field name="name">tax.account.group.form</field>
+            <field name="model">tax.account.group</field>
+            <field name="arch" type="xml">
+                <form string="Tax Payment Account Group">
+                    <sheet>
+                      <group>
+                        <field name="name"/>
+                        <field name="account_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tax_account_group_action">
+        <field name="name">Tax Payment Account Group</field>
+        <field name="res_model">tax.account.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Tax Payment Account Group" id="tax_account_group_menu" parent="account.menu_finance_configuration"
+        action="tax_account_group_action"/>
+    </data>
+</odoo>

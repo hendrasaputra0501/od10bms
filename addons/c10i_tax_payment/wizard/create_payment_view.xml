@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wizard_create_payment" model="ir.ui.view">
+            <field name="name">wizard.create.payment</field>
+            <field name="model">create.payment</field>
+            <field name="arch" type="xml">
+                <form string="Create Payment">
+                    <group>
+                        <group>
+                            <field name="payment_date" />
+                            <field name="tax_amount_total" readonly="True"/>
+                        </group>
+                        <group>
+                            <field name="journal_id" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Create" name="create_payment" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_create_payment" model="ir.actions.act_window">
+            <field name="name">Create Payment</field>
+            <field name="res_model">create.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="wizard_create_payment"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_c10i_tax_payment">
+            <field name="name">Tax Payment</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record model="res.groups" id="group_c10i_tax_payment_user">
+            <field name="name">Pegawai Accountant</field>
+            <field name="category_id" ref="module_c10i_tax_payment"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        
+    </data>
+</odoo>

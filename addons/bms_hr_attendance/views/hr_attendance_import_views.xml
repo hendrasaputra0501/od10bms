@@ -1,0 +1,56 @@
+<odoo>
+  <data>
+
+    <record id="bms_view_hr_attendance_import_form" model="ir.ui.view">
+        <field name="name">bms.view.hr.attendance.import.form</field>
+        <field name="model">hr.attendance.import</field>
+        <field name="inherit_id" ref="c10i_hr_attendance.view_hr_attendance_import_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="operating_unit_id" required="1" attrs="{'readonly':[('state','not in',['draft','imported'])]}"/>
+            </field>
+            <xpath expr="//sheet/notebook/page[@name='checked']/field/tree" position="attributes">
+                <attribute name="colors">red:business_stop==00.00 and business_start!=00.00;red:business_stop!=00.00 and business_start==00.00;yellow:b_date_stop>o_date_start and overtime_total!=00.00 and business_total != 00.00;red:b_date_start>b_date_stop</attribute>
+                <!-- <attribute name="domain">[('department_id.operating_unit_id','=',parent.operating_unit_id.id)]</attribute> -->
+            </xpath> 
+
+            <xpath expr="//sheet/notebook/page[@name='general']/field[@name='line_ids']/tree/field[@name='penalty_value']" position="before">
+                    <field name="premi_value" />
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='general']/field[@name='line_ids']/form/group[1]/group[2]/field[@name='penalty_value']" position="before">
+                <field name="premi_value" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="c10i_hr_attendance.view_hr_attendance_import_tree" model="ir.ui.view">
+        <field name="name">view.hr.attendance.import.tree</field>
+        <field name="model">hr.attendance.import</field>
+        <field name="arch" type="xml">
+            <tree string="Attendance Import">
+                <field name="name"/>
+                <field name="date"/>
+                <!--<field name="company_id"/>-->
+                <field name="state"/>
+                <field name="operating_unit_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="c10i_hr_attendance.action_hr_attendance_import" model="ir.actions.act_window">
+        <field name="name">Attendance Import</field>
+        <field name="res_model">hr.attendance.import</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="c10i_hr_attendance.view_hr_attendance_import_filter"/>
+        <field name="context">{}</field>
+        <field name="domain">[('search_ids','=',1)]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to Add Attendance Import.
+          </p>
+        </field>
+    </record>
+
+  </data>
+</odoo>

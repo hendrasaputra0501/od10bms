@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="base.IDR" model="res.currency">
+            <field name="name">IDR</field>
+            <field name="symbol">Rp</field>
+            <field name="rounding">0.01</field>
+            <field name="position">before</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="name">PT. BUMI MAJU SAWIT</field>
+            <field name="rml_header1">PT. BUMI MAJU SAWIT</field>
+            <field name="website">http://www.bumimajusawit.co.id/2016/</field>
+            <field name="email">bms@bumimajusawit.co.id</field>
+            <field name="street">Graha BIP Lt. 3 Zone E</field>
+            <field name="street2">Jl. Jend. Gatot Subroto Kav. 23</field>
+            <field name="zip">12930</field>
+            <field name="vat"></field>
+            <field name="city">Jakarta Selatan</field>
+            <field name="state_id" ref="base.state_id_kb"/>
+            <field name="currency_id" ref="base.IDR"/>
+            <field name="country_id" ref="base.id"/>
+            <field name="logo" type="base64" file="c10i_base/static/description/icon.png"/>
+        </record>
+    </data>
+</odoo>

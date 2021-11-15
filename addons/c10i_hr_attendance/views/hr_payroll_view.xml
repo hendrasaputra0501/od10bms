@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--HR Attendance Import-->
+        <record id="view_hr_attendance_payroll_form" model="ir.ui.view">
+            <field name="name">view.hr.attendance.payroll.form</field>
+            <field name="model">hr.attendance.payroll</field>
+            <field name="arch" type="xml">
+                <form string="Attendance Payroll">
+                    <header>
+                        <button name="get_attendance_data" type="object" states="draft" string="Get Data" icon="fa-archive text-primary"/>
+                        <button name="action_confirm" type="object" states="draft" string="Confirm" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label string="Nama" class="oe_edit_only"/>
+                            <h1><field name="name" readonly="1"/></h1>
+                        </div>
+                        <group name="hr_attendance_payroll">
+                            <group>
+                                <field name="account_period_id" required="1"/>
+                                <field name="date_start" required="1"/>
+                            </group>
+                            <group>
+                                <field name="company_id"/>
+                                <field name="date_stop" required="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Details" name="payroll_detail">
+                                <field name="line_ids" nolabel="1">
+                                    <tree>
+                                        <field name="name" invisible="1"/>
+                                        <field name="employee_id"/>
+                                        <field name="effective_work_days"/>
+                                        <field name="effective_work_days_value"/>
+                                        <field name="non_effective_work_days"/>
+                                        <field name="non_effective_work_days_value"/>
+                                        <field name="overtime_value"/>
+                                        <field name="natura_value"/>
+                                        <field name="penalty_value"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="employee_id" readonly="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="effective_work_days" readonly="1"/>
+                                                <field name="effective_work_days_value"/>
+                                                <field name="non_effective_work_days" readonly="1"/>
+                                                <field name="non_effective_work_days_value"/>
+                                                <field name="overtime_value"/>
+                                                <field name="natura_value"/>
+                                                <field name="penalty_value"/>
+                                            </group>
+                                        </group>
+                                        <field name="attendance_line_ids" readonly="1">
+                                            <tree>
+                                                <field name="employee_id" options="{'no_create': True, 'no_open': True}"/>
+                                                <field name="attendance_type_id" readonly="1"/>
+                                                <field name="check_in" readonly="1"/>
+                                                <field name="check_out" readonly="1"/>
+                                                <field name="working_time" widget="float_time" readonly="1"/>
+                                                <field name="work_day_time" widget="float_time" invisible="1"/>
+                                                <field name="work_day"/>
+                                                <field name="overtime" widget="float_time" readonly="1"/>
+                                                <field name="penalty_value" invisible="1"/>
+                                                <!--<field name="employee_salary" invisible="1"/>-->
+                                                <field name="note"/>
+                                            </tree>
+                                            <form>
+                                                <group>
+                                                    <group>
+                                                        <field name="employee_id" readonly="1"/>
+                                                        <field name="attendance_type_id" readonly="1"/>
+                                                        <field name="check_in"/>
+                                                        <field name="check_out"/>
+                                                        <field name="working_time" widget="float_time" readonly="1"/>
+                                                        <field name="overtime" widget="float_time" readonly="1"/>
+                                                    </group>
+                                                    <group>
+                                                        <field name="work_day"/>
+                                                        <field name="penalty_value" invisible="1"/>
+                                                    </group>
+                                                </group>
+                                                <field name="note" />
+                                            </form>
+                                        </field>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_payroll_tree" model="ir.ui.view">
+            <field name="name">view.hr.attendance.payroll.tree</field>
+            <field name="model">hr.attendance.payroll</field>
+            <field name="arch" type="xml">
+                <tree string="Attendance Payroll">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_payroll_filter" model="ir.ui.view">
+            <field name="name">view.hr.attendance.payroll.filter</field>
+            <field name="model">hr.attendance.payroll</field>
+            <field name="arch" type="xml">
+                <search string="Attendance Payroll">
+                    <field name="name"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Company" domain="[]" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_hr_attendance_payroll" model="ir.actions.act_window">
+            <field name="name">Attendance Payroll</field>
+            <field name="res_model">hr.attendance.payroll</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_hr_attendance_payroll_filter"/>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to Add Attendance Payroll.
+              </p>
+            </field>
+        </record>
+        <menuitem id="menu_hr_attendance_payroll" name="Payroll" action="action_hr_attendance_payroll" parent="c10i_hr_attendance.menu_hr_attendance_manage_payroll" sequence="5" groups="hr_attendance.group_hr_attendance_user"/>
+    </data>
+</odoo>

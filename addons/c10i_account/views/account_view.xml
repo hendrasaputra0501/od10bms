@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="c10i_view_tax_form_inherited" model="ir.ui.view">
+            <field name="name">c10i.account.tax.form.inherited</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form" />
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='name']" position="after">
+                     <field name="report_name"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="c10i_view_account_invoice_form_inherited" model="ir.ui.view">
+            <field name="name">c10i.view.account.invoice.form.inherited</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                 <xpath expr="//button[@name='invoice_print']" position="replace">
+                     <button name="print_report_invoice" string="Print" type="object" icon="fa-print" states="open,paid"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_bank_id']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="c10i_view_account_invoice_supplier_form_inherited" model="ir.ui.view">
+            <field name="name">c10i.view.account.invoice.form.supplier.inherited</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form" />
+            <field name="arch" type="xml">
+                 <xpath expr="//button[@name='action_invoice_cancel']" position="before">
+                     <button name="print_report_invoice" string="Print" type="object" icon="fa-print" states="open,paid"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="c10i_bank_statement_form_inherit_custom" model="ir.ui.view">
+            <field name="name">c10i.account.bank.statement.custom</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form" />
+            <field name="arch" type="xml">
+                <button name="check_confirm_bank" position="attributes">
+                    <attribute name='confirm'>Apakah Anda yakin memiliki Saldo Akhir tersebut?</attribute>
+                </button>
+            </field>
+        </record>
+
+        <record id="c10i_view_account_journal_form" model="ir.ui.view">
+            <field name="name">c10i.account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form" />
+            <field name="arch" type="xml">
+                <field name="refund_sequence" position="after">
+                    <field name="receipt_sequence" attrs="{'invisible': [('type', 'not in', ['cash', 'bank'])]}" groups="base.group_no_one"/>
+                </field>
+                <field name="refund_sequence_id" position="after">
+                    <field name="receipt_sequence_id" required="0" attrs="{'readonly': 1, 'invisible': ['|',('type', 'not in', ['cash', 'bank']), ('receipt_sequence', '!=', True)]}" groups="base.group_no_one"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- ========== Spesifikasi Report ========== -->
+        <report string	= "Report Nota Invoice"
+				model	= "account.invoice"
+				auto	= "True"
+				name	= "report_nota_invoice"
+				rml		= "c10i_account/report/report_nota_invoice.jrxml"
+				id		= "report_nota_invoice"
+                menu    = "True"
+        />
+
+        <!-- ========== Remove Report ========== -->
+        <report
+            id              = "account_invoices"
+            model           = "account.invoice"
+            string          = "Invoices"
+            report_type     = "qweb-pdf"
+            name            = "account.report_invoice"
+            file            = "account.report_invoice"
+            attachment_use  = "True"
+            menu            = "False"
+            attachment      = "(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        />
+
+        <!--Periodical Processing-->
+        <!--<menuitem id="menu_c10i_finance_periodical_processing" name="Periodic Processing" parent="account.menu_finance" sequence="13" groups="account.group_account_user,account.group_account_manager"/>-->
+        <record id="c10i_account_period_form" model="ir.ui.view">
+            <field name="name">c10i.account.period.form</field>
+            <field name="model">account.period</field>
+            <field name="inherit_id" ref="account_period.view_account_period_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="before">
+                    <button name="close_period" string="Close Period" type="object" states="draft" class="oe_highlight"/>
+                    <button name="periodical_post_entries" string="Post All Entries in this Period" type="object" states="draft"/>
+                    <button name="reopen_period" string="Re-Open Period" type="object" states="done" groups="account.group_account_manager"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="c10i_account_fiscalyear_form" model="ir.ui.view">
+            <field name="name">c10i.account.fiscalyear.form</field>
+            <field name="model">account.fiscalyear</field>
+            <field name="inherit_id" ref="account_period.view_account_fiscalyear_form" />
+            <field name="arch" type="xml">
+                <button name="create_period" position="replace">
+                    <button name="create_period" string="Create Monthly Periods" type="object" class="oe_highlight" attrs="{'invisible':[('period_ids','!=',[])]}"/>
+                </button>
+                <button name="create_period3" position="replace">
+                    <button name="create_period3" string="Create 3 Months Periods" type="object" class="oe_highlight" attrs="{'invisible':[('period_ids','!=',[])]}"/>
+                </button>
+                <xpath expr="//field[@name='state']" position="before">
+                    <!--<button name="close_fiscalyear" string="Close Fiscalyear" type="object" states="draft" class="oe_highlight"/>-->
+                    <!--<button name="reopen_fiscalyear" string="Re-Open Fiscalyear" type="object" states="done" groups="account.group_account_manager"/>-->
+                    <button name="create_closing_entry" string="Close Fiscalyear" type="object" states="draft" groups="account.group_account_manager" class="oe_highlight"/>
+                    <button name="cancel_closing_entry" string="Re-Open Fiscalyear" type="object" states="done" groups="account.group_account_manager" class="oe_highlight"/>
+                </xpath>
+
+                <field name="date_start" position="before" >
+                    <field name="journal_id" domain="[('type','=','closing')]"/>
+                    <field name="move_id" groups="base.group_no_one" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="c10i_account_financial_report_form" model="ir.ui.view">
+            <field name="name">c10i.account.financial.report.form</field>
+            <field name="model">account.financial.report</field>
+            <field name="inherit_id" ref="account.view_account_financial_report_form"/>
+            <field name="arch" type="xml">
+                <field name="sign" position="after">
+                    <field name="show_view_label" attrs="{'invisible': [('type','!=','sum')]}"/>
+                </field>
+
+            </field>
+        </record>
+    </data>
+</odoo>

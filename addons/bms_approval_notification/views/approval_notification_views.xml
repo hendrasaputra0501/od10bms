@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="bms_approval_notification_list">
+      <field name="name">bms.approval.notification.list</field>
+      <field name="model">bms.approval.notification</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="document_id"/>
+          <field name="document_state"/>
+          <field name="user_ids"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="bms_approval_notification_form">
+      <field name="name">bms.approval.notification.form</field>
+      <field name="model">bms.approval.notification</field>
+      <field name="arch" type="xml">
+        <form string="Approval Notification">
+          <sheet>
+            <group col="4">
+              <field name="document_id" domain="[('|'), ('name', 'ilike', 'Pembelian'), ('name', 'ilike', 'SPK')]"/>
+              <field name="document_state"/>
+            </group>
+            <group>
+              <field name="user_ids" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="bms_approval_notification.action_window">
+      <field name="name">Approval Notification</field>
+      <field name="res_model">bms.approval.notification</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Approval Notification" id="bms_approval_notification.menu" parent="purchase.menu_purchase_config"
+              action="bms_approval_notification.action_window"/>
+  </data>
+</odoo>

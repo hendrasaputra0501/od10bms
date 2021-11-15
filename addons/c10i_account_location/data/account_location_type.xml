@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="default_account_location_type_na" model="account.location.type">
+            <field name="name">NA</field>
+            <field name="code">-</field>
+            <field name="active">1</field>
+            <field name="no_location">1</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="default_account_location_type_gc" model="account.location.type">
+            <field name="name">General Charge</field>
+            <field name="code">GC</field>
+            <field name="active">1</field>
+            <field name="no_location">0</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="default_account_location_type_idc" model="account.location.type">
+            <field name="name">Indirect Cost</field>
+            <field name="code">IDC</field>
+            <field name="active">1</field>
+            <field name="no_location">0</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="default_account_location_type_pj" model="account.location.type">
+            <field name="name">Project</field>
+            <field name="code">PJ</field>
+            <field name="active">1</field>
+            <field name="no_location">0</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+    </data>
+</odoo>

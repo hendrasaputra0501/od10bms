@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <!-- Master Mill Utility-->
+        <record id="view_mill_utility_form" model="ir.ui.view">
+            <field name="name">view.mill.utility.form</field>
+            <field name="model">mill.utility</field>
+            <field name="arch" type="xml">
+                <form string="Utility">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label string="Nama" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="" required="1"/></h1>
+                        </div>
+                        <group name="utility_information">
+                            <group string="Utility Information">
+                                <field name="code" required="1"/>
+                                <field name="location_type_id" required="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}" domain="[('utility','=',True)]"/>
+                            </group>
+                            <group string="Lokasi &amp; Tanggal">
+                                <field name="type" readonly="1"/>
+                                <field name="location_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                <field name="company_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_mill_utility_tree" model="ir.ui.view">
+            <field name="name">view.mill.utility.tree</field>
+            <field name="model">mill.utility</field>
+            <field name="arch" type="xml">
+                <tree string="Utility">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="type"/>
+                    <field name="location_type_id"/>
+                    <field name="location_id"/>
+                    <field name="active" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mill_utility_filter" model="ir.ui.view">
+            <field name="name">view.mill.utility.filter</field>
+            <field name="model">mill.utility</field>
+            <field name="arch" type="xml">
+                <search string="Utility">
+                    <field name="name" string="Deskripsi" filter_domain="['|',('code','ilike',self),('name','ilike',self)]"/>
+                    <separator/>
+                    <filter name="active" string="Active" domain="[('active','=',True)]"/>
+                    <filter name="inactive" string="Inactive" domain="[('active','=',False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Company" domain="[]" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_mill_utility_vehicle" model="ir.actions.act_window">
+            <field name="name">Vehicle</field>
+            <field name="res_model">mill.utility</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_mill_utility_filter"/>
+            <field name="context">{"default_type":"vh"}</field>
+            <field name="domain">[('type','=','vh')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Klik untuk menambahkan Master Vehicle.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_master_mill_utility_vehicle" action="action_mill_utility_vehicle" parent="c10i_palm_oil_mill.master_mills_menu" sequence="40"/>
+
+        <record id="action_mill_utility_heavy_equipment" model="ir.actions.act_window">
+            <field name="name">Alat Berat</field>
+            <field name="res_model">mill.utility</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_mill_utility_filter"/>
+            <field name="context">{"default_type":"he"}</field>
+            <field name="domain">[('type','=','he')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Klik untuk menambahkan Master Heavy Equipment.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_master_mill_utility_heavy_equipment" action="action_mill_utility_heavy_equipment" parent="c10i_palm_oil_mill.master_mills_menu" sequence="41"/>
+
+        <record id="action_mill_utility_workshop" model="ir.actions.act_window">
+            <field name="name">Workshop</field>
+            <field name="res_model">mill.utility</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_mill_utility_filter"/>
+            <field name="context">{"default_type":"ws"}</field>
+            <field name="domain">[('type','=','ws')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Klik untuk menambahkan Master Workshop.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_master_mill_utility_workshop" action="action_mill_utility_workshop" parent="c10i_palm_oil_mill.master_mills_menu" sequence="50"/>
+
+        <record id="action_mill_utility_machine" model="ir.actions.act_window">
+            <field name="name">Machine</field>
+            <field name="res_model">mill.utility</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_mill_utility_filter"/>
+            <field name="context">{"default_type":"ma"}</field>
+            <field name="domain">[('type','=','ma')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Klik untuk menambahkan Master Machine.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_master_mill_utility_machine" action="action_mill_utility_machine" parent="c10i_palm_oil_mill.master_mills_menu" sequence="60"/>
+
+        <record id="action_mill_utility_laboratory" model="ir.actions.act_window">
+            <field name="name">Laboratory</field>
+            <field name="res_model">mill.utility</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_mill_utility_filter"/>
+            <field name="context">{"default_type":"lb"}</field>
+            <field name="domain">[('type','=','lb')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Klik untuk menambahkan Master Laboratory.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_master_mill_utility_laboratory" action="action_mill_utility_laboratory" parent="c10i_palm_oil_mill.master_mills_menu" sequence="70"/>
+        <!--End Of Master Mill Utility-->
+    </data>
+</odoo>

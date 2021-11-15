@@ -1,0 +1,12 @@
+<odoo>
+	<data>
+		<report string	= "Form Issue"
+			model	= "stock.picking"
+			auto	= "True"
+			name	= "stock_picking_issue"
+			rml		= "c10i_stock_issue_product/reports/report_stock_picking.jrxml"
+			id		= "stock_picking_issue"
+			menu    = "False"
+			/>
+	</data>
+</odoo>

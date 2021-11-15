@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!--====================Specifying the report========================-->
+        <report string="Report General Ledger By Account"
+            model="report.general.ledger.account"
+            auto="True"
+            name="report_general_ledger_account"
+            rml="c10i_account_location/report/report_general_ledger_account.jrxml"
+            id="c10i_account.report_general_ledger_account"
+            menu="False"
+            />
+
+		<report string="Report General Ledger By Account Excel Edition"
+			model="report.general.ledger.account"
+			auto="True"
+			name="report_general_ledger_account_xls"
+			rml="c10i_account_location/report/report_general_ledger_account_xls.jrxml"
+			id="c10i_account.report_general_ledger_account_xls"
+			menu="False"
+			/>
+    </data>
+</odoo>

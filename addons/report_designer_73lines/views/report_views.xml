@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Part of Odoo Module Developed by 73lines
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <!-- Start Report Designing Action -->
+    <record id="action_report_designer" model="ir.actions.act_url">
+        <field name="name">Report Designer</field>
+        <field name="url">/report/editor</field>
+        <field name="target">self</field>
+    </record>
+
+    <!-- Tag Attribute Tree View -->
+    <record id="tag_attribute_tree" model="ir.ui.view">
+        <field name="name">Tag Attribute Tree</field>
+        <field name="model">report.tag.attribute</field>
+        <field name="arch" type="xml">
+            <tree string="Tag Attributes" editable="bottom">
+                <field name="name" />
+                <field name="display" />
+                <field name="second_attribute" />
+                <field name="with_attrs" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Tag Attribute Action -->
+    <record id="tag_attribute_action" model="ir.actions.act_window">
+        <field name="name">Tag Attributes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">report.tag.attribute</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Main Menu: Start Report Designing -->
+    <menuitem id="report_designer_website"
+              parent="base.menu_administration"
+              name="Start Report Designing"
+              action="action_report_designer"
+              sequence="0"/>
+
+    <!--  Main Menu: Report Designer Settings -->
+    <menuitem id="report_designer_config" parent="base.menu_administration" name="Report Designer Settings" sequence="0"/>
+
+    <!-- Tag Attribute Menu -->
+    <menuitem id="tag_attribute"
+              name="Tag Attributes"
+              parent="report_designer_73lines.report_designer_config"
+              action="tag_attribute_action"
+              sequence="10" />
+
+    <!-- @todo Siddharth Bhalgami <siddharth.bhalgami@gmail.com>
+                *** Idea is giving or making a common layout
+                which is usable in multiple reports template.
+                So, no need to start from scratch if we have
+                some kind of common template/view/structure. ***
+     -->
+    <!--<record id="view_view_form_report_inherit" model="ir.ui.view">-->
+        <!--<field name="name">ir.ui.view.report form</field>-->
+        <!--<field name="model">ir.ui.view</field>-->
+        <!--<field name="inherit_id" ref="base.view_view_form" />-->
+        <!--<field name="arch" type="xml">-->
+            <!--<field name="priority" position="after">-->
+                <!--<field name="use_as_layout" />-->
+            <!--</field>-->
+        <!--</field>-->
+    <!--</record>-->
+
+    <!--<menuitem action="base.action_ui_view" id="menu_ui_view_report_designer"-->
+              <!--parent="report_designer_73lines.report_designer_configuration"-->
+              <!--groups="base.group_no_one" sequence="20"/>-->
+
+</odoo>

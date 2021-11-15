@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_wizard_downpayment_sale_form" model="ir.ui.view">
+            <field name="name">view.wizard.downpayment.sale.form</field>
+            <field name="model">wizard.downpayment.sale</field>
+            <field name="arch" type="xml">
+                <form string="Downpayment Sale">
+                    <group string="Downpayment">
+                        <group>
+                            <label for="downpayment"/>
+                            <div class="o_row">
+                                <field name="downpayment" required="1"/>
+                                <label string="%"/>
+                            </div>
+                            <field name="downpayment_date"/>
+                            <label for="downpayment_residual"/>
+                            <div class="o_row">
+                                <field name="downpayment_residual" readonly="1"/>
+                                <label string="%"/>
+                            </div>
+                            <field name="taxes_id" widget="many2many_tags"/>
+                            <field name="downpayment_value" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sale Information">
+                            <group>
+                                <group>
+                                    <field name="name" readonly="1" invisible="1"/>
+                                    <field name="sale_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                    <field name="doc_type_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                    <field name="amount_total" readonly="1"/>
+                                    <field name="auto_downpayment" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="user_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                    <field name="company_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Create Downpayment" name="create_downpayment" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_downpayment_sale" model="ir.actions.act_window">
+            <field name="name">Downpayment Sale</field>
+            <field name="res_model">wizard.downpayment.sale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_wizard_downpayment_sale_form"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <!-- Purchase -->
+        <record id="view_wizard_downpayment_purchase_form" model="ir.ui.view">
+            <field name="name">view.wizard.downpayment.purchase.form</field>
+            <field name="model">wizard.downpayment.purchase</field>
+            <field name="arch" type="xml">
+                <form string="Downpayment Purchase">
+                    <group string="Downpayment">
+                        <group>
+                            <label for="downpayment"/>
+                            <div class="o_row">
+                                <field name="downpayment" required="1"/>
+                                <label string="%"/>
+                            </div>
+                            <field name="downpayment_date"/>
+                            <label for="downpayment_residual"/>
+                            <div class="o_row">
+                                <field name="downpayment_residual" readonly="1"/>
+                                <label string="%"/>
+                            </div>
+                            <field name="taxes_id" widget="many2many_tags"/>
+                            <field name="downpayment_value" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Purchase Information">
+                            <group>
+                                <group>
+                                    <field name="name" readonly="1" invisible="1"/>
+                                    <field name="purchase_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                    <field name="doc_type_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                    <field name="amount_total" readonly="1"/>
+                                    <field name="auto_downpayment" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="user_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                    <field name="company_id" readonly="1" options="{'no_create_edit':True, 'no_create':True, 'no_open':True}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Create Downpayment" name="create_downpayment" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_downpayment_purchase" model="ir.actions.act_window">
+            <field name="name">Downpayment Purchase</field>
+            <field name="res_model">wizard.downpayment.purchase</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_wizard_downpayment_purchase_form"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

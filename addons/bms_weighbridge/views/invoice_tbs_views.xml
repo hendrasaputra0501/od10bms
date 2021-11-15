@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="invoice_tbs_partner_form">
+        <field name="name">invoice.tbs.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <field name="property_account_payable_id" position="before">
+                <field name="default_taxes_ids" />
+            </field>
+        </field>
+    </record>
+
+    <!-- ##################### TIMBANG METRO ###################### -->
+    <record id="view_invoice_tbs_form" model="ir.ui.view">
+        <field name="name">view.invoice.tbs.form</field>
+        <field name="model">invoice.tbs</field>
+        <field name="arch" type="xml">
+            <form string="Invoice TBS" >
+                <header>
+                    <button name="button_generate_pricelist" type="object" string="Generate Pricelist" states="draft" class="oe_highlight"/>
+                    <button name="set_draft" type="object" string="Set to Draft" states="price_allocation" />
+                    <button name="button_generate_lines" type="object" string="Allocate Price" states="price_allocation" class="oe_highlight"/>
+                    <button name="button_confirm" type="object" string="Confirm" states="price_allocation" class="oe_highlight"/>
+                    <button name="action_create_bills" type="object" string="Create Bills" states="confirmed" class="oe_highlight"/>
+                    <button name="button_cancel" type="object" string="Cancel" states="invoiced" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,invoiced"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"  name="action_view_invoice"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o" attrs="{'invisible':[('state', '!=', 'invoiced'),('invoice_ids','=',[])]}">
+                            <field name="invoice_count" widget="statinfo" string="Vendor Bills"/>
+                            <field name='invoice_ids' invisible="1"/>
+                        </button>
+                        <button type="object"  name="action_view_advance"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o" attrs="{'invisible':[('state', '!=', 'invoiced'),('invoice_ids','=',[])]}">
+                            <field name="advance_count" widget="statinfo" string="Advance Bills"/>
+                            <field name='advance_ids' invisible="1"/>
+                        </button>
+                    </div>
+                    <!--<div class="oe_title">-->
+                        <!--<label string="Nama" class="oe_edit_only"/>-->
+                        <!--<h1><field name="name" placeholder="Pabrik" required="1" readonly="1"/></h1>-->
+                    <!--</div>-->
+                    <group name="main_info">
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_stop" />
+                            <field name="relasi_id" options="{'no_create': True, 'no_open': True}" string="Filter by Relasi"/>
+                            <field name="partner_id" domain="[('supplier','=',True)]" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('relasi_id','!=',False)]}" string="Filter by Vendor"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="product_id" attrs="{'invisible': [('state','!=','confirmed')], 'required': [('state','=','confirmed')]}" options="{'no_create': True}" />
+                            <field name="journal_id" attrs="{'invisible': [('state','!=','confirmed')], 'required': [('state','=','confirmed')]}" options="{'no_create': True}" />
+                            <field name="currency_id" attrs="{'invisible': [('state','!=','confirmed')], 'required': [('state','=','confirmed')]}" options="{'no_create': True}" />
+                            <field name="date_invoice" attrs="{'invisible': [('state','!=','confirmed')], 'required': [('state','=','confirmed')]}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detail Invoice" name="detail_invoice" attrs="{'invisible': [('invoice_line_ids','=',[])]}">
+                            <field name="invoice_line_ids" >
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="name" />
+                                    <field name="partner_id" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="qty_bruto" readonly="1" sum="qty_bruto"/>
+                                    <field name="qty_sortasi" readonly="1" sum="qty_sortasi"/>
+                                    <field name="qty_netto" sum="qty_netto" readonly="1"/>
+                                    <field name="quantity" sum="quantity"/>
+                                    <field name="price_unit" />
+                                    <field name="price_subtotal" sum="price_subtotal"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pricelist" name="detail_pricelist">
+                            <field name="invoice_pricelist_ids" >
+                                <tree editable="bottom" >
+                                    <field name="name" />
+                                    <field name="partner_id" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="base_price" />
+                                    <field name="price_add1" />
+                                    <field name="price_add2" />
+                                    <field name="price_add3" />
+                                    <field name="price_unit" />
+                                    <field name="pct_sortasi" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Timbangan" name="detail_weighbridge">
+                            <field name="weighbridge_ids" readonly="1">
+                                <tree limit="10">
+                                    <field name="TIMBANG_NO" />
+                                    <field name="TIMBANG_RELASI" />
+                                    <field name="TIMBANG_IN_DATE" />
+                                    <field name="TIMBANG_OUT_DATE" />
+                                    <field name="TIMBANG_PRODUK" />
+                                    <field name="TIMBANG_BERATNETTO" />
+                                    <field name="TIMBANG_SORTASI" />
+                                    <field name="TIMBANG_POTONGAN" />
+                                    <field name="TIMBANG_TOTALBERAT" />
+                                    <field name="state" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_invoice_tbs_tree" model="ir.ui.view">
+        <field name="name">view.invoice.tbs.tree</field>
+        <field name="model">invoice.tbs</field>
+        <field name="arch" type="xml">
+            <tree string="Invoice" >
+                <field name='date_start'  />
+                <field name='date_stop' />
+                <field name='state' />
+                <field name="partner_id" />
+                <field name="relasi_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_invoice_tbs_filter" model="ir.ui.view">
+        <field name="name">view.invoice.tbs.filter</field>
+        <field name="model">invoice.tbs</field>
+        <field name="arch" type="xml">
+            <search string="Invoice TBS">
+                <!-- <field name="name" string="Search" filter_domain="['|','|',('TIMBANG_NO','ilike',self),('TIMBANG_RELASI','ilike',self),('TIMBANG_KONTRAK','ilike',self)]"/> -->
+                <!-- <separator/> -->
+                <field name="relasi_id" string="Relasi" />
+                <group expand="0" string="Group By">
+                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_invoice_tbs" model="ir.actions.act_window">
+        <field name="name">Invoice TBS</field>
+        <field name="res_model">invoice.tbs</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_invoice_tbs_filter"/>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Start Creating Invoice TBS
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_invoice_tbs" parent="account.menu_finance_payables" action="action_invoice_tbs" sequence="1"/>
+
+</odoo>

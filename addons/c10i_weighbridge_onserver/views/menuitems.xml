@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Parent Menu -->
+	<menuitem id="menu_weighbridge" parent="stock.menu_stock_root" name="Weighbridge" sequence="51"/>
+	<!-- Sub Menu -->
+
+	<!-- Menu Action -->
+    <menuitem id="menu_weighbridge_ticket" parent="menu_weighbridge" action="action_weighbridge_ticket" sequence="1"/>
+</odoo>

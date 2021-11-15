@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record forcecreate="True" id="decimal_mill_density" model="decimal.precision">
+            <field name="name">Density</field>
+            <field name="digits" eval="4"/>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record forcecreate="True" id="decimal_mill_koreksi" model="decimal.precision">
+            <field name="name">Koreksi Suhu</field>
+            <field name="digits" eval="7"/>
+        </record>
+        <record forcecreate="True" id="decimal_mill_sounding_oil_losses" model="decimal.precision">
+            <field name="name">Oil Lossess Precentage</field>
+            <field name="digits" eval="3"/>
+        </record>
+        <record forcecreate="True" id="decimal_mill_sounding_kernel_losses" model="decimal.precision">
+            <field name="name">Kernel Lossess Precentage</field>
+            <field name="digits" eval="2"/>
+        </record>
+        <record forcecreate="True" id="decimal_mill_sounding_height_storage" model="decimal.precision">
+            <field name="name">Sounding Height Storage</field>
+            <field name="digits" eval="1"/>
+        </record>
+        <record forcecreate="True" id="decimal_mill_sounding_ffa" model="decimal.precision">
+            <field name="name">Sounding FFA</field>
+            <field name="digits" eval="2"/>
+        </record>
+        <record forcecreate="True" id="decimal_mill_sounding_kernel_height" model="decimal.precision">
+            <field name="name">Sounding Height Kernel</field>
+            <field name="digits" eval="0"/>
+        </record>
+        <record forcecreate="True" id="decimal_mill_bunker_volume" model="decimal.precision">
+            <field name="name">Mill Bunker Volume</field>
+            <field name="digits" eval="6"/>
+        </record>
+        <record forcecreate="True" id="decimal_mill_bunker_density" model="decimal.precision">
+            <field name="name">Mill Bunker Density</field>
+            <field name="digits" eval="3"/>
+        </record>
+    </data>
+</odoo>

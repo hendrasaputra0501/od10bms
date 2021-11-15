@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Part of Odoo Module Developed by 73lines
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <template id="assets_common_report_designer" name="report designer assets" inherit_id="website.assets_editor">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/less" href="/report_designer_73lines/static/src/less/report_editor.less"/>
+            <link rel="stylesheet" type="text/css" href="/report_designer_73lines/static/lib/tag-editor/jquery.tag-editor.css"/>
+
+            <script type="text/javascript" src="/report_designer_73lines/static/src/js/report_editor.js"/>
+            <script type="text/javascript" src="/report_designer_73lines/static/lib/tag-editor/jquery.caret.js"/>
+            <script type="text/javascript" src="/report_designer_73lines/static/lib/tag-editor/jquery.tag-editor.js"/>
+        </xpath>
+    </template>
+
+    <template id="assets_backend_report_designer" name="report designer backend assets" inherit_id="website.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/report_designer_73lines/static/src/js/setting_dashboard.js"/>
+        </xpath>
+    </template>
+
+    <!-- Common Report Blank Layout -->
+    <template id="default_report_document">
+        <t t-call="report.external_layout">
+            <!--
+                As language is not required for all objects.
+                So for now, If partner is available in object then pass
+                that partner's language.
+            -->
+            <t t-if="'partner_id' in doc.fields_get()">
+                <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+            </t>
+            <div class="page oe_structure"/>
+        </t>
+    </template>
+
+    <!-- Common Report Structure (Main) -->
+    <template id="default_report">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <!--
+                    As language is not required for all objects.
+                    So for now, If partner is available in object then pass
+                    that partner's language.
+                -->
+                <t t-if="'partner_id' in doc.fields_get()">
+                    <t t-call="report_designer_73lines.default_report_document" t-lang="doc.partner_id.lang"/>
+                </t>
+                <t t-if="'partner_id' not in doc.fields_get()">
+                    <t t-call="report_designer_73lines.default_report_document"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- report designer loader -->
+    <template id="report_designer_loader">
+        <t t-call="website.layout">
+            <div class="report_loader">
+                <div class="center">
+                    <img src="/report_designer_73lines/static/src/img/gears.svg"/>
+                    <div>
+                        <span>Loading....</span>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+        <!-- Entry Utility Usage -->
+        <record id="bm_utility_entry_tree" model="ir.ui.view">
+            <field name="name">bm.utility.entry.tree</field>
+            <field name="model">bm.utility.entry</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="operator_id"/>
+                    <field name="date_stop"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_utility_entry_form" model="ir.ui.view">
+            <field name="name">bm.utility.entry.form</field>
+            <field name="model">bm.utility.entry</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_validate" type="object" string="Validate" 
+                            states='draft' class="oe_highlight"/>
+                            <button name="set_draft" type="object" string="Set to Draft" 
+                                states='done'/>
+                                <field name="state" status_visibility="draft,done" widget="statusbar" />
+                            </header>
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="operator_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="date_stop"/>
+                                        <field name="initial_value" groups="base.group_no_one"/>
+                                        <field name="electricity_usage"/>
+                                        <field name="water_usage"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page name="page_electricity_usage" string="Electricity Usage"
+                                        attrs="{'invisible': [('electricity_usage','=',False)]}">
+                                        <field name="electricity_usage_ids" 
+                                            context="{'default_initial_value': initial_value, 'default_date_stop': date_stop, 'readonly_by_pass': True}">
+                                            <tree editable="top">
+                                                <field name="initial_value" invisible="1" />
+                                                <field name="unit_id" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                                <field name="date_start" readonly="0"/>
+                                                <field name="date_stop" />
+                                                <field name="meter_start" readonly="0"/>
+                                                <field name="meter_stop" />
+                                                <field name="load_voltage" invisible="1"/>
+                                                <field name="saving_limit" invisible="1"/>
+                                                <field name="meter_factor" invisible="1"/>
+                                            </tree>
+                                        </field>
+                                    </page>
+                                    <page name="page_water_usage" string="Water Usage" 
+                                        attrs="{'invisible': [('water_usage','=',False)]}">
+                                        <field name="water_usage_ids"
+                                            context="{'default_initial_value': initial_value, 'default_date_stop': date_stop, 'readonly_by_pass': True}">
+                                            <tree editable="top">
+                                                <field name="initial_value" invisible="1"/>
+                                                <field name="unit_id" options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                                <field name="date_start" readonly="0"/>
+                                                <field name="date_stop" />
+                                                <field name="meter_start" readonly="0"/>
+                                                <field name="meter_stop" />
+                                            </tree>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+
+                <record id="bm_utility_entry_filter" model="ir.ui.view">
+                    <field name="name">bm.utility.usage.filter</field>
+                    <field name="model">bm.utility.entry</field>
+                    <field name="arch" type="xml">
+                        <search string="Search Utility Usage">
+                            <field name="operator_id" string="Search" filter_domain="[('operator_id','ilike',self)]"/>
+                        </search>
+                    </field>
+                </record>
+                <!-- actions opening views on models -->
+
+                <record model="ir.actions.act_window" id="action_bm_utility_entry">
+                    <field name="name">Utility Usage</field>
+                    <field name="res_model">bm.utility.entry</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="view_type">form</field>
+                    <field name="search_view_id" ref="bm_utility_entry_filter"/>
+                </record>
+            </data>
+        </odoo>

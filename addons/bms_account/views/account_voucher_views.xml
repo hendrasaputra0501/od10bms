@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	        <!-- ========== Spesifikasi Report ========== -->
+        <report string	= "Report Voucher"
+				model	= "account.voucher"
+				auto	= "True"
+				name	= "report_voucher_cash_bank1"
+				rml		= "bms_account/reports/report_voucher.jrxml"
+				id		= "report_voucher_cash_bank1"
+                menu    = "False"
+        />
+
+        <record model="ir.ui.view" id="cep_view_voucher_form">
+            <field name="name">cep.account.voucher.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="c10i_account.view_voucher_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='line_ids']/tree/field[@name='account_id']" position="replace">
+                    <field name="account_account_location_ids" widget="many2many_tags" invisible="1"/>
+                    <field name="account_id" invisible="0" domain="[('user_type_id.name','!=','View'),('id', 'in', account_account_location_ids[0][2])]" options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <record id="bm_tower_tree" model="ir.ui.view">
+            <field name="name">bm.tower.tree</field>
+            <field name="model">bm.tower</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="company_id"/>
+                    <field name="floor_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bm_tower_form" model="ir.ui.view">
+            <field name="name">bm.tower.form</field>
+            <field name="model">bm.tower</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="company_id" options="{'no_create':True,'no_edit':True}" groups="base.group_multi_company"/>
+                            </group>
+                            <field name="floor_ids" string="Floor">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bm_tower_filter" model="ir.ui.view">
+            <field name="name">bm.tower.filter</field>
+            <field name="model">bm.tower</field>
+            <field name="arch" type="xml">
+                <search string="Cari weighbridge">
+                    <field name="name" string="Search" filter_domain="[('name','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="action_bm_tower">
+            <field name="name">Tower</field>
+            <field name="res_model">bm.tower</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="bm_tower_filter"/>
+        </record>
+    </data>
+</odoo>

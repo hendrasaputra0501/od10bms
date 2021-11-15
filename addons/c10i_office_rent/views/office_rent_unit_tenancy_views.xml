@@ -1,0 +1,115 @@
+<odoo>
+    <data>
+        <record id="office_rent_unit_tenancy_tree" model="ir.ui.view">
+            <field name="name">office.rent.unit.tenancy.tree</field>
+            <field name="model">office.rent.unit.tenancy</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="unit_id"/>
+                    <field name="tenant_code"/>
+                    <field name="partner_id"/>
+                    <field name="tenancy_type"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="company_id" options="{'no_create':True,'no_edit':True}" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="office_rent_unit_tenancy_form" model="ir.ui.view">
+            <field name="name">office.rent.unit.tenancy.form</field>
+            <field name="model">office.rent.unit.tenancy</field>
+            <field name="arch" type="xml">
+                <form create="false">
+                    <sheet>
+                        <group>
+                            <group name="tenant_partner_form">
+                                <field name="company_id" options="{'no_create':True,'no_edit':True}" groups="base.group_multi_company"/>
+                                <field name="partner_id"/>
+                                <field name="tenant_code"/>
+                                <field name="unit_id"/>
+                                <field name="tenancy_type"/>
+                            </group>
+                            <group name="tenant_duration_form" string="Duration">
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <group name="tenant_config_form">
+                            <group name="tenant_tuition" string="Tuition Billing">
+                                <field name="invoice_service_charge_partner_id"/>
+                                <field name="invoice_sinking_fund_partner_id"/>
+                                <field name="tuition_method_period" string="One Bill Every"/>
+                                <field name="tuition_schedule_date" string="Schedule Date"/>
+                            </group>
+                            <group name="tenant_utility" string="Utility Billing">
+                                <field name="invoice_utility_partner_id"/>
+                            </group>
+                        </group>
+                        <field name="rent_order_ids">
+                            <tree>
+                                <field name="state" invisible="1"/>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="office_rent_unit_tenancy_form_unit" model="ir.ui.view">
+            <field name="name">office.rent.unit.tenancy.form.unit</field>
+            <field name="model">office.rent.unit.tenancy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group name="tenant_partner_unit">
+                                <field name="partner_id"/>
+                                <field name="tenant_code"/>
+                                <field name="tenancy_type"/>
+                            </group>
+                            <group string="Duration" name="tenant_duration_unit">
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <group name="tenant_config_form">
+                            <group name="tenant_tuition" string="Tuition Billing">
+                                <field name="invoice_service_charge_partner_id"/>
+                                <field name="invoice_sinking_fund_partner_id"/>
+                                <field name="tuition_method_period" string="One Bill Every"/>
+                                <field name="tuition_schedule_date" string="Schedule Date"/>
+                            </group>
+                            <group name="tenant_utility" string="Utility Billing">
+                                <field name="invoice_utility_partner_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="office_rent_unit_tenancy_filter" model="ir.ui.view">
+            <field name="name">office.rent.unit.tenancy.filter</field>
+            <field name="model">office.rent.unit.tenancy</field>
+            <field name="arch" type="xml">
+                <search string="Cari unit">
+                    <field name="tenant_code" string="Search" filter_domain="[('tenant_code','ilike',self)]"/>
+                    </search>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="action_office_rent_unit_tenancy">
+            <field name="name">Rent Unit Tenancy</field>
+            <field name="res_model">office.rent.unit.tenancy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="office_rent_unit_tenancy_filter"/>
+        </record>
+    </data>
+</odoo> 

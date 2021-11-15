@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_komparasi_account_pivot" model="ir.ui.view">
+            <field name="name">komparasi.account.pivot</field>
+            <field name="model">komparasi.account</field>
+            <field name="arch" type="xml">
+                <pivot string="Komparasi Account" disable_linking="True">
+                    <field name="account_id" type="row"/>
+                    <field name="lead_create_date" type="col"/>
+                    <!-- <field name="account_balance_sheet" type="col"/> -->
+                    <field name="debit" type="measure"/>
+                    <field name="credit" type="measure"/>
+                    <field name="balance" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record model="ir.ui.view" id="komparasi_account_search">
+            <field name="name">komparasi.account.search</field>
+            <field name="model">komparasi.account</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="account_id"/>
+                    <filter string="Balance Sheet" domain="[('account_balance_sheet','=','TRUE')]"/>
+                    <filter string="Profit Loss" domain="[('account_balance_sheet','!=','TRUE')]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_komparasi_account_all" model="ir.actions.act_window">
+            <field name="name">Komparasi Account</field>
+            <field name="res_model">komparasi.account</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="search_view_id" ref="komparasi_account_search"/>
+            <field name="help">Report Komparasi Account.</field>
+        </record>
+
+        <!-- <menuitem name="Komparasi Account" action="action_komparasi_account_all" id="menu_action_komparasi_account_all" parent="account.account_reports_business_intelligence_menu" sequence="20"/> -->
+
+        <!-- <act_window id="act_account_invoice_partner_relation" name="Monthly Turnover" context="{'search_default_partner_id':[active_id], 'search_default_month':1,'search_default_user':1,'group_by_no_leaf':1,'group_by':[]}" res_model="komparasi.account" src_model="res.partner" view_mode="graph"/> -->
+
+    </data>
+</odoo>

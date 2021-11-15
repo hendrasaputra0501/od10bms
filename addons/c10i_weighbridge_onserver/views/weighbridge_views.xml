@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="weighbridge_ticket_form" model="ir.ui.view">
+        <field name="name">weighbridge.ticket.form</field>
+        <field name="model">weighbridge.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" status_visibility="done" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label string="Nama" class="oe_edit_only"/>
+                        <h1><field name="name" required="1" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="vehicle_number" />
+                            <field name="driver_name" />
+                            <field name="transporter_id" />
+                            <field name="driver_name" />
+                        </group>
+                        <group string="Order">
+                            <field name="type" invisible="1"/>
+                            <field name="server_key" groups="base.group_no_one"/>
+                            <field name="sale_order_id" attrs="{'invisible': [('type','!=','sale')]}"/>
+                            <field name="sale_line_id" attrs="{'invisible': [('type','!=','sale')]}"/>
+                            <field name="purchase_order_id" attrs="{'invisible': [('type','!=','purchase')]}"/>
+                            <field name="purchase_line_id" attrs="{'invisible': [('type','!=','purchase')]}"/>
+                            <field name="partner_id" />
+                            <field name="product_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="weight_in" />
+                            <field name="date_in" />
+                            <field name="weight_out" />
+                            <field name="date_out" />
+                        </group>
+                        <group string="Order">
+                            <field name="weight_netto" />
+                            <field name="weight_sorted" />
+                            <field name="weight_total" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="weighbridge_ticket_tree" model="ir.ui.view">
+        <field name="name">weighbridge.ticket.tree</field>
+        <field name="model">weighbridge.ticket</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false" >
+                <!-- colors="red:create_to_odoo_model==True or update_to_odoo_model==True; blue:cannot_be_updated==True; grey:delete_to_odoo_model==True"> -->
+                <field name="name" />
+                <field name="order_name" />
+                <field name="partner_id" />
+                <field name="product_id" />
+                <field name="date_in" />
+                <field name="date_out" />
+                <field name="weight_total" sum="weight_total"/>
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="weighbridge_ticket_filter" model="ir.ui.view">
+        <field name="name">weighbridge.ticket.filter</field>
+        <field name="model">weighbridge.ticket</field>
+        <field name="arch" type="xml">
+            <search string="Ticket">
+                <field name="name" string="Search" filter_domain="['|',('name','ilike',self),('order_name','ilike',self)]"/>
+                <filter name="partner_id" string="Partner" />
+                <filter name="product_id" string="Product" />
+                <!-- <filter string="Queue" name="state" domain="[('state','=','to_create')]"/> -->
+                <!-- <filter string="On Progress" name="state" domain="[('state','=','to_update')]"/> -->
+                <!-- <filter string="Need Manual Update" name="state" domain="[('state','=','cannot_be_updated')]"/> -->
+                <!-- <filter string="To be Deleted" name="state" domain="[('state','=','to_delete')]"/> -->
+                <separator/>
+                <!-- <filter string="Archived" domain="[('active','=',False)]" /> -->
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Type" domain="[]" context="{'group_by':'type'}"/>
+                    <filter string="Partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Product" domain="[]" context="{'group_by':'product_id'}"/>
+                    <filter string="Order" domain="[]" context="{'group_by':'order_name'}"/>
+                    <separator/>
+                    <filter string="Weighbridge Server" domain="[]" context="{'group_by':'server_key'}"/>
+                    <separator/>
+                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_weighbridge_ticket" model="ir.actions.act_window">
+        <field name="name">Ticket</field>
+        <field name="res_model">weighbridge.ticket</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="weighbridge_ticket_filter"/>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Create to add a new WeighBridge Ticket
+          </p>
+        </field>
+    </record>
+</odoo>

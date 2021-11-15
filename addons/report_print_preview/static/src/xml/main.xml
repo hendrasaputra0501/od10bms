@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="report.client_action">
+        <t t-jquery=".o_report_iframe" t-operation="replace">
+            <iframe class="o_report_iframe" allowfullscreen="true"/>
+        </t>
+    </t>
+    <t t-extend="report.client_action.ControlButtons">
+        <t t-jquery=".o_report_no_edit_mode" t-operation="replace">
+            <div class="o_report_no_edit_mode">
+                <button type="button" class="btn btn-primary btn-sm o_report_print">Download</button>
+                <button type="button" class="btn btn-default btn-sm o_report_direct">Print</button>
+            </div>
+        </t>
+    </t>
+</templates>

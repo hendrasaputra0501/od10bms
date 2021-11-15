@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="doc_type_invoice_advance_supplier_form">
+            <field name="name">doc.type.account.invoice.advance.inhrt</field>
+            <field name="model">account.invoice.advance</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="c10i_account_invoice_advance.invoice_advance_supplier_form"/>
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="purchase_id" domain="[('partner_id','=',partner_id)]" options="{'no_create': True}"/>
+                    <field name="sale_id" domain="[('partner_id','=',partner_id)]" options="{'no_create': True}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

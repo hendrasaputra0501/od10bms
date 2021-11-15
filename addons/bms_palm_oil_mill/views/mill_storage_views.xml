@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+    
+    	<record id="mill_storage_tree_view" model="ir.ui.view">
+            <field name="name">mill.storage.tree.view</field>
+            <field name="model">mill.storage</field>
+            <field name="arch" type="xml">
+                <tree string="Master Storage">
+	                <field name="name"/>
+	                <field name="code"/>
+	                <field name="type"/>
+	                <field name="height"/>
+                </tree>
+            </field>
+        </record>	
+        
+
+        <record id="view_mill_storage_search" model="ir.ui.view">
+            <field name="name">mill.storage.search</field>
+            <field name="model">mill.storage</field>
+            <field name="arch" type="xml">
+                <search string="Search Mill Storage">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="type"/>
+                    <field name="height"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mill_storage_form_view">
+		    <field name="name">mill.storage.form</field>
+		    <field name="model">mill.storage</field>
+		    <field name="arch" type="xml">
+		        <form string="Master Storage">
+		            <group>
+						<field name="name"/>
+	                    <field name="code"/>
+	                    <field name="type"/>
+	                    <field name="height"/>
+	                    <field name="active"/>
+					</group>        
+				</form>
+			</field>
+		</record>
+
+		<record id="mill_storage_measurement_tree_view" model="ir.ui.view">
+            <field name="name">mill.storage.measurement.tree.view</field>
+            <field name="model">mill.storage.measurement</field>
+            <field name="arch" type="xml">
+                <tree string="Tabel Pengukuran Tangki">
+	                <field name="mill_storage_id"/>
+	                <field name="start_date"/>
+	                <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+
+
+		<record model="ir.ui.view" id="mill_storage_measurement_form_view">
+		    <field name="name">mill.storage.measurement.form</field>
+		    <field name="model">mill.storage.measurement</field>
+		    <field name="arch" type="xml">
+		        <form string="Tabel Pengukuran Tangki">
+		             <group col="4">
+						<field name="mill_storage_id"/>
+		                <field name="start_date"/>
+		                <field name="end_date"/>
+		                <field name="storage_type"/>
+			            <notebook colspan="5">
+	                    	<page string="Tabel Pengukuran Tangki Cm" attrs="{'invisible':[('storage_type','!=','CPO')]}">
+	                    		<field name="mill_storage_measurement_cm"> 
+	                    			<tree editable="top"> 
+			                    		<field name="height"/>
+			                    		<field name="volume"/>
+			                    	</tree>
+		                    	</field>
+                            </page>
+                            <page string="Tabel Pengukuran Tangki mm" attrs="{'invisible':[('storage_type','!=','CPO')]}">
+	                    		<field name="mill_storage_measurement_mm"> 
+	                    			<tree editable="top"> 
+			                    		<field name="height_start"/>
+			                    		<field name="height_end"/>
+			                    		<field name="height"/>
+			                    		<field name="volume"/>
+			                    	</tree>
+		                    	</field>
+                            </page>
+                            <page string="Tabel Pengukuran Bunker Cm" attrs="{'invisible':[('storage_type','!=','Bunker')]}">
+	                    		<field name="mill_storage_measurement_bunker_cm"> 
+	                    			<tree editable="top"> 
+			                    		<field name="height"/>
+			                    		<field name="volume"/>
+			                    		<field name="density"/>
+			                    		<field name="tonage"/>
+			                    	</tree>
+		                    	</field>
+                            </page>
+	                    </notebook>	
+		            </group>
+		        </form>
+		        
+		    </field>
+		</record> 
+
+		<record model="ir.actions.act_window" id="action_mill_storage">
+		    <field name="name">Master Storage</field>
+		    <field name="res_model">mill.storage</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_mill_storage_measurement">
+		    <field name="name">Tabel Pengukuran Tangki</field>
+		    <field name="res_model">mill.storage.measurement</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+		</record>
+		
+		<menuitem id="master_storage_menu" name="Master Storage" parent="c10i_palm_oil_mill.master_mills_menu" action="action_mill_storage"/>
+
+		<menuitem id="master_storage_measurement_menu" name="Tabel Pengukuran Tangki" parent="c10i_palm_oil_mill.master_mills_menu" action="action_mill_storage_measurement"/>
+
+	</data>
+</odoo>

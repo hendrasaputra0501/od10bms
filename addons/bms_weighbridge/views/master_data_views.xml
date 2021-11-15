@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_data_weighbridge_scale" parent="stock.menu_stock_root" name="Weighbridge" sequence="51"/>
+    <menuitem id="menu_master_weighbridge_scale" parent="menu_data_weighbridge_scale" name="Master Data" sequence="11"/>
+
+    <record id="view_weighbridge_res_partner_form" model="ir.ui.view">
+        <field name="name">view.weighbridge.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="phone" position="before" >
+                <field name="referensi_timbang" placeholder="Kode Referensi Timbang"/>
+                <field name="referensi_timbang_id" attrs="{'invisible': [('referensi_timbang_id','=',False)]}" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_weighbridge_partner_form" model="ir.ui.view">
+        <field name="name">view.weighbridge.partner.form</field>
+        <field name="model">weighbridge.partner</field>
+        <field name="arch" type="xml">
+            <form string="Partner" >
+                <sheet>
+                    <group name="main_info">
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="related_partner_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="tbs_pricelist" string="TBS Pricelist" attrs="{'invisible': [('tbs_pricelist_ids','=',[])]}">
+                            <field name="tbs_pricelist_ids">
+                                <tree editable="bottom" create="false">
+                                    <field name="name" />
+                                    <field name="base_price" />
+                                    <field name="price_add1" />
+                                    <field name="price_add2" />
+                                    <field name="price_add3" />
+                                    <field name="price_unit" />
+                                    <field name="pct_sortasi" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="cpo_ongkir" string="Ongkos Kirim CPO" attrs="{'invisible': [('cpo_ongkir_ids','=',[])]}">
+                            <field name="cpo_ongkir_ids">
+                                <tree editable="bottom" create="false">
+                                    <field name="name"/>
+                                    <field name="tujuan"/>
+                                    <field name="price_unit"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_weighbridge_partner" model="ir.actions.act_window">
+        <field name="name">Relasi</field>
+        <field name="res_model">weighbridge.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Create to add a new Data Mapping from Weighbridge Scale Application to Odoo Weighbridge Scale
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_weighbridge_partner" parent="menu_master_weighbridge_scale" action="action_weighbridge_partner" sequence="1"/>
+
+    <record id="view_weighbridge_picking_type_form" model="ir.ui.view">
+        <field name="name">view.weighbridge.picking.type.form</field>
+        <field name="model">weighbridge.picking.type</field>
+        <field name="arch" type="xml">
+            <form string="Picking Type" >
+                <sheet>
+                    <group name="main_info">
+                        <group>
+                            <field name="name" />
+                            <field name="trans_type" required="1"/>
+                            <field name="without_contract" />
+                        </group>
+                        <group>
+                            <field name="related_picking_type_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_weighbridge_picking_type" model="ir.actions.act_window">
+        <field name="name">Jenis Transaksi</field>
+        <field name="res_model">weighbridge.picking.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Create to add a new Data Mapping from Weighbridge Scale Application to Odoo Weighbridge Scale
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_weighbridge_picking_type" parent="menu_master_weighbridge_scale" action="action_weighbridge_picking_type" sequence="2"/>
+
+    <record id="view_weighbridge_product_product_form" model="ir.ui.view">
+        <field name="name">view.weighbridge.product.product.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <field name="type" position="before" >
+                <field name="referensi_timbang" placeholder="Kode Referensi Timbang"/>
+                <field name="referensi_timbang_id" attrs="{'invisible': [('referensi_timbang_id','=',False)]}" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_weighbridge_product_form" model="ir.ui.view">
+        <field name="name">view.weighbridge.product.form</field>
+        <field name="model">weighbridge.product</field>
+        <field name="arch" type="xml">
+            <form string="Produk" >
+                <sheet>
+                    <group name="main_info">
+                        <group>
+                            <field name="name" />
+                            <field name="transport_account_id"/>
+                        </group>
+                        <group>
+                            <field name="related_product_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_weighbridge_product" model="ir.actions.act_window">
+        <field name="name">Produk</field>
+        <field name="res_model">weighbridge.product</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Create to add a new Data Mapping from Weighbridge Scale Application to Odoo Weighbridge Scale
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_weighbridge_product" parent="menu_master_weighbridge_scale" action="action_weighbridge_product" sequence="3"/>
+
+    <record id="view_weighbridge_contract_form" model="ir.ui.view">
+        <field name="name">view.weighbridge.contract.form</field>
+        <field name="model">weighbridge.contract</field>
+        <field name="arch" type="xml">
+            <form string="Kontrak" >
+                <sheet>
+                    <group name="main_info">
+                        <group>
+                            <field name="name" />
+                            <field name="trans_type" required="1"/>
+                        </group>
+                        <group>
+                            <field name="related_sale_id" attrs="{'invisible': [('trans_type','!=','sale')], 'required': [('trans_type','=','sale')]}"/>
+                            <field name="related_purchase_id" attrs="{'invisible': [('trans_type','!=','purchase')], 'required': [('trans_type','=','purchase')]}"/>
+                            <field name="related_partner_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_weighbridge_contract" model="ir.actions.act_window">
+        <field name="name">Kontrak</field>
+        <field name="res_model">weighbridge.contract</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Create to add a new Data Mapping from Weighbridge Scale Application to Odoo Weighbridge Scale
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_weighbridge_contract" parent="menu_master_weighbridge_scale" action="action_weighbridge_contract" sequence="12"/>
+
+</odoo>

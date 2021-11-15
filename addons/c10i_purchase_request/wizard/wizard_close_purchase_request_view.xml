@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_wizard_close_purchase_request" model="ir.ui.view">
+            <field name="name">Close Purchase Request</field>
+            <field name="model">wizard.close.purchase.request</field>
+            <field name="arch" type="xml">
+                <form string="Close Purchase Request">
+                    <p class="oe_grey">
+                        Are you sure want to close multiple PR?
+                    </p>
+                    <group>
+                        <field name="check_approved" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="button_done" string="Close" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <act_window 
+            id          = "act_wizard_close_purchase_request"
+            name        = "Close"
+            src_model   = "purchase.request"
+            res_model   = "wizard.close.purchase.request"
+            view_type   = "form"
+            view_mode   = "form"
+            key2        = "client_action_multi"
+            target      = "new"
+        />
+    </data>
+</odoo>

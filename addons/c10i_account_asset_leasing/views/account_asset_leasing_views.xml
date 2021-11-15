@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.ui.view" id="c10i_account_asset_leasing_form">
+			<field name="name">c10i.account.asset.leasing.form</field>
+			<field name="model">account.asset.leasing</field>
+			<field name="arch" type="xml">
+				<form string="Procurement Leasing">
+					<header>
+						<button string="Running" class="oe_highlight" name="action_ongoing" states="draft" type="object" groups="account.group_account_user"/>
+						<button string="Correction" class="" name="reset_leasing" states="draft" type="object" groups="account.group_account_user"/>
+						<button string="Compute" class="" name="compute_installment" states="draft" type="object" groups="account.group_account_user"/>
+						<!-- <button string="Finish" class="oe_highlight" name="get_finished" states="ongoing" type="object" groups="account.group_account_user"/> -->
+						<button string="Close" class="oe_highlight" name="action_close" states="finished" type="object" groups="account.group_account_user"/>
+						
+						
+						<field name="state" widget="statusbar" statusbar_visible="draft,ongoing,finished,closed" 
+							statusbar_colors='{"draft":"blue","ongoing":"green","finished":"blue","closed":"red"}' colspan="2" />
+					</header>
+					<sheet>
+						
+						<div class="oe_title">
+							<label for="number" class="oe_edit_only"/>
+							<h1>
+								<field name="number" placeholder="e.g. Leasing for ..."/>
+							</h1>
+						</div>
+						
+						<group>
+							<group>
+
+								<field name="name" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+								<field name="invoice_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"  options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+
+								<field name="partner_id" required="1"/>
+								<field name="currency_id" invisible="1"/>
+								<field name="gross_value" widget="monetary" options="{'currency_field': 'currency_id'}" required='1' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+								<field name="deposite_value" widget="monetary" options="{'currency_field': 'currency_id'}" required='1' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+								<div>
+									<field name="is_down_payment" invisible="1"/>
+									<field name="is_down_payment_post" invisible="1"/>
+									<button name="%(action_wizard_leasing)d" string="Create Payment" attrs="{'invisible': ['|',('deposite_value', '&lt;=', 0),('is_down_payment','=',True)]}" class="oe_edit_only" type="action" style="background-color:#0080ff;margin:0;font-weight:bold" groups="account.group_account_user,base.group_user"/>
+									<button name="get_dp_post" string="DP Posted" attrs="{'invisible': ['|',('is_down_payment','=',False),('is_down_payment_post','=', True)]}" class="oe_edit_only" type="object" style="background-color:#0080ff;margin:0;font-weight:bold" groups="account.group_account_user,base.group_user"/>	
+										
+								</div>
+								<br/>
+								<field name="installment_period_numb" required='1' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+							</group>
+							<group>
+								<field name="ongoing_date" required="1"/>
+							</group>
+						</group>
+
+						<notebook colspan="4">
+							<page string="Detail Installment Periode">
+								<field name="account_asset_installment_line_ids" mode="tree" readonly="1">
+									<tree string="Installment Lines" default_order='installment_date asc' create="false" delete="false" edit="false" open="false" colors="purple:state=='paid';green:state=='not_pay';">
+										<field name="name"/>
+										<field name="installment_date"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="installment_amount" sum="Installment Amount" style="text-align:left !important"/>
+										<field name="state"/>
+										<field name="is_installment_payment" invisible="1"/>
+										<button name="%(action_wizard_leasing)d" string="Pay Installment" attrs="{'invisible':['|',('state','in',['paid','post']),('is_installment_payment','=',False)]}" class="btn-primary" type="action" style="background-color:#0080ff;margin:0;font-weight:bold" groups="account.group_account_user,base.group_user"/>
+										<button name="post_installment" string="Post Installment" attrs="{'invisible':['|',('state','not in',['paid']),('is_installment_payment','=',False)]}" class="btn-primary" type="object" style="background-color:#0080ff;margin:0;font-weight:bold" groups="account.group_account_user,base.group_user"/>
+									</tree>
+								</field>
+							</page>
+						</notebook>
+
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" groups="base.group_user" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+				</form>
+			</field>
+	</record>
+
+	<record model="ir.ui.view" id="c10i_account_asset_leasing_tree">
+			<field name="name">c10i.account.asset.leasing.tree</field>
+			<field name="model">account.asset.leasing</field>
+			<field name="arch" type="xml">
+				<tree string="Installment" decoration-info="state == 'ongoing'" decoration-muted="state == 'closed'">
+					<field name="name"/>
+					<field name="ongoing_date" string="Ongoing Date"/>
+					<field name="gross_value" string="Gross/Purchase Value" sum="Gross/Purchase Value"/>
+					<field name="deposite_value" string="Deposite Value/Uang Muka" sum="Deposite Value/Uang Muka"/>
+					<field name="installment_period_numb"/>
+					<field name="state"/>
+				</tree>
+			</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="request_leasing">
+			<field name="name">Leasing and Installment</field>
+			<field name="res_model">account.asset.leasing</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_type">form</field>
+	</record>
+
+	<menuitem name="Leasing" id="menu_open_leasing" sequence="103" web_icon="c10i_account_asset_leasing,static/description/icon.png" groups="account.group_account_user"/>
+	<menuitem name="Procurement Leasing" id="menu_open_leasing_1" parent="menu_open_leasing" sequence="1"/>
+	<menuitem name="Procurement Leasing" parent="menu_open_leasing_1" id="menu_leasing" action="request_leasing" sequence="1"/>
+	
+</odoo>

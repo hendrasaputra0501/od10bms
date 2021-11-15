@@ -1,0 +1,3 @@
+id,name,widget_json
+report_widget_1,monetary,"{""widget"": ""monetary"", ""display_currency"": “currency_field”}"
+report_widget_2,image,"{""widget"": ""image"", ""class"": ""img-responsive"", ""style"": """", ""alt-field"": """", ""zoom"": """", ""max_width"": 64}"

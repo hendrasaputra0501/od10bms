@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="cep_invoice_supplier_form" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form</field>
+            <field name="model">account.invoice</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//sheet/notebook/page[2]/group/group[1]/field[@name='name']" position="replace"></xpath>
+            	<xpath expr="//sheet/notebook/page[2]/group/group[2]/field[@name='date']" position="before">
+            		<field name="name"/>
+            	</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

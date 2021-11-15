@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="attendance_work" model="hr.attendance.type">
+            <field name="name">KJ</field>
+            <field name="description">Kerja</field>
+            <field name="type">effective_work_day</field>
+        </record>
+
+        <record id="attendance_overtime" model="hr.attendance.type">
+            <field name="name">L</field>
+            <field name="description">Lembur di hari Libur</field>
+            <field name="type">overtime</field>
+        </record>
+
+        <record id="attendance_notavailable" model="hr.attendance.type">
+            <field name="name">NA</field>
+            <field name="description">Not Available</field>
+            <field name="type">not_available</field>
+        </record>
+
+        <record id="attendance_btrip" model="hr.attendance.type">
+            <field name="name">D</field>
+            <field name="description">Dinas Luar</field>
+            <field name="type">effective_work_day</field>
+        </record>
+
+        <record id="attendance_sick1" model="hr.attendance.type">
+            <field name="name">S1</field>
+            <field name="description">Sakit</field>
+            <field name="type">non_effective_work_day</field>
+        </record>
+
+        <record id="attendance_sick2" model="hr.attendance.type">
+            <field name="name">S2</field>
+            <field name="description">Sakit</field>
+            <field name="type">non_effective_work_day</field>
+            <field name="notes">Sakit karena Opname/Operasi/Kecelakaan</field>
+        </record>
+
+        <record id="attendance_onleave1" model="hr.attendance.type">
+            <field name="name">C1</field>
+            <field name="description">Cuti</field>
+            <field name="type">non_effective_work_day</field>
+        </record>
+
+        <record id="attendance_absence" model="hr.attendance.type">
+            <field name="name">M</field>
+            <field name="description">Mangkir</field>
+            <field name="type">not_working</field>
+        </record>
+
+        <record id="attendance_onleave2" model="hr.attendance.type">
+            <field name="name">P1</field>
+            <field name="description">Izin Potong Gaji</field>
+            <field name="type">not_working</field>
+        </record>
+    </data>
+</odoo>

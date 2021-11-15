@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ##################### TIMBANG METRO ###################### -->
+    <record id="view_weighbridge_scale_metro_form" model="ir.ui.view">
+        <field name="name">view.weighbridge.scale.metro.form</field>
+        <field name="model">weighbridge.scale.metro</field>
+        <field name="arch" type="xml">
+            <form string="Timbangan" create="false" delete="false">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label string="Nama" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Pabrik" required="1" readonly="1"/></h1>
+                    </div>
+                    <group name="main_info">
+                        <group>
+                            <field name="wb_partner_id" />
+                            <!--<field name="partner_id" />-->
+                            <field name="wb_contract_id" />
+                            <field name="transporter_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                        </group>
+                        <group>
+                            <field name="picking_type_id" />
+                            <field name="product_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="page_original_info" string="Original Information">
+                            <group name="original_info">
+                                <field name='src_machine' readonly="1"/>
+                                <field name='TIMBANG_NO' readonly="1"/>
+                                <field name='TIMBANG_RECSTS' readonly="1"/>
+                                <field name='TIMBANG_NOKENDARAAN' readonly="1"/>
+                                <field name='TIMBANG_JENISTIMBANG' readonly="1"/>
+                                <field name='TIMBANG_TIPETRANS' readonly="1"/>
+                                <field name='TIMBANG_PRODUK' readonly="1"/>
+                                <field name='TIMBANG_RELASI' readonly="1"/>
+                                <field name='TIMBANG_TRANSPORTER' readonly="1"/>
+                                <field name='TIMBANG_SUPIR' readonly="1"/>
+                                <field name='TIMBANG_KONTRAK' readonly="1"/>
+                                <field name='TIMBANG_DO' readonly="1"/>
+                                <field name='TIMBANG_NETTOPKS' readonly="1"/>
+                                <field name='TIMBANG_SORTASI' readonly="1"/>
+                                <field name='TIMBANG_NOSEGEL' readonly="1"/>
+                                <!--<field name='TIMBANG_FFA' readonly="1"/>-->
+                                <!--<field name='TIMBANG_MOISTURE' readonly="1"/>-->
+                                <!--<field name='TIMBANG_DIRTY' readonly="1"/>-->
+                                <!--<field name='TIMBANG_SUHU' readonly="1"/>-->
+                                <field name='TIMBANG_IN_WEIGHT' readonly="1"/>
+                                <field name='TIMBANG_IN_DATE' readonly="1"/>
+                                <!-- <field name='TIMBANG_IN_TIME' readonly="1"/> -->
+                                <field name='TIMBANG_IN_TIMESTAMP' readonly="1"/>
+                                <field name='TIMBANG_IN_USERLOG' readonly="1"/>
+                                <field name='TIMBANG_OUT_WEIGHT' readonly="1"/>
+                                <field name='TIMBANG_OUT_DATE' readonly="1"/>
+                                <!-- <field name='TIMBANG_OUT_TIME' readonly="1"/> -->
+                                <field name='TIMBANG_OUT_TIMESTAMP' readonly="1"/>
+                                <field name='TIMBANG_OUT_USERLOG' readonly="1"/>
+                                <field name='TIMBANG_BERATNETTO' readonly="1"/>
+                                <field name='TIMBANG_POTONGAN' readonly="1"/>
+                                <field name='TIMBANG_TOTALBERAT' readonly="1"/>
+                                <field name='prev_totalberat' readonly="1"/>
+                                <!--<field name='TIMBANG_TIMESTAMPDELETE' readonly="1"/>-->
+                                <!--<field name='TIMBANG_USERLOGDELETE' readonly="1"/>-->
+                                <field name='TIMBANG_KETERANGAN' readonly="1"/>
+                                <!--<field name='TIMBANG_GUID' readonly="1"/>-->
+                                <!--<field name='TIMBANG_TIMESTAMPEDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_USERLOGEDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_ISGENERATED' readonly="1"/>-->
+                                <!--<field name='TIMBANG_OUT_BERAPAKALI_AUDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_IN_WEIGHT_AUDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_OUT_WEIGHT_AUDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_BERATNETTO_AUDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_POTONGAN_AUDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_TOTALBERAT_AUDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_OUT_TIMESTAMP_AUDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_OUT_USERLOG_AUDIT' readonly="1"/>-->
+                                <!--<field name='TIMBANG_CETAK' readonly="1"/>-->
+                                <field name='TIMBANG_PECAHKONTRAKDO' readonly="1"/>
+                                <field name='TIMBANG_ASALKONTRAK' readonly="1"/>
+                                <field name='TIMBANG_ASALDO' readonly="1"/>
+                                <field name='TIMBANG_ASALTOTALBERAT' readonly="1"/>
+                                <field name='TIMBANG_ASALKELEBIHANBERAT' readonly="1"/>
+                                <!--<field name='TIMBANG_LASTUPLOAD' readonly="1"/>-->
+                                <!--<field name='KONTRAK_NO' readonly="1"/>-->
+                                <!--<field name='KONTRAK_RECSTS' readonly="1"/>-->
+                                <!--<field name='KONTRAK_TANGGAL' readonly="1"/>-->
+                                <!--<field name='KONTRAK_PRODUK' readonly="1"/>-->
+                                <!--<field name='KONTRAK_KUALITAS' readonly="1"/>-->
+                                <!--<field name='KONTRAK_RELASI' readonly="1"/>-->
+                                <!--<field name='KONTRAK_QUANTITY' readonly="1"/>-->
+                                <!--<field name='KONTRAK_EXTRAQTY' readonly="1"/>-->
+                                <!--<field name='KONTRAK_EXTRAPROSEN' readonly="1"/>-->
+                                <!--<field name='KONTRAK_KETERANGAN' readonly="1"/>-->
+                                <!--<field name='KONTRAK_TIMESTAMP' readonly="1"/>-->
+                                <!--<field name='KONTRAK_USERLOG' readonly="1"/>-->
+                                <!--<field name='KONTRAK_TIMESTAMPUPDATE' readonly="1"/>-->
+                                <!--<field name='KONTRAK_USERLOGUPDATE' readonly="1"/>-->
+                                <!--<field name='KONTRAK_TIMESTAMPDELETE' readonly="1"/>-->
+                                <!--<field name='KONTRAK_USERLOGDELETE' readonly="1"/>-->
+                                <!--<field name='KONTRAK_GUID' readonly="1"/>-->
+                                <!--<field name='KONTRAK_TIMESTAMPFINISH' readonly="1"/>-->
+                                <!--<field name='KONTRAK_USERLOGFINISH' readonly="1"/>-->
+                                <!--<field name='KONTRAK_LASTUPLOAD' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_MTU' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_HARGA' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_JENISDOKUMEN' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_NOMORPABEAN' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_TANGGALPABEAN' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_NOMORBUKTI' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_TANGGALBUKTI' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_USERLOG' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_TIMESTAMP' readonly="1"/>-->
+                                <!--<field name='KONTRAK_BC_FLAG' readonly="1"/>-->
+                            </group>
+                        </page>
+                        <page name="page_picking" attrs="{'invisible': [('picking_ids','=',[])]}" string="Pickings">
+                            <field name="picking_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_weighbridge_scale_metro_tree" model="ir.ui.view">
+        <field name="name">view.weighbridge.scale.metro.tree</field>
+        <field name="model">weighbridge.scale.metro</field>
+        <field name="arch" type="xml">
+            <tree string="Timbangan" create="false" delete="false" colors="red:create_to_odoo_model==True or update_to_odoo_model==True; blue:cannot_be_updated==True; grey:delete_to_odoo_model==True">
+                <field name='TIMBANG_NO' />
+                <field name='TIMBANG_TIPETRANS' />
+                <field name='TIMBANG_RELASI' />
+                <field name='TIMBANG_KONTRAK' />
+                <field name='TIMBANG_TOTALBERAT' sum="TIMBANG_TOTALBERAT"/>
+                <field name='create_to_odoo_model' invisible='1' />
+                <field name='update_to_odoo_model' invisible='1' />
+                <field name='delete_to_odoo_model' invisible='1' />
+                <field name='cannot_be_updated' invisible='1' />
+                <field name='state' />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_weighbridge_scale_metro_filter" model="ir.ui.view">
+        <field name="name">view.weighbridge.scale.metro.filter</field>
+        <field name="model">weighbridge.scale.metro</field>
+        <field name="arch" type="xml">
+            <search string="Timbangan">
+                <field name="name" string="Search" filter_domain="['|','|',('TIMBANG_NO','ilike',self),('TIMBANG_RELASI','ilike',self),('TIMBANG_KONTRAK','ilike',self)]"/>
+                <filter string="Queue" name="state" domain="[('state','=','to_create')]"/>
+                <filter string="On Progress" name="state" domain="[('state','=','to_update')]"/>
+                <filter string="Need Manual Update" name="state" domain="[('state','=','cannot_be_updated')]"/>
+                <filter string="To be Deleted" name="state" domain="[('state','=','to_delete')]"/>
+                <separator/>
+                <filter string="Archived" domain="[('active','=',False)]" />
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="RELASI" domain="[]" context="{'group_by':'TIMBANG_RELASI'}"/>
+                    <filter string="KONTRAK" domain="[]" context="{'group_by':'TIMBANG_KONTRAK'}"/>
+                    <filter string="TIPE TRANSAKSI" domain="[]" context="{'group_by':'TIMBANG_TIPETRANS'}"/>
+                    <separator/>
+                    <filter string="MACHINE" domain="[]" context="{'group_by':'src_machine'}"/>
+                    <separator/>
+                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_weighbridge_scale_metro" model="ir.actions.act_window">
+        <field name="name">Timbangan</field>
+        <field name="res_model">weighbridge.scale.metro</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_weighbridge_scale_metro_filter"/>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Create to add a new WeighBridge Scale Entry
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_weighbridge_scale_metro" parent="menu_data_weighbridge_scale" action="action_weighbridge_scale_metro" sequence="1"/>
+
+</odoo>

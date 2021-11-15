@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data> 
+    
+        <record id="mill_daily_sounding_tree_view" model="ir.ui.view">
+            <field name="name">mill.daily.sounding.tree.view</field>
+            <field name="model">mill.daily.sounding</field>
+            <field name="arch" type="xml">
+                <tree string="Laporan Harian Sounding">
+                    <field name="date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>   
+        
+
+        <record id="view_mill_daily_sounding_search" model="ir.ui.view">
+            <field name="name">mill.daily.sounding.search</field>
+            <field name="model">mill.daily.sounding</field>
+            <field name="arch" type="xml">
+                <search string="Search Laporan Harian Sounding">
+                    <field name="date"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mill_daily_sounding_form_view">
+            <field name="name">mill.daily.sounding.form</field>
+            <field name="model">mill.daily.sounding</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Harian Sounding">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved" />
+                        <button name="action_approve" string="Approve" states="draft" class="oe_highlight" type="object"/>
+                        <button name="action_create_view_lhp" string="Create/View LHP" states="approved" class="oe_highlight" type="object"/>
+                        <button name="action_set_to_draft" string="Set to Draft" states="approved" class="oe_highlight" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="tanpa_produksi"/>
+                            </group>
+                        </group>
+                        <section attrs="{'readonly': [('state','!=','draft')]}">
+                            <h1 style="background-color: LightGray;"><center>LAPORAN HARIAN SOUNDING</center></h1>
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="vertical-align: top;" width="15%">
+                                        <label string="CPO"/>
+                                        <table width="500">
+                                            <field name="sounding_cpo_lines" attrs="{'readonly': [('state','!=','draft')]}">
+                                                <tree editable="bottom"> 
+                                                    <field name="storage_id" options="{'no_open': True, 'no_create': True}" domain="[('type','=',['CPO','CST','OILTANK'])]"/>
+                                                    <field name="height"/>
+                                                    <field name="temperature"/>
+                                                    <field name="ffa" avg="avg_ffa"/>
+                                                    <field name="penyesuaian_qty_tangki_cpo" />
+                                                </tree>
+                                            </field>
+                                        </table>
+                                    </td>
+                                    <td style="vertical-align: top;" width="3%"></td>
+                                    <td style="vertical-align: top;" width="25%">
+                                        <table name="Oil Losses" width="100%">
+                                            <tr>
+                                                <td width="30%">
+                                                    <label string="Oil Losses"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="oil_losses_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="oil_losses_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br></br>
+                                        <table width="100%" border="1">
+                                            <th width="30%"></th>
+                                            <th align="center" width="30%">Sample %</th>
+                                            <th align="center" width="30%">FFB %</th>
+                                            <tr>
+                                                <td>
+                                                    <label string="Solid"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="solid_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="solid_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="Press Cake"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_cake_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_cake_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="Wet Nut"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="wet_nut_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="wet_nut_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="Final Effluent"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="final_effluent_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="final_effluent_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="Empty Bunch"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="empty_bunch_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="empty_bunch_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <label string="Total"/>
+                                                </td>
+                                                <td align="right">
+                                                    <!-- <field name="total_oil_losses_ffb" attrs="{'readonly': [('state','!=','draft')]}"/> -->
+                                                    <field name="total_oil_losses_ffb" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="vertical-align: top;" width="3%"></td>
+                                    <td style="vertical-align: top;" width="25%">
+                                        <table width="100%" border="1">
+                                            <th width="30%"></th>
+                                            <th align="center">Sample %</th>
+                                            <th align="center">FFB %</th>
+                                            <tr>
+                                                <td>
+                                                    <label string="Press 1"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_1_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td >
+                                                <td align="right">
+                                                    <field name="press_1_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="Press 2"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_2_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_2_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="Press 3"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_3_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_3_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="Press 4"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_4_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="press_4_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <label string="Total"/>
+                                                </td>
+                                                <td align="right">
+                                                    <!-- <field name="total_press_ffb" attrs="{'readonly': [('state','!=','draft')]}"/> -->
+                                                    <field name="total_press_ffb" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="vertical-align: top;" width="3%"></td>
+                                    <td style="vertical-align: top;" width="25%">
+                                        <table width="100%" name="Kernel Losses">
+                                            <tr>
+                                                <td width="30%">
+                                                    <label string="Kernel Losses"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="kernel_losses_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="kernel_losses_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br>
+                                        </br>
+                                        <table width="100%" border="1">
+                                            <th width="30%"></th>
+                                            <th align="center">Sample %</th>
+                                            <th align="center">FFB %</th>
+                                            <tr>
+                                                <td>
+                                                    <label string="Claybath"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="claybath_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="claybath_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="LTDS 1"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="ltds_1_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="ltds_1_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="LTDS 2"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="ltds_2_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="ltds_2_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label string="F. Cyclone"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="f_cyclone_sample" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="f_cyclone_ffb" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <label string="Total"/>
+                                                </td>
+                                                <td align="right">
+                                                    <!-- <field name="total_kernel_losses_ffb" attrs="{'readonly': [('state','!=','draft')]}"/> -->
+                                                    <field name="total_kernel_losses_ffb" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br></br>
+                                        <table name="Moisture" width="100%">
+                                            <tr>
+                                                <td width="30%">
+                                                    <label string="Moist"/>
+                                                </td>
+                                                <td align="right">
+                                                    <field name="moist" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: top;" width="15%" colspan="1">
+                                        <label string="Kernel"/>
+                                        <table width="500">
+                                            <field name="sounding_kernel_lines" attrs="{'readonly': [('state','!=','draft')]}">
+                                                <tree editable="bottom"> 
+                                                    <field name="storage_id" options="{'no_open': True, 'no_create': True}" domain="[('type','!=',['CPO','CST','OILTANK'])]" />
+                                                    <field name="height_1"/>
+                                                    <field name="height_2"/>
+                                                    <field name="height_3"/>
+                                                    <field name="penyesuaian_qty_stock_kernel"/>
+                                                </tree>
+                                            </field>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table width="30%">
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Oil Losses"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="total_oil_losses_ffb_show" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Kernel Losses" style="vertical-align: top;"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="total_kernel_losses_ffb_show" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Rata - rata FFA"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="ffa_average" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Empty Bunch"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="empty_bunch_ffb_show" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Eff. Rippler Mill 1"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="effective_rippler_mill_1" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Eff. Rippler Mill 2"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="effective_rippler_mill_2" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Kotoran Produksi"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="kotoran_produksi" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Kotoran Bunker"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="kotoran_bunker" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Kotoran Silo 1"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="kotoran_silo_1" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="75%" style="vertical-align: top;">
+                                        <label string="Kotoran Silo 2"/>
+                                    </td>
+                                    <td width="25%" align="right" style="vertical-align: top;">
+                                        <field name="kotoran_silo_2" attrs="{'readonly': [('state','!=','draft')]}"/>%
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
+                        <section>
+                            <h1 style="background-color: LightGray;"><center>LAPORAN HARIAN TBS OLAH</center></h1>
+                            <group>
+                                <group col="4">
+                                    <field name="tbs_in" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="restan" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="total_in_restan" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group col="4">
+                                    <field name="lori_olah" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group col="4">
+                                    <field name="restan_dalam_stelizer" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="restan_depan_stelizer" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="restan_belakang_stelizer" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="loading_ramp" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="total_stelizer" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group col="4">
+                                    <field name="kapasitas_lori" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="tbs_olah" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group col="4">
+                                    <field name="hm_ebc" string="Hm cbc" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <!-- <field name="throughput" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/> -->
+                                </group>
+                            </group>
+                            <group>
+                                <group col="4">
+                                    <label string=""/>
+                                    <label string="Date" />
+                                    <label string="Time" colspan="2"/>
+                                    <label for="start_olah_date" string="Start Olah" />
+                                    <field name="start_olah_date" nolabel="1" style="width: 25%" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="start_olah_time" nolabel="1" style="width: 25%" colspan="2" widget="float_time" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <label for="stop_olah_date" string="Stop Olah" />
+                                    <field name="stop_olah_date" nolabel="1" style="width: 25%" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="stop_olah_time" nolabel="1" style="width: 25%" colspan="2" widget="float_time" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group col="4">
+                                    <field name="karbonat" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                    <field name="keterangan" colspan="4" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                </group>
+                            </group>
+                        </section>
+                    </sheet>            
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_mill_daily_sounding">
+            <field name="name">Laporan Harian Sounding</field>
+            <field name="res_model">mill.daily.sounding</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="daily_sounding_menu" name="Laporan Harian Sounding" parent="c10i_palm_oil_mill.transaction_mills_menu" action="action_mill_daily_sounding"/>
+    </data>
+</odoo>

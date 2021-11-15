@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data> 
+	
+		<record id="mill_lhp_tree_view" model="ir.ui.view">
+			<field name="name">mill.lhp.tree.view</field>
+			<field name="model">mill.lhp</field>
+			<field name="arch" type="xml">
+				<tree string="Laporan Harian Produksi" create="false">
+					<field name="date"/>
+					<field name="tbs_proses_brutto" invisible="1"/>
+					<field name="tbs_proses_netto"/>
+					<field name="total_produksi_cpo"/>
+					<field name="oer"/>
+					<field name="total_produksi_kernel"/>
+					<field name="ker"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>   
+		
+
+		<record id="view_mill_lhp_search" model="ir.ui.view">
+			<field name="name">mill.lhp.search</field>
+			<field name="model">mill.lhp</field>
+			<field name="arch" type="xml">
+				<search string="Search Laporan Harian Produksi">
+					<field name="date"/>
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="mill_lhp_form_view">
+			<field name="name">mill.lhp.form</field>
+			<field name="model">mill.lhp</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Harian Produksi" create="false">
+					<header>
+						<button name="action_approve" string="Approve" states="draft" class="oe_highlight" type="object"/>
+						<button name="print_lhp" string="PRINT" states="draft,approved" class="oe_highlight" type="object"/>
+						<button name="print_lhp_kumulatif" string="PRINT LHP KUMULATIF" states="draft,approved" class="oe_highlight" type="object"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,approved" />
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="date"/>
+								<field name="tanpa_produksi"/>
+								<field name="computed" groups="base.group_no_one"/>
+							</group>
+							<group>
+								<field name="lhp_type_id" attrs="{'required':1, 'readonly': [('state', '!=', 'draft')]}" options="{'no_create': True, 'no_edit': True}"/>
+							</group>
+						</group>
+						<section>
+							<h1 style="background-color: LightGray;"><center>LAPORAN HARIAN PRODUKSI</center></h1>
+							<table style="width:100%;">
+								<tr>
+									<td style="vertical-align: top;">
+										<label string="A. TBS"/>
+										<table width="100%">
+											<th width="5%">No.</th>
+											<th width="40%">Description</th>
+											<th width="25%" invisible="1">Brutto</th>
+											<th width="25%">Netto</th>
+											<th width="5%">UoM</th>
+											<tr>
+												<td>
+													1
+												</td>
+												<td>
+													<label string="SALDO AWAL TBS"/>
+												</td>
+												<td>
+													<field name="saldo_awal_tbs_netto"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="saldo_awal_tbs_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													2
+												</td>
+												<td>
+													<label string="PENERIMAAN TBS PLASMA"/>
+												</td>
+												<td>
+													<field name="tbs_in_plasma"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="tbs_in_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													3
+												</td>
+												<td>
+													<label string="PENERIMAAN TBS PTPN"/>
+												</td>
+												<td>
+													<field name="tbs_in_ptpn"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="tbs_in_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													4
+												</td>
+												<td>
+													<label string="PENERIMAAN TBS TOTAL"/>
+												</td>
+												<td>
+													<field name="tbs_in_netto"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="tbs_in_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													5
+												</td>
+												<td>
+													<label string="TOTAL TBS"/>
+												</td>
+												<td>
+													<field name="total_tbs_netto"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="total_tbs_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													6
+												</td>
+												<td>
+													<label string="TBS DI L. RAMP"/>
+												</td>
+												<td>
+													<field name="tbs_ramp_netto"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="tbs_ramp_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													7
+												</td>
+												<td>
+													<label string="TBS DALAM LORI"/>
+												</td>
+												<td>
+													<field name="tbs_lori_netto"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="tbs_lori_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													8
+												</td>
+												<td>
+													<label string="TBS DALAM REBUSAN"/>
+												</td>
+												<td>
+													<field name="tbs_rebusan_netto"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="tbs_rebusan_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													9
+												</td>
+												<td>
+													<label string="TOTAL SALDO AKHIR TBS"/>
+												</td>
+												<td>
+													<field name="saldo_akhir_tbs_netto"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="saldo_akhir_tbs_brutto" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													10
+												</td>
+												<td>
+													<label string="JUMLAH LORI"/>
+												</td>
+												<td>
+													<field name="total_lori_netto_rel"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+												<td>
+													<field name="total_lori_brutto_rel" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													11
+												</td>
+												<td>
+													<label string="TBS/LORI"/>
+												</td>
+												<td>
+													<field name="per_lori_netto_rel"/>
+												</td>
+												<td>
+													<label string="kg/Lori"/>
+												</td>
+												<td>
+													<field name="per_lori_brutto_rel" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													12
+												</td>
+												<td>
+													<label string="JUMLAH LORI DIPROSES"/>
+												</td>
+												<td>
+													<field name="proses_tbs_netto_rel"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+												<td>
+													<field name="proses_tbs_brutto_rel" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													13
+												</td>
+												<td>
+													<label string="TBS.PROSES"/>
+												</td>
+												<td>
+													<field name="tbs_proses_netto"/>
+												</td>
+												<td>
+													<label string="kg"/>
+												</td>
+												<td>
+													<field name="tbs_proses_brutto" invisible="1"/>
+												</td>
+											</tr>
+										</table>
+										<field name="move_tbs_proses_ids" invisible="1"/>
+										<field name="move_tbs_proses_id" invisible="1"/>
+									</td>
+									<td width="5%">
+									</td>
+									<td style="vertical-align: top;">
+										<table frame="box">
+											<th width="30%"></th>
+											<th></th>
+											<th></th>
+											<tr>
+												<td>
+													<label string="PROSES TBS"/>
+												</td>
+												<td>
+													<field name="proses_tbs"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="RESTAN"/>
+												</td>
+												<td>
+												</td>
+												<td>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="di Rebusan"/>
+												</td>
+												<td>
+													<field name="restan_rebusan"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="di Lori"/>
+												</td>
+												<td>
+													<field name="restan_lori"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="di Loading Ramp"/>
+												</td>
+												<td>
+													<field name="restan_loading_ramp"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="di Lantai"/>
+												</td>
+												<td>
+													<field name="restan_lantai"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="Sub Total"/>
+												</td>
+												<td>
+													<field name="total_restan"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="Total Lori"/>
+												</td>
+												<td>
+													<field name="total_lori"/>
+												</td>
+												<td>
+													<label string="Lori"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+												</td>
+												<td>
+												</td>
+												<td>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="PERLORI/Netto"/>
+												</td>
+												<td>
+													<field name="per_lori_netto"/>
+												</td>
+												<td>
+													<label string="Kg"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="PERLORI/Brutto" invisible="1"/>
+												</td>
+												<td>
+													<field name="per_lori_brutto" invisible="1"/>
+												</td>
+												<td>
+													<label string="Kg" invisible="1"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="Hm CBC"/>
+												</td>
+												<td>
+													<field name="hm_ebc"/>
+												</td>
+												<td>
+													<label string="Jam"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label string="Throughput"/>
+												</td>
+												<td>
+													<field name="throughput"/>
+												</td>
+												<td>
+													<label string="Ton/Jam"/>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+							<br>
+							</br>
+							<label string="B. CPO"/>
+							<group>
+								<field name="lhp_cpo_line" nolabel="1">
+									<tree editable="top">
+										<field name="sequence" attrs="{'invisible': [('type','!=','cm')]}"/>
+										<field name="name" attrs="{'invisible': [('type','!=','cm')]}"/>
+										<field name="height" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="uom_height_id" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="temperature" string="Temperature" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="uom_temperature_id" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="density" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="volume_liter" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="uom_volume_liter_id" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="koreksi_suhu" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="jumlah_setelah_koreksi" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="jumlah"/>
+										<field name="uom_jumlah_id" attrs="{'invisible': [('type','not in',('cm','mm'))]}"/>
+										<field name="ffa"/>
+										<field name="type" invisible="1"/>
+									</tree>
+								</field>
+							</group>
+							<!-- <group class="oe_subtotal_footer oe_right" colspan="2" name="total_cpo" > -->
+							<group>
+								<group>
+									<label string="CPO di PKS"/>
+									<group>
+										<label string="CPO BMS"/>
+										<group>
+											<field name="total_cpo_tangki"/>
+											<field name="total_pengiriman_cpo"/>
+											<field name="total_penjualan_cpo" string="Penjualan CPO"/>
+											<field name="selisih_timbang_penjualan_cpo" />
+											<field name="saldo_awal_cpo" string="Stok Kemarin"/>
+											<field name="total_penyesuaian_cpo"/>
+											<field name="total_produksi_cpo"/>
+											<field name="move_cpo_produksi_ids" invisible="1"/>
+											<field name="move_cpo_produksi_id" invisible="1"/>
+											<field name="move_cpo_penyesuaian_ids" invisible="1"/>
+											<field name="move_cpo_penyesuaian_ids" invisible="1"/>
+											<table>
+												<tr>
+													<td>
+														<h3><label string="OER  :"/></h3>
+													</td>
+													<td>
+														<h3><field name="oer"/></h3>
+													</td>
+													<td>
+														<h3><label string="%"/></h3>
+													</td>
+												</tr>
+											</table>
+										</group>
+									</group>
+									<group>
+										<label string="CPO PTPN"/>
+										<group>
+											<field name="saldo_awal_cpo_ptpn"/>
+											<field name="total_produksi_cpo_ptpn"/>
+											<field name="total_penyerahan_cpo_ptpn"/>
+											<field name="total_cpo_tangki_ptpn"/>
+										</group>
+									</group>
+								</group>
+								<group>
+									<label string="CPO di Palopo"/>
+									<group>
+										<field name="saldo_awal_cpo_palopo" string="Stok Kemarin"/>
+										<field name="total_penjualan_cpo_palopo"/>
+										<field name="selisih_timbang_penjualan_cpo_palopo" />
+										<field name="total_penyesuaian_cpo_palopo"/>
+										<field name="total_cpo_tangki_palopo"/>
+									</group>
+								</group>
+							</group>
+							<br>
+							</br>
+							<label string="C. Kernel"/>
+							<group>
+								<field name="lhp_kernel_line" nolabel="1">
+									<tree editable="top">
+										<field name="sequence" attrs="{'invisible': [('type','=','detail')]}"/>
+										<field name="name"/>
+										<field name="height" attrs="{'invisible': [('type','=','total')]}"/>
+										<field name="sample_height" attrs="{'invisible': [('type','=','total')]}"/>
+										<field name="real_height" attrs="{'invisible': [('type','=','total')]}"/>
+										<field name="desc_1" attrs="{'invisible': [('type','=','total')]}"/>
+										<field name="kg_cm" attrs="{'invisible': [('type','=','total')]}"/>
+										<field name="desc_2" attrs="{'invisible': [('type','=','total')]}"/>
+										<field name="density" attrs="{'invisible': [('type','=','total')]}"/>
+										<field name="jumlah"/>
+										<field name="type" invisible="1"/>
+									</tree>
+								</field>
+							</group>
+							<!-- <group class="oe_subtotal_footer oe_right" colspan="2" name="total_kernel" > -->
+							<group>
+								<group>
+									<label string="KERNEL di PKS"/>
+									<group>
+										<label string="KERNEL BMS"/>
+										<group colspan="2" name="total_kernel" >
+											<field name="total_stock_kernel"/>
+											<field name="total_pengiriman_kernel"/>
+											<field name="total_penjualan_kernel"/>
+											<field name="selisih_timbang_penjualan_kernel"/>
+											<field name="saldo_awal_kernel" string="Stok Kemarin"/>
+											<field name="total_penyesuaian_kernel"/>
+											<field name="total_produksi_kernel"/>
+											<field name="move_kernel_produksi_ids" invisible="1"/>
+											<field name="move_kernel_produksi_id" invisible="1"/>
+											<field name="move_kernel_penyesuaian_ids" invisible="1"/>
+											<field name="move_kernel_penyesuaian_id" invisible="1"/>
+											<table>
+												<tr>
+													<td>
+														<h3><label string="KER  :"/></h3>
+													</td>
+													<td>
+														<h3><field name="ker"/></h3>
+													</td>
+													<td>
+														<h3><label string="%"/></h3>
+													</td>
+												</tr>
+											</table>
+										</group>
+									</group>
+									<group>
+										<label string="KERNEL PTPN"/>
+										<group>
+											<field name="saldo_awal_kernel_ptpn"/>
+											<field name="total_produksi_kernel_ptpn"/>
+											<field name="total_penyerahan_kernel_ptpn"/>
+											<field name="total_stock_kernel_ptpn"/>
+										</group>
+									</group>
+								</group>
+								<group>
+									<label string="KERNEL di MPA"/>
+									<group>
+										<field name="saldo_awal_kernel_mpa" string="Stok Kemarin"/>
+										<field name="total_penjualan_kernel_mpa"/>
+										<field name="selisih_timbang_penjualan_kernel_mpa"/>
+										<field name="total_penyesuaian_kernel_mpa"/>
+										<field name="total_stock_kernel_mpa"/>
+									</group>
+								</group>
+							</group>
+						</section>
+					</sheet>            
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_mill_lhp">
+			<field name="name">Laporan Harian Produksi</field>
+			<field name="res_model">mill.lhp</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<menuitem id="lhp_menu" name="Laporan Harian Produksi" parent="c10i_palm_oil_mill.transaction_mills_menu" action="action_mill_lhp"/>
+	</data>
+</odoo>

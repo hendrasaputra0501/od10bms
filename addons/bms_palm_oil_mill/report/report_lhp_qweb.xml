@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_lhp_document">
+        <div class="page">
+            <div class="oe_structure"/>
+            <t t-set="i" t-value="1" />
+            <t t-set="company" t-value="doc.company_id"></t>
+            <div class="col-xs-12">
+                <div class="col-xs-2">
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 80px;"/><img t-att-src="'/cep_purchase/static/src/img/iso.png'" style="max-height: 70px;"/>
+                </div>
+                <div class="col-xs-6">
+                    <span>
+                        <span t-field="company.partner_id"
+                            t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                            style="border-bottom: 1px solid black;"/>
+                        <ul class="list-inline">
+                            <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
+                            <li t-if="company.fax">Fax: <span t-field="company.fax"/></li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+            <div class="row zero_min_height; col-xs-12">
+                <span><strong><h3 style="text-align:center;">LAPORAN HARIAN PRODUKSI</h3></strong></span>
+                <h5 style="text-align:center;"><span t-field="doc.date"/></h5>
+                <div class="col-xs-12">
+                    <div style="border-bottom: 1px solid black;"></div>
+                </div>
+            </div>
+            <table style="width:100%; height:5mm; font-size:10px;">
+                <tr>
+                    <td style="vertical-align: top;">
+                        <strong>A. TBS</strong>
+                        <table width="100%">
+                            <th width="5%">No.</th>
+                            <th width="40%">Description</th>
+                            <th width="25%">Netto</th>
+                            <th width="5%">UoM</th>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    <span>SALDO AWAL TBS</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.saldo_awal_tbs_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    <span>PENERIMAAN TBS</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.tbs_in_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    <span>TOTAL TBS</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.total_tbs_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    <span>TBS DI L. RAMP</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.tbs_ramp_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    <span>TBS DALAM LORI</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.tbs_lori_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    6
+                                </td>
+                                <td>
+                                    <span>TBS DALAM REBUSAN</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.tbs_rebusan_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    7
+                                </td>
+                                <td>
+                                    <span>TOTAL SALDO AKHIR TBS</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.saldo_akhir_tbs_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    8
+                                </td>
+                                <td>
+                                    <span>JUMLAH LORI</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.total_lori_netto_rel" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    9
+                                </td>
+                                <td>
+                                    <span>TBS/LORI</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.per_lori_netto_rel" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>kg/Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    10
+                                </td>
+                                <td>
+                                    <span>JUMLAH LORI DIPROSES</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.proses_tbs_netto_rel" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    11
+                                </td>
+                                <td>
+                                    <span>TBS.PROSES</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.tbs_proses_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="5%">
+                    </td>
+                    <td style="vertical-align: top;">
+                        <table class="table-bordered" style="border: 1px solid black;" frame="box">
+                            <th width="30%"></th>
+                            <th></th>
+                            <th></th>
+                            <tr>
+                                <td>
+                                    <span>PROSES TBS</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.proses_tbs" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>RESTAN</span>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>di Rebusan</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.restan_rebusan" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>di Lori</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.restan_lori" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>di Loading Ramp</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.restan_loading_ramp" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>di Lantai</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.restan_lantai" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Sub Total</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.total_restan" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Total Lori</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.total_lori" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Lori</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>PERLORI/Netto</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.per_lori_netto" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Hm CBC</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.hm_ebc" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Jam</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Throughput</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.throughput" t-options='{"widget": "float", "precision": 2}'/>
+                                </td>
+                                <td>
+                                    <span>Ton/Jam</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div class="col-xs-12">
+                <strong>B. CPO</strong>
+                <table class="table" style="width:100%; height:5mm; font-size:10px;">
+                    <thead>
+                        <tr>
+                            <th>Sequence</th>
+                            <th>Description</th>
+                            <th>Ketinggian</th>
+                            <th>UoM</th>
+                            <th>Temperature</th>
+                            <th>UoM</th>
+                            <th>Density</th>
+                            <th>Volume Liter</th>
+                            <th>UoM</th>
+                            <th>Fak. Koreksi</th>
+                            <th>Jum. Set. Koreksi</th>
+                            <th>Jumlah</th>
+                            <th>UoM</th>
+                            <th>ffa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="doc.lhp_cpo_line" t-as="cpo">
+                            <tr>
+                                <td><span t-field="cpo.sequence"/></td>
+                                <td><span t-field="cpo.name"/></td>
+                                <td><span t-field="cpo.height" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="cpo.uom_height_id" /></td>
+                                <td><span t-field="cpo.temperature" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="cpo.uom_temperature_id"/></td>
+                                <td><span t-field="cpo.density"/></td>
+                                <td><span t-field="cpo.volume_liter" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="cpo.uom_volume_liter_id" /></td>
+                                <td><span t-field="cpo.koreksi_suhu" /></td>
+                                <td><span t-field="cpo.jumlah_setelah_koreksi" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="cpo.jumlah" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="cpo.uom_jumlah_id"/></td>
+                                <td><span t-field="cpo.ffa" t-options='{"widget": "float", "precision": 2}'/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-4">
+                    <strong>CPO di PKS</strong>
+                    <table style="width:100%; height:5mm; font-size:10px;">
+                        <tr>
+                            <td>Stock CPO dalam Tangki</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_cpo_tangki" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Pengiriman CPO</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_pengiriman_cpo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Penjualan CPO</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_penjualan_cpo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Selisih Timbang</td>
+                            <td>:</td>
+                            <td><span t-field="doc.selisih_timbang_penjualan_cpo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Stock Kemarin</td>
+                            <td>:</td>
+                            <td><span t-field="doc.saldo_awal_cpo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Penyesuaian CPO</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_penyesuaian_cpo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Produksi CPO</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_produksi_cpo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>OER</td>
+                            <td>:</td>
+                            <td><h5><strong><span t-field="doc.oer" t-options='{"widget": "float", "precision": 2}'/>%</strong></h5></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-4">
+                    <strong>CPO PTPN</strong>
+                    <table style="width:100%; height:5mm; font-size:10px;">
+                        <tr>
+                            <td>Stock Kemarin</td>
+                            <td>:</td>
+                            <td><span t-field="doc.saldo_awal_cpo_ptpn" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Produksi CPO</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_produksi_cpo_ptpn" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Penyerahan CPO</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_penyerahan_cpo_ptpn" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Stok CPO dalam Tangki</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_cpo_tangki_ptpn" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-4">
+                    <strong>CPO di Palopo</strong>
+                    <table style="width:100%; height:5mm; font-size:10px;">
+                        <tr>
+                            <td>Stock Kemarin</td>
+                            <td>:</td>
+                            <td><span t-field="doc.saldo_awal_cpo_palopo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Selisih Timbang</td>
+                            <td>:</td>
+                            <td><span t-field="doc.selisih_timbang_penjualan_cpo_palopo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Penjualan CPO</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_penjualan_cpo_palopo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Penyesuaian CPO</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_penyesuaian_cpo_palopo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Stock CPO dalam Tangki</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_cpo_tangki_palopo" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                    </table>
+                </div>                
+            </div>
+            <div class="col-xs-12">
+                <strong>C. KERNEL</strong>
+                <table class="table" style="width:100%; height:5mm; font-size:10px;">
+                    <thead>
+                        <tr>
+                            <th>Sequence</th>
+                            <th>Description</th>
+                            <th>Ketinggian</th>
+                            <th>Sample</th>
+                            <th>Tinggi Bersih</th>
+                            <th>Ket. 1</th>
+                            <th>Kg/cm</th>
+                            <th>Ket. 2</th>
+                            <th>Densitas</th>
+                            <th>Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="doc.lhp_kernel_line" t-as="kernel">
+                            <tr>
+                                <td><span t-field="kernel.sequence"/></td>
+                                <td><span t-field="kernel.name"/></td>
+                                <td><span t-field="kernel.height" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="kernel.sample_height" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="kernel.real_height" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="kernel.desc_1"/></td>
+                                <td><span t-field="kernel.kg_cm"/></td>
+                                <td><span t-field="kernel.desc_2"/></td>
+                                <td><span t-field="kernel.density" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td><span t-field="kernel.jumlah" t-options='{"widget": "float", "precision": 2}'/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-xs-4">
+                    <strong>KERNEL di PKS</strong>
+                    <table style="width:100%; height:5mm; font-size:10px;">
+                        <tr>
+                            <td>Total Stock Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_stock_kernel" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Pengiriman Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_pengiriman_kernel" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Total Penjualan Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_penjualan_kernel" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Selisih Timbang Penjualan Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.selisih_timbang_penjualan_kernel" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Stock Kemarin</td>
+                            <td>:</td>
+                            <td><span t-field="doc.saldo_awal_kernel" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Total Produksi Kernel Hari ini</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_produksi_kernel" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>KER</td>
+                            <td>:</td>
+                            <td><h5><strong><span t-field="doc.ker" t-options='{"widget": "float", "precision": 2}'/>%</strong></h5></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-4">
+                    <strong>KERNEL PTPN</strong>
+                    <table style="width:100%; height:5mm; font-size:10px;">
+                        <tr>
+                            <td>Stock Kemarin</td>
+                            <td>:</td>
+                            <td><span t-field="doc.saldo_awal_kernel_ptpn" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Produksi Kernel Hari ini</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_produksi_kernel_ptpn" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Penyerahan Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_penyerahan_kernel_ptpn" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Total Stock Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_stock_kernel_ptpn" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-4">
+                    <strong>KERNEL di MPA</strong>
+                    <table style="width:100%; height:5mm; font-size:10px;">
+                        <tr>
+                            <td>Stock Kemarin</td>
+                            <td>:</td>
+                            <td><span t-field="doc.saldo_awal_kernel_mpa" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Penjualan Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_penjualan_kernel_mpa" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Selisih Timbang Penjualan Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.selisih_timbang_penjualan_kernel_mpa" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                        <tr>
+                            <td>Total Stock Kernel</td>
+                            <td>:</td>
+                            <td><span t-field="doc.total_stock_kernel_mpa" t-options='{"widget": "float", "precision": 2}'/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <table style="width:100%;">
+                <thead>
+                    <tr>
+                        <td style="text-align:center; vertical-align:middle;">Disetujui oleh:</td>
+                        <td style="text-align:center; vertical-align:middle;">Diperiksa oleh:</td>
+                        <td style="text-align:center; vertical-align:middle;">Dibuat oleh:</td>
+                    </tr>
+                    <tr style="height:20mm;">
+                        <td style="text-align:center; vertical-align:middle;"></td>
+                        <td style="text-align:center; vertical-align:middle;"></td>
+                        <td style="text-align:center; vertical-align:middle;"></td>
+                    </tr>
+                    <tr style="text-decoration:underline;">
+                        <td style="text-align:center; vertical-align:middle;">Chaerul A.</td>
+                        <td style="text-align:center; vertical-align:middle;">Nanang N. Amin</td>
+                        <td style="text-align:center; vertical-align:middle;">M. Aswar</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center; vertical-align:middle;">Mill Manager</td>
+                        <td style="text-align:center; vertical-align:middle;">KTU</td>
+                        <td style="text-align:center; vertical-align:middle;">Kerani Produksi</td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </template>
+
+
+    <template id="report_lhp_qweb">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="bms_palm_oil_mill.report_lhp_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

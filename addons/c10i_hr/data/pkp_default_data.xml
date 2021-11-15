@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--PTKP Kawin-->
+        <record id="default_pkp_1" model="hr.pkp">
+            <field name="name">PKP1</field>
+            <field name="salary_min" type="float">0</field>
+            <field name="salary_max" type="float">50000000</field>
+            <field name="tax_pct" type="float">5</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="active">1</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="default_pkp_2" model="hr.pkp">
+            <field name="name">PKP2</field>
+            <field name="salary_min" type="float">50000000</field>
+            <field name="salary_max" type="float">250000000</field>
+            <field name="tax_pct" type="float">15</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="active">1</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="default_pkp_3" model="hr.pkp">
+            <field name="name">PKP3</field>
+            <field name="salary_min" type="float">250000000</field>
+            <field name="salary_max" type="float">500000000</field>
+            <field name="tax_pct" type="float">30</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="active">1</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="default_pkp_4" model="hr.pkp">
+            <field name="name">PKP4</field>
+            <field name="salary_min" type="float">500000000</field>
+            <field name="salary_max" type="float">0</field>
+            <field name="tax_pct" type="float">30</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="active">1</field>
+            <field name="sequence">4</field>
+        </record>
+    </data>
+</odoo>

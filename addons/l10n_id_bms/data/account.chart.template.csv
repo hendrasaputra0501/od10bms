@@ -1,0 +1,2 @@
+id,name,property_account_receivable_id:id,property_account_payable_id:id,property_account_expense_categ_id:id,property_account_income_categ_id:id,income_currency_exchange_account_id:id,expense_currency_exchange_account_id:id,use_anglo_saxon,currency_id:id
+l10n_id_bms,ID Tax and Account Chart Template PT. Bumi Maju Sawit,bms_account_11310001,bms_account_21100001,bms_account_51100002,bms_account_41000099,bms_account_65100103,bms_account_65100103,TRUE,base.IDR

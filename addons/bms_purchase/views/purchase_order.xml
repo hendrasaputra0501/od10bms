@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record id="bms_purchase_order_form_inherited" model="ir.ui.view">
+            <field name="name">bms.purchase.ordering</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="c10i_purchase.purchase_order_form_inherit" />
+            <field name="arch" type="xml">
+
+                <!-- AWAL tambahan DIKI -->
+                <field name='state' position="after">
+                    <field name="state_approv" widget="statusbar" readonly="0"/>
+                </field>
+
+                <xpath expr="//field[@name='state']" position="before">
+                    <button name="set_to_approve_manager" string="Request to Approve" type="object" attrs="{'invisible':[('state_approv', '!=', ('draft'))]}"/>
+                    <button name="set_to_approve_direktur" string="Approve Manager" groups="purchase.group_purchase_manager" type="object" attrs="{'invisible':[('state_approv', '!=', ('to_approve_manager'))]}"/>
+                    <button name="set_approved" string="Approve Direktur" groups="bms_purchase.group_purchase_direktur" type="object"  attrs="{'invisible':[('state_approv', '!=', ('to_approve_direktur'))]}"/>
+                </xpath>
+
+                <xpath expr="//header/button[@name='button_confirm']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('state_approv', 'not in', ('approved'))]}</attribute>
+                </xpath>
+
+                <field name='report_sign_1' position="after">
+                    <field name="approved_manager"/>
+                    <field name="approved_direktur"/>
+                </field>
+                <!-- AHIR tambahan DIKI -->
+
+                <field name='report_sign_1' position="after">
+                    <field name="sign_city" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="bms_purchase_order_form_inherited1" model="ir.ui.view">
+            <field name="name">bms.purchase.orde</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="c10i_purchase_request.purchase_order_form_inherit" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[last()]/group/group/field[@name='purchase_request_ids']" position="replace">
+                    <field name="purchase_request_ids" string="Purchase Request" widget="many2many_tags" domain="[('state', '=', 'approved')]" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="wizard_hutang_usaha">
+        <field name="name">Laporan Hutang Usaha</field>
+        <field name="model">wizard.hutang.usaha</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="partner_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('supplier', '=', True)]"/>
+                    <field name="account_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('internal_type', '=', 'payable')]"/>
+                </group>
+                <group col="4">
+                    <field name="date_from" />
+                    <field name="date_to" />
+                </group>
+                <footer>
+                    <button name="print_report" string="Excel" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_wizard_hutang_usaha" model="ir.actions.act_window">
+        <field name="name">Laporan Hutang Usaha</field>
+        <field name="res_model">wizard.hutang.usaha</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="wizard_hutang_usaha"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_wizard_report_hutang_usaha" parent="account.menu_finance_legal_statement" sequence="5" action="action_wizard_hutang_usaha" name="Laporan Hutang Usaha"/>
+
+    <report
+        id="report_hutang_usaha_xlsx"
+        model="account.invoice"
+        string="Laporan Hutang Usaha"
+        report_type="xlsx"
+        name="c10i_account.report_hutang_usaha_xlsx"
+        file="c10i_account.report_hutang_usaha_xlsx"
+    />
+</odoo>

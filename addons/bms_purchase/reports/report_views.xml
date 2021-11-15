@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report string  = "Purchase Order"
+                model   = "purchase.order"
+                auto    = "True"
+                name    = "report_nota_purchase_order"
+                rml     = "bms_purchase/reports/report_nota_purchase.jrxml"
+                id      = "c10i_purchase.report_nota_purchase_order"
+                menu    = "False" />
+
+        <report string  = "Penawaran Harga"
+                model   = "purchase.rfq"
+                auto    = "True"
+                name    = "report_nota_purchase_rfq"
+                rml     = "bms_purchase/reports/report_nota_purchase_rfq.jrxml"
+                id      = "c10i_purchase.report_nota_purchase_rfq"
+                menu    = "False"
+        />
+
+        <report string  = "Permintaan Barang dan Jasa"
+                model   = "purchase.request"
+                auto    = "True"
+                name    = "report_purchase_request"
+                rml     = "bms_purchase/reports/report_purchase_request.jrxml"
+                id      = "c10i_purchase_request.report_purchase_request"
+                menu    = "False"
+        />
+    </data>
+</odoo>

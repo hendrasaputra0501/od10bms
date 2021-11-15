@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<!-- main menu -->
+    <menuitem id="menu_bm" name="Building Management" sequence="1"/>
+    <!-- sub menu -->
+    <menuitem id="menu_bm_billing" name="Billing" parent="menu_bm" sequence="1" groups="c10i_bm.group_bm_billing_user"/> 
+    <menuitem id="menu_bm_utility" name="Utilities" parent="menu_bm" sequence="2" groups="c10i_bm.group_bm_utility_user"/> 
+    <menuitem id="menu_bm_unit_tenant" name="Unit and Tenant" parent="menu_bm" sequence="3" groups="c10i_bm.group_bm_user,c10i_bm.group_bm_utility_user"/>
+    
+    <menuitem id="menu_bm_config" name="Configuration" parent="menu_bm" sequence="4" groups="c10i_bm.group_bm_manager"/> 
+    <menuitem id="menu_bm_rate" name="Service Rate" parent="menu_bm_config" sequence="2" groups="c10i_bm.group_bm_manager"/>
+    <menuitem id="menu_bm_building" name="Building" parent="menu_bm_config" sequence="3" groups="c10i_bm.group_bm_manager"/>
+    <!-- actions -->
+    <menuitem id="menu_bm_tuition_bill" parent="menu_bm_billing" sequence="1"
+        action="action_bm_tuition_bill" />
+    <menuitem id="menu_bm_utility_bill" parent="menu_bm_billing" sequence="2"
+        action="action_bm_utility_bill" />
+
+    <menuitem id="menu_bm_utility_entry" name="Utility Entry" parent="menu_bm_utility" sequence="1"
+        action="action_bm_utility_entry" />
+    <menuitem id="menu_bm_electricity_usage" name="Electricity Usage" parent="menu_bm_utility" sequence="2" 
+        action="action_bm_electricity_usage" groups="c10i_bm.group_bm_billing_user"/>
+    <menuitem id="menu_bm_water_usage" name="Water Usage" parent="menu_bm_utility" sequence="3"
+        action="action_bm_water_usage" groups="c10i_bm.group_bm_billing_user"/>
+    
+    <menuitem id="menu_bm_unit" name="Unit" parent="menu_bm_unit_tenant" sequence="1"
+        action="action_bm_unit"/>
+    <menuitem id="menu_bm_tenant" name="Tenant" parent="menu_bm_unit_tenant" sequence="2"
+        action="action_bm_unit_tenancy"/>
+    <menuitem id="menu_bm_owner" name="Owner" parent="menu_bm_unit_tenant" sequence="3"
+        action="action_bm_owner"/>
+    
+    <menuitem id="menu_bm_setting" name="Settings" parent="menu_bm_config" sequence="1"
+        action="action_bm_config"/>
+    <menuitem id="menu_bm_tower" name="Tower" parent="menu_bm_building" sequence="1"
+        action="action_bm_tower"/>
+    <menuitem id="menu_bm_floor" name="Floor" parent="menu_bm_building" sequence="2"
+        action="action_bm_floor"/>
+    <menuitem id="menu_bm_tuition_rate" name="Tuition Rate" parent="menu_bm_rate" sequence="1"
+        action="action_bm_tuition_rate"/>
+    <!-- <menuitem id="menu_bm_sinking_fund_rate" name="Sinking Fund Rate" parent="menu_bm_rate" sequence="2"
+        action="action_bm_sinking_fund_rate"/> -->
+    <menuitem id="menu_bm_electricity_rate" name="Electricity Usage Rate" parent="menu_bm_rate" sequence="3"
+        action="action_bm_electricity_rate"/>
+    <menuitem id="menu_bm_water_rate" name="Water Usage Rate" parent="menu_bm_rate" sequence="4"
+        action="action_bm_water_rate"/>
+</odoo>

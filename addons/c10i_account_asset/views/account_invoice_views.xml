@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="c10i_account_invoice_form_inherited" model="ir.ui.view">
+        <field name="name">c10i.account.invoice.form.inherited</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form" />
+        <field name="arch" type="xml">
+             <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='asset_category_id']" position="replace">
+                 <!-- <field name="asset_id" string="Add to Asset"/> -->
+                 <button name="%(action_set_asset_from_invoice)d" string="Asset" type="action" icon="fa-list" />
+            </xpath>
+        </field>
+    </record>        
+</odoo>

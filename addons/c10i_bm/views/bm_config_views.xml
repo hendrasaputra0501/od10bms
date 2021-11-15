@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="bm_odoo_config" model="ir.ui.view">
+            <field name="name">bm settings</field>
+            <field name="model">bm.config</field>
+            <field name="arch" type="xml">
+                <form string="Configure BM" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link" special="cancel"/>
+                    </header>
+                    <field name="company_id" invisible="1"/>
+                    <group name="basic_config" string="Configurations">
+                        <label for="service_charge_product_id"/>
+                        <div>
+                            <field name="service_charge_product_id"/>
+                        </div>
+                        <label for="sinking_fund_product_id"/>
+                        <div>
+                            <field name="sinking_fund_product_id"/>
+                        </div>
+                        <label for="tuition_schedule_date"/>
+                        <div>
+                            <field name="tuition_schedule_date"/>
+                        </div>
+                    </group>
+                    <group name="utility_config">
+                        <label for="electricity_cost_product_id"/>
+                        <div>
+                            <field name="electricity_cost_product_id"/>
+                        </div>
+                        <label for="water_cost_product_id"/>
+                        <div>
+                            <field name="water_cost_product_id"/>
+                        </div>
+                    </group>
+                    <div>
+                        <span>(*) This configuration is related to the company you're logged into.</span>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_bm_config" model="ir.actions.act_window">
+            <field name="name">Configure Building Management</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bm.config</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+    </data>
+</odoo>

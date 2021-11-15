@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+        <record model="ir.ui.view" id="tax_payment_tree">
+            <field name="name">tax.payment.tree</field>
+            <field name="model">tax.payment</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date_start"/>
+                    <field name="date_stop"/>
+                    <!-- <field name="account_ids"/> -->
+                    <field name="account_group"/>
+                    <field name="amount_to_pay"/>
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form View -->
+        <record model="ir.ui.view" id="tax_payment_form">
+            <field name="name">tax.payment.form</field>
+            <field name="model">tax.payment</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <!-- <button name="set_open" class="oe_highlight" string="Set Open" type="object" clickable="True" attrs="{'invisible':[('state', '=', ('open'))]}"/> -->
+                        <button name="set_draft" class="oe_highlight" string="Set Draft" type="object" clickable="True" attrs="{'invisible':[('state', '!=', ('open'))]}"/>
+                        <field name="state" widget="statusbar" clickable="True"/>
+                        <button name="get_data" string="Get Data" type="object" clickable="True" attrs="{'invisible':[('state', '!=', ('draft'))]}"/>
+                        <button name="%(action_create_payment)d" string="Create Payment" type="action" attrs="{'invisible':['|', ('state', '!=', ('open')), ('amount_to_pay', '&lt;', 0)]}" class="oe_highlight"/>
+                        <!-- <button name="create_payment" class="oe_highlight" string="Create Payment" type="object" clickable="True" /> -->
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="voucher_id" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date_start"/>
+                                <field name="date_stop"/>
+                                <field name="account_group"/>
+                                <field name="account_ids" readonly="1" widget="many2many_tags"/>
+                                <!-- <field name="voucher_id" readonly="1"/> -->
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Lines">
+                                <field name="line_ids" readonly="1"/>
+                                <group class="oe_subtotal_footer oe_right" colspan="2">
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="amount_to_pay" />
+                                    </div>
+                                    <field name="amount_to_pay" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' />
+                                </group>
+                            </page>
+                            <page string="Move Lines">
+                                <field name="move_line_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tax_payment_action">
+            <field name="name">Tax Payment</field>
+            <field name="res_model">tax.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- <menuitem 
+            id="main_tax_payment"
+            name="Tax Payment"
+        /> -->
+
+        <menuitem 
+            id="submenu_tax_payment"
+            name="Tax Payment"
+            parent="account.menu_finance"
+            sequence="2"
+
+            action="tax_payment_action"
+        />
+
+    </data>
+</odoo>

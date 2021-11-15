@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_c10i_employee_advance_v2_c10i_employee_advance_v2,c10i_employee_advance_v2.c10i_employee_advance_v2,model_c10i_employee_advance_v2_c10i_employee_advance_v2,,1,0,0,0

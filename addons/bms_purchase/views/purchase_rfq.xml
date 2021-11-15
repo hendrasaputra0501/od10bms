@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_purchase_rfq_form_inherit">
+            <field name="name">cep.purchase.rfq.inherit</field>
+            <field name="model">purchase.rfq</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="c10i_purchase_request.view_purchase_rfq_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[1]/field[@name='line_ids']/tree/field[@name='state']" position="after">
+                    <field name="note"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="c10i_purchase_request.action_purchase_rfq" model="ir.actions.act_window">
+            <field name="name">Penawaran Harga</field>
+            <field name="res_model">purchase.rfq</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Klik untuk menambahkan Penawaran Permintaan Barang
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="c10i_purchase_request.action_purchase_rfq" id="c10i_purchase_request.purchase_rfq_menu" parent="c10i_purchase_request.menu_purchase_request" sequence="20" name="Penawaran Harga"/>
+    </data>
+</odoo>

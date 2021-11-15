@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!--====================Specifying the report========================-->
+		<report string="Report General Ledger By Account Excel Edition"
+			model="report.general.ledger.account"
+			auto="True"
+			name="report_general_ledger_account_xls"
+			rml="bms_account/reports/report_general_ledger_account_xls.jrxml"
+			id="c10i_account.report_general_ledger_account_xls"
+			menu="False"
+			/>
+
+        <report string="Report Aging Excel"
+		model="report.aging.excel"
+		auto="True"
+		name="report_aging_excel"
+		rml="bms_account/reports/report_aging_excel.jrxml"
+		id="c10i_account.report_aging_excel"
+		menu="False"
+		/>
+
+        <report string="Report Aging XLS"
+		model="report.aging"
+		auto="True"
+		name="report_aging_xls"
+		rml="bms_account/reports/report_aging_excel.jrxml"
+		id="c10i_account.report_aging_xls"
+		menu="False"
+		/>
+    </data>
+</odoo>

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Part of Odoo Module Developed by 73lines
+    See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <!-- Single Block Snippet -->
+    <template id="single_block" name="Single">
+        <div class="container-fluid single_block mt16 mb16 report-container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="s_block mt8 mb8"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Double Block Snippet -->
+    <template id="double_block" name="Double">
+        <div class="container-fluid double_block mt16 mb16 report-container">
+            <div class="row">
+                <div class="col-md-6 col-xs-6">
+                    <div class="d_block mt8 mb8"/>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                    <div class="d_block mt8 mb8"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Triple Block Snippet -->
+    <template id="triple_block" name="Triple">
+        <div class="container-fluid triple_block mt16 mb16 report-container">
+            <div class="row">
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8"/>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8"/>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div class="t_block mt8 mb8"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Quadruple Block Snippet -->
+    <template id="quadruple_block" name="Quadruple">
+        <div class="container-fluid quadruple_block mt16 mb16 report-container">
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8"/>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8"/>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8"/>
+                </div>
+                <div class="col-md-3 col-xs-3">
+                    <div class="q_block mt8 mb8"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- <hr> Block Snippet -->
+    <template id="hr_tag_block" name="&lt; hr &gt;">
+        <div class="container-fluid hr_block report-container">
+            <div class="row">
+                <hr/>
+            </div>
+        </div>
+    </template>
+
+    <!-- <div> snippet -->
+    <template id="div_tag" name="&lt; div &gt;">
+        <div class="report-well"/>
+    </template>
+
+    <!-- <p> snippet -->
+    <template id="p_tag" name="&lt; p &gt;">
+        <p class="report-well">p tag - Placeholder Text</p>
+    </template>
+
+    <!-- <span> snippet -->
+    <template id="span_tag" name="&lt; span &gt;">
+        <span class="report-well">span tag - Placeholder Text</span>
+    </template>
+
+    <!-- <address> snippet -->
+    <template id="address_tag" name="&lt; address &gt;">
+        <address class="report-well">address tag - Placeholder Text</address>
+    </template>
+
+    <!-- Address Format snippet -->
+    <template id="address_field" name="Address Format">
+        <div class="report-well">
+            <div class="report-well"><span class="report-well"><b>Address: </b></span></div>
+            <div class="report-well"><span class="report-well">Address Street 1</span></div>
+            <div class="report-well"><span class="report-well">Address Street 2</span></div>
+            <div class="report-well"><span class="report-well">Landmark</span><span> </span><span class="report-well">city</span><span> </span><span class="report-well">State</span></div>
+            <div class="report-well"><span class="report-well">Country </span><span> </span><span class="report-well"> Pin Code</span></div>
+        </div>
+    </template>
+
+    <!-- lable-field snippet -->
+    <template id="label_field" name="label: field">
+        <div class="report-well"><span class="report-well"><b>Label: </b></span><span class="report-well">field</span></div>
+    </template>
+
+    <!-- total right side 1 snippet -->
+    <template id="total_right_side" name="Total Table">
+        <div class="row report-well">
+            <div class="col-md-4 col-xs-4">
+                <div class="t_block mt8 mb8"/>
+            </div>
+            <div class="col-md-4 col-xs-4">
+                <div class="t_block mt8 mb8"/>
+            </div>
+            <div class="col-xs-4 col-md-4 pull-right">
+                <div class="t_block mt8 mb8">
+                    <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td>
+                                <strong>
+                                    <span>span name</span>
+                                </strong>
+                            </td>
+                            <td class="text-right">
+                                <span>span name</span>
+                            </td>
+                        </tr>
+                        <tr class="border-black">
+                            <td>
+                                <strong>
+                                    <span>span name</span>
+                                </strong>
+                            </td>
+                            <td class="text-right">
+                                <span>span name</span>
+                            </td>
+                        </tr>
+                        <tr class="border-black">
+                            <td>
+                                <strong>
+                                    <span>span name</span>
+                                </strong>
+                            </td>
+                            <td class="text-right">
+                                <span>span name</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Header 1 snippet -->
+    <template id="header_1" name="Header 1">
+        <h2 class="report-well">
+            <span class="report-well">Reference1 #</span>
+            <span class="report-well">Reference2 #</span>
+            <span class="report-well">span-name</span>
+        </h2>
+    </template>
+
+    <!-- Header 2 snippet -->
+    <template id="header_2" name="Header 2">
+        <div class="row report-well">
+            <div class="col-xs-3">
+                <strong>
+                    <span>Date Order:</span>
+                </strong>
+                <p>P Tag</p>
+            </div>
+            <div class="col-xs-3">
+                <strong>
+                    <span>Header 1:</span>
+                </strong>
+                <p>P Tag</p>
+            </div>
+            <div class="col-xs-3">
+                <strong>
+                    <span>Header 2:</span>
+                </strong>
+                <p>P Tag</p>
+            </div>
+            <div class="col-xs-3">
+                <strong>
+                    <span>Header 3:</span>
+                </strong>
+                <p>P Tag</p>
+            </div>
+        </div>
+    </template>
+
+    <!-- <table> snippet -->
+    <template id="table_tag" name="&lt; table &gt;">
+        <table class="report-well table table-hover">
+            <thead>
+                <tr>
+                    <td><span class="report-well"><b>Header_1</b></span></td>
+                    <td><span class="report-well"><b>Header_2</b></span></td>
+                    <td><span class="report-well pull-right"><b>Header_3</b></span></td>
+                    <td><span class="report-well pull-right"><b>Header_4</b></span></td>
+                    <td><span class="report-well pull-right"><b>Header_5</b></span></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="report-well">Field_Data_1</span></td>
+                    <td><span class="report-well">Field_Data_2</span></td>
+                    <td><span class="report-well pull-right">Field_Data_3</span></td>
+                    <td><span class="report-well pull-right">Field_Data_4</span></td>
+                    <td><span class="report-well pull-right">Field_Data_5</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+    <!-- Snippet Panel (Side Panel in Website) -->
+    <template id="report_snippets">
+        <ul id="navigate_section">
+            <li class="active">
+                <a href="#snippet_report" class="scroll-link">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x fa-inverse"/>
+                        <i class="fa fa-th-large fa-stack-1x"/>
+                    </span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#snippet_content" class="scroll-link">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x fa-inverse"/>
+                        <i class="fa fa-code fa-stack-1x"/>
+                    </span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#snippet_content_template" class="scroll-link">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x fa-inverse"/>
+                        <i class="fa fa-align-left fa-stack-1x"/>
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <div id="o_scroll">
+            <div id="snippet_report" class="o_panel">
+                <div class="o_panel_header">
+                    <span class="fa-stack">
+                        <i class="fa fa-th-large fa-stack-1x"/>
+                    </span>
+                    Report Blocks
+                </div>
+                <div class="o_panel_body">
+                    <t t-snippet="report_designer_73lines.single_block"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/single-icon.png"/>
+                    <t t-snippet="report_designer_73lines.double_block"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/double-icon.png"/>
+                    <t t-snippet="report_designer_73lines.triple_block"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/triple-icon.png"/>
+                    <t t-snippet="report_designer_73lines.quadruple_block"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/quadruple-icon.png"/>
+                </div>
+            </div>
+            <div id="snippet_content" class="o_panel">
+                <div class="o_panel_header">
+                    <span class="fa-stack">
+                        <i class="fa fa-code fa-stack-1x"/>
+                    </span>
+                    Report Contents
+                </div>
+                <div class="o_panel_body">
+                    <t t-snippet="report_designer_73lines.div_tag"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/div-icon.png"/>
+                    <t t-snippet="report_designer_73lines.p_tag"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/p-icon.png"/>
+                    <t t-snippet="report_designer_73lines.hr_tag_block"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/hr-icon.png"/>
+                    <t t-snippet="report_designer_73lines.span_tag"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/span-icon.png"/>
+                    <t t-snippet="report_designer_73lines.address_tag"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/address-icon.png"/>
+                    <t t-snippet="report_designer_73lines.table_tag"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/table-icon.png"/>
+                    <t t-snippet="report_designer_73lines.address_field"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/address-format-icon.png"/>
+                    <t t-snippet="report_designer_73lines.label_field"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/label-icon.png"/>
+                    <t t-snippet="report_designer_73lines.header_1"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/single-block-title-header-1.png"/>
+                    <t t-snippet="report_designer_73lines.header_2"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/quadruple-header-2.png"/>
+                    <t t-snippet="report_designer_73lines.total_right_side"
+                        t-thumbnail="/report_designer_73lines/static/src/img/icons/total-icon.png"/>
+                </div>
+            </div>
+
+            <div id="snippet_content_template" class="o_panel">
+                <div class="o_panel_header">
+                    <span class="fa-stack">
+                        <i class="fa fa-align-left fa-stack-1x"/>
+                    </span>
+                    Custom Report
+                </div>
+                <div class="o_panel_body">
+
+                    <!-- Custom Report Blocks Layout -->
+                    <!-- @todo Siddharth Bhalgami <siddharth.bhalgami@gmail.com>
+                                *** Not ready yet, due to language problem.
+                                Uncomment it & you'll face some problem.
+                                Will be fixed soon. ***
+                    -->
+                    <t t-snippet="report_designer_73lines.custom_block_1"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/custom-report-template-icon.png" />
+                    <t t-snippet="report_designer_73lines.custom_block_2"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/custom-report-template-icon.png" />
+                    <t t-snippet="report_designer_73lines.custom_block_3"
+                       t-thumbnail="/report_designer_73lines/static/src/img/icons/custom-report-template-icon.png" />
+                </div>
+            </div>
+        </div>
+
+        <div id="snippet_options" class="hidden">
+            <t t-call="report_designer_73lines.snippet_options"/>
+        </div>
+    </template>
+
+    <!-- Snippet Options -->
+    <template id="snippet_options">
+        <t t-call="web_editor.snippet_options"/>
+
+        <div data-js='blog-style' data-selector="t, div, table, tr, td, span, address, p, .report-well">
+            <li>
+                <a href="#" id="oe_snippet_attribute" class="oe_snippet_attribute" title="Attribute Block">Attribute</a>
+            </li>
+        </div>
+
+        <div data-js='background'
+             data-selector=".report-well, .report-container">
+            <li class="dropdown-submenu">
+                <a tabindex="-1" href="#"><i class="fa fa-picture-o"/>Background Image
+                </a>
+                <ul class="dropdown-menu">
+                    <li data-background="">
+                        <a href="#">None</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li data-choose_image="choose_image">
+                        <a href="#">
+                            <b>Set Custom Image...</b>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li data-background="/web/image/website.s_background_image_01">
+                        <a href="#">Peak</a>
+                    </li>
+                    <li data-background="/web/image/website.s_background_image_02">
+                        <a href="#">Downtown</a>
+                    </li>
+                    <li data-background="/web/image/website.s_background_image_03">
+                        <a href="#">Panama Sky</a>
+                    </li>
+                    <li data-background="/web/image/website.s_background_image_04">
+                        <a href="#">Cubes</a>
+                    </li>
+                    <li data-background="/web/image/website.s_background_image_05">
+                        <a href="#">Building Profile</a>
+                    </li>
+                    <li data-background="/web/image/website.s_background_image_06">
+                        <a href="#">Type</a>
+                    </li>
+                    <li data-background="/web/image/website.s_background_image_07">
+                        <a href="#">People</a>
+                    </li>
+                    <li data-background="/web/image/website.s_background_image_08">
+                        <a href="#">City</a>
+                    </li>
+                    <li data-background="/web/image/website.s_background_image_09">
+                        <a href="#">Sails</a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+
+        <div data-js="colorpicker"
+             data-selector=".report-well, .report-container, tr">
+            <li class="dropdown-submenu">
+                <a tabindex="-1" href="#"><i class="fa fa-eyedropper"/>Background Color
+                </a>
+                <ul class="dropdown-menu">
+                    <li></li>
+                </ul>
+            </li>
+        </div>
+
+        <div data-js='margin-y'
+             data-selector="section, .row > [class*='col-md-'], :not(.o_gallery > .container) > .carousel, .parallax, hr">
+        </div>
+
+        <div data-js='margin-x' data-selector=".row > [class*='col-md-']" data-drop-near=".row > [class*='col-md-']">
+        </div>
+
+        <div data-js='resize' data-selector="div.container-fluid.report-container"
+             data-drop-in=".oe_structure, [data-oe-type=html]">
+        </div>
+
+        <div data-js='content' data-selector=".report-well"
+             data-drop-in=".s_block, .d_block, .t_block, .q_block, td">
+        </div>
+
+        <div data-js='ul'
+             data-selector=":not(li) > ul:has(ul,ol), :not(li) > ol:has(ul,ol)">
+            <li data-toggle_class="o_ul_folded">
+                <a href="#">Folded list</a>
+            </li>
+        </div>
+
+        <div data-js='collapse'
+             data-selector='.panel-group > .panel:has(> .panel-collapse)'
+             data-drop-in='.panel-group:has(> .panel > .panel-collapse)'>
+        </div>
+    </template>
+
+</odoo>

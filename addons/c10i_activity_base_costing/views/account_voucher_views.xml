@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="abc_voucher_form_inherit_location" model="ir.ui.view">
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="c10i_account_location.view_voucher_form_inherit_location"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='account_location_id']" position="after">
+                <field name="account_activity_id" options="{'no_create_edit':True, 'no_create':True}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="abc_voucher_line_form_inherit_location" model="ir.ui.view">
+        <field name="model">account.voucher.line</field>
+        <field name="inherit_id" ref="c10i_account_location.view_voucher_line_form_inherit_location"/>
+        <field name="arch" type="xml">
+            <field name="account_location_id" position="after">
+                <field name="account_activity_id" options="{'no_create_edit':True, 'no_create':True}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

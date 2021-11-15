@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<record id="view_account_asset_search_inherit" model="ir.ui.view">
+	        <field name="name">account.asset.asset.search.inherit</field>
+	        <field name="model">account.asset.asset</field>
+	        <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
+	        <field name="arch" type="xml">
+	            <search string="Asset Account">
+	                <field name="code"/>
+	            </search>
+	        </field>
+	    </record>
+
+	    <record model="ir.ui.view" id="view_account_asset_asset_purchase_tree_inherit">
+	        <field name="name">account.asset.asset.purchase.tree.inherit</field>
+	        <field name="model">account.asset.asset</field>
+	        <field name="inherit_id" ref="account_asset.view_account_asset_asset_purchase_tree"/>
+	        <field name="arch" type="xml">
+	        	<field name="name" position="after">
+	                <field name="code"/>
+	        	</field>
+	        </field>
+	    </record>
+
+    </data>
+</odoo>

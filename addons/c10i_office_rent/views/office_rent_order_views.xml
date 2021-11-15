@@ -1,0 +1,125 @@
+<odoo>
+    <data>
+        <record id="office_rent_order_tree" model="ir.ui.view">
+            <field name="name">office.rent.order.tree</field>
+            <field name="model">office.rent.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Order No."/>
+                    <field name="partner_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="office_rent_order_form" model="ir.ui.view">
+            <field name="name">office.rent.order.form</field>
+            <field name="model">office.rent.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                        <button name="action_confirm" states="draft" string="Confirm Rent" type="object" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="rent_order"/>
+                            </group>
+                            <group></group>
+                            <group string="Payment">
+                                <field name="pricelist_id"/>
+                                <field name="payment_method_period"/>
+                                <field name="tuition_schedule_date"/>
+                            </group>
+                           <group string="Duration">
+                                <field name="date_order" invisible="1"/>
+                                <field name="duration"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="next_payment" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Order Lines">
+                                <field name="order_line_ids">
+                                    <tree string="Sales Order Lines" editable="bottom" decoration-info="invoice_status=='to invoice'">
+                                        <field name="state" invisible="1"/>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="product_id"
+                                            attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}"
+                                            context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom}"/>
+                                        <field name="layout_category_id" groups="sale.group_sale_layout"/>
+                                        <field name="product_uom_qty"
+                                            string="Ordered Qty"
+                                            context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom"/>
+                                        <field name="qty_invoiced"
+                                            invisible="1"/>
+                                        <field name="qty_to_invoice" invisible="1"/>
+                                        <field name="product_uom"
+                                            attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}"
+                                            context="{'company_id': parent.company_id}"
+                                            groups="product.group_uom" options='{"no_open": True}'/>
+                                        <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" widget="many2many_tags"/>
+                                        <field name="price_unit"
+                                            attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                                        <field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale')]"
+                                            attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                                        <field name="discount" groups="sale.group_discount_per_so_line"/>
+                                        <field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal"/>
+                                        <field name="price_total" widget="monetary" groups="sale.group_show_price_total"/>
+                                        <field name="qty_delivered_updateable" invisible="1"/>
+                                        <field name="procurement_ids" invisible="1"/>
+                                        <field name="state" invisible="1"/>
+                                        <field name="invoice_status" invisible="1"/>
+                                        <field name="customer_lead" invisible="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="amount_total" />
+                                        <button name="button_dummy"
+                                            states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                                    </div>
+                                    <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <field name="note" class="oe_inline" placeholder="Setup default terms and conditions in your company settings."/>
+                                <div class="oe_clear"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="office_rent_order_filter" model="ir.ui.view">
+            <field name="name">office.rent.order.filter</field>
+            <field name="model">office.rent.order</field>
+            <field name="arch" type="xml">
+                <search string="Cari order">
+                    <field name="name" string="Search" filter_domain="[('name','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="action_office_rent_order">
+            <field name="name">Rent order</field>
+            <field name="res_model">office.rent.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="office_rent_order_filter"/>
+        </record>
+    </data>
+</odoo>

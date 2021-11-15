@@ -1,0 +1,83 @@
+<odoo>
+    <data>
+        <record id="office_rent_unit_tree" model="ir.ui.view">
+            <field name="name">office.rent.unit.tree</field>
+            <field name="model">office.rent.unit</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="tower_id"/>
+                    <field name="floor_id"/>
+                    <field name="area"/>
+                    <field name="block"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="office_rent_unit_form" model="ir.ui.view">
+            <field name="name">office.rent.unit.form</field>
+            <field name="model">office.rent.unit</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="%(c10i_office_rent.action_orent_unit_tuition_bill)d"  string="Create Tuition Bill"
+                            context="{'default_filter_unit_id': active_id}"
+                            type="action" groups="c10i_bm.group_bm_billing_user"/>
+                            <button name="%(c10i_office_rent.action_orent_unit_rental_bill)d"  string="Create Rental Bill"
+                                context="{'default_filter_unit_id': active_id}"
+                                type="action" groups="c10i_bm.group_bm_billing_user"/>
+                            </header>
+                            <sheet>
+                                <group>
+                                    <group name="basic_info">
+                                        <field name="company_id" options="{'no_create':True,'no_edit':True}" groups="base.group_multi_company"/>
+                                        <field name="name"/>
+                                        <field name="tower_id"/>
+                                        <field name="floor_id" options="{'no_create':True,'no_edit':True}"/>
+                                        <field name="area"/>
+                                        <field name="block"/>
+                                        <field name="rent_ok"/>
+                                    </group>
+                                    <group></group>
+                                    <group string= "Utility" name="utility">
+                                        <field name="electricity_factor"/>
+                                        <field name="electricity_load_voltage"/>
+                                        <field name="electricity_saving_limit"/>
+                                    </group>
+                                    <group string= "Configuration" name="config">
+                                        <field name="service_charge_product_id" required="1"/>
+                                        <field name="sinking_fund_product_id" required="1"/>
+                                        <field name="electricity_cost_product_id" required="1"/>
+                                        <field name="water_cost_product_id" required="1"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Tenant">
+                                        <field name="tenant_ids" context="{'form_view_ref': 'c10i_bm.bm_unit_tenancy_form_unit'}" />
+                                    </page>
+                                </notebook>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+
+                <record id="office_rent_unit_filter" model="ir.ui.view">
+                    <field name="name">office.rent.unit.filter</field>
+                    <field name="model">office.rent.unit</field>
+                    <field name="arch" type="xml">
+                        <search string="Cari unit">
+                            <field name="name" string="Search" filter_domain="[('name','ilike',self)]"/>
+                        </search>
+                    </field>
+                </record>
+                <!-- actions opening views on models -->
+
+                <record model="ir.actions.act_window" id="action_office_rent_unit">
+                    <field name="name">Rent Unit</field>
+                    <field name="res_model">office.rent.unit</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="view_type">form</field>
+                    <field name="search_view_id" ref="office_rent_unit_filter"/>
+                </record>
+            </data>
+        </odoo>

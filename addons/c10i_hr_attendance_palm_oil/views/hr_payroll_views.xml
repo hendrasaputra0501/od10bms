@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="palm_oil_hr_attendance_payroll_form" model="ir.ui.view">
+            <field name="name">view.hr.attendance.payroll.form</field>
+            <field name="model">hr.attendance.payroll</field>
+            <field name="inherit_id" ref="c10i_hr_attendance.view_hr_attendance_payroll_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div[1]" position="after">
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"  name="action_view_invoice"
+                            class="oe_stat_button" icon="fa-pencil-square-o"
+                                attrs="{'invisible':[('state', '!=', 'done'),('invoice_ids','=',[])]}">
+                            <field name='invoice_ids' invisible="1"/>
+                            <field name="invoice_count" widget="statinfo" string="AP"/>
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//sheet/group[@name='hr_attendance_payroll']" position="after">
+                    <group name="payroll_partner" attrs="{'invisible': [('state','=','draft')]}">
+                        <group>
+                            <field name="payroll_partner_id" attrs="{'required': [('state','=','confirmed')]}"/>
+                            <field name="bpjs_kes_partner_id" attrs="{'required': [('state','=','confirmed')]}"/>
+                            <field name="bpjs_tk_partner_id" attrs="{'required': [('state','=','confirmed')]}"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </xpath>
+                <button name="get_attendance_data" position="after">
+                    <button name="action_create_bill" states="confirmed" type="object" string="Create Invoice AP" icon="fa-archive text-primary"/>
+                    <button name="action_draft" type="object" states="confirmed" string="Set To Draft" class="oe_highlight"/>
+                </button>
+                <xpath expr="//field[@name='line_ids']/form/group[1]" position="after">
+                    <group name="bpjs">
+                        <group string="BPJS Kesehatan">
+                            <field name="amount_bpjs_kes" />
+                            <field name="potongan_bpjs_kes" />
+                            <field name="tunjangan_bpjs_kes" />
+                        </group>
+                        <group string="BPJS Ketenagakerjaan">
+                            <field name="amount_bpjs_tk" />
+                            <field name="potongan_bpjs_tk" />
+                            <field name="tunjangan_bpjs_tk" />
+                        </group>
+                        <group string="BPJS Pensiunan">
+                            <field name="amount_bpjs_pensiun" />
+                            <field name="potongan_bpjs_pensiun" />
+                            <field name="tunjangan_bpjs_pensiun" />
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

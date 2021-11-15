@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bms_hr_attendance_payroll_form" model="ir.ui.view">
+            <field name="name">bms.hr.attendance.payroll.form</field>
+            <field name="model">hr.attendance.payroll</field>
+            <field name="inherit_id" ref="c10i_hr_attendance.view_hr_attendance_payroll_form" />
+            <field name="arch" type="xml">
+                <field name="account_period_id" position="after">
+                    <field name="operation_type_id" required="True" attrs="{'readonly':[('state','!=','draft')]}"/>
+                </field>
+
+                <xpath expr="//notebook/page[1]/field[@name='line_ids']/tree/field[@name='natura_value']" position="after">
+                    <field name="allowance_structural" />
+                    <field name="allowance_production" />
+                    <field name="premi_value" />
+                </xpath>
+                <xpath expr="//notebook/page[1]/field[@name='line_ids']/form/group[1]/group[2]/field[@name='natura_value']" position="after">
+                    <field name="allowance_structural" />
+                    <field name="allowance_production" />
+                    <field name="premi_value" />
+                </xpath>
+                <xpath expr="//notebook/page[1]/field[@name='line_ids']/tree/field[@name='penalty_value']" position="after">
+                    <field name="rapel_value"/>
+                </xpath>
+                <xpath expr="//notebook/page[1]/field[@name='line_ids']/form/group[1]/group[2]/field[@name='penalty_value']" position="after">
+                    <field name="rapel_value"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="c10i_hr_attendance.view_hr_attendance_payroll_tree" model="ir.ui.view">
+            <field name="name">view.hr.attendance.payroll.tree</field>
+            <field name="model">hr.attendance.payroll</field>
+            <field name="arch" type="xml">
+                <tree string="Attendance Payroll">
+                    <field name="name"/>
+                    <field name="operation_type_id"/>
+                    <field name="company_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <report string  = "Report Payroll Xlsx"
+                model   = "hr.attendance.payroll"
+                auto    = "True"
+                report_type = "xlsx"
+                name    = "report_salary_xlsx_new"
+                id      = "report_salary_xlsx_new"
+                menu    = "True"
+        />
+    </data>
+</odoo>
