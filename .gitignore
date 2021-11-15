@@ -1,6 +1,15 @@
 # Odoo BMS Custom Excluded File/Folders
-.hg
+.hg/
 .hg*
+.ssh/
+.bash_history
+.psql_history
+.java/
+.local/
+.mailmap
+.gitconfig
+.viminfo
+openerp-jasper.pid
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
