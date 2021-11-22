@@ -7,17 +7,24 @@
 				<form string="Procurement Leasing">
 					<header>
 						<button string="Running" class="oe_highlight" name="action_ongoing" states="draft" type="object" groups="account.group_account_user"/>
-						<button string="Correction" class="" name="reset_leasing" states="draft" type="object" groups="account.group_account_user"/>
-						<button string="Compute" class="" name="compute_installment" states="draft" type="object" groups="account.group_account_user"/>
+						<button string="Correction" class="" name="reset_leasing" states="ongoing" type="object" groups="account.group_account_user"/>
+<!-- 						<button string="Compute" name="compute_installment" states="ongoing" type="object" class="oe_highlight" groups="account.group_account_user"/> -->
 						<!-- <button string="Finish" class="oe_highlight" name="get_finished" states="ongoing" type="object" groups="account.group_account_user"/> -->
 						<button string="Close" class="oe_highlight" name="action_close" states="finished" type="object" groups="account.group_account_user"/>
+						<button name="action_create_payment" type="object" class="oe_highlight" string="Create Deposite Payment" attrs="{'invisible': [('voucher_count', '!=', 0)]}"/>	
 						
 						
 						<field name="state" widget="statusbar" statusbar_visible="draft,ongoing,finished,closed" 
 							statusbar_colors='{"draft":"blue","ongoing":"green","finished":"blue","closed":"red"}' colspan="2" />
 					</header>
 					<sheet>
-						
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_view_payments"
+                                string="Payment(s)" type="object" states="draft" 
+                                attrs="{'invisible': [('voucher_count','=',0)]}" icon="fa-refresh"/>
+                             <field name="voucher_ids" invisible="1"/>
+                             <field name="voucher_count" invisible="1"/>
+                         </div>
 						<div class="oe_title">
 							<label for="number" class="oe_edit_only"/>
 							<h1>
@@ -35,14 +42,14 @@
 								<field name="currency_id" invisible="1"/>
 								<field name="gross_value" widget="monetary" options="{'currency_field': 'currency_id'}" required='1' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
 								<field name="deposite_value" widget="monetary" options="{'currency_field': 'currency_id'}" required='1' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-								<div>
+<!-- 								<div>
 									<field name="is_down_payment" invisible="1"/>
 									<field name="is_down_payment_post" invisible="1"/>
 									<button name="%(action_wizard_leasing)d" string="Create Payment" attrs="{'invisible': ['|',('deposite_value', '&lt;=', 0),('is_down_payment','=',True)]}" class="oe_edit_only" type="action" style="background-color:#0080ff;margin:0;font-weight:bold" groups="account.group_account_user,base.group_user"/>
 									<button name="get_dp_post" string="DP Posted" attrs="{'invisible': ['|',('is_down_payment','=',False),('is_down_payment_post','=', True)]}" class="oe_edit_only" type="object" style="background-color:#0080ff;margin:0;font-weight:bold" groups="account.group_account_user,base.group_user"/>	
 										
 								</div>
-								<br/>
+								<br/> -->
 								<field name="installment_period_numb" required='1' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
 							</group>
 							<group>
@@ -60,9 +67,22 @@
 										<field name="installment_amount" sum="Installment Amount" style="text-align:left !important"/>
 										<field name="state"/>
 										<field name="is_installment_payment" invisible="1"/>
-										<button name="%(action_wizard_leasing)d" string="Pay Installment" attrs="{'invisible':['|',('state','in',['paid','post']),('is_installment_payment','=',False)]}" class="btn-primary" type="action" style="background-color:#0080ff;margin:0;font-weight:bold" groups="account.group_account_user,base.group_user"/>
-										<button name="post_installment" string="Post Installment" attrs="{'invisible':['|',('state','not in',['paid']),('is_installment_payment','=',False)]}" class="btn-primary" type="object" style="background-color:#0080ff;margin:0;font-weight:bold" groups="account.group_account_user,base.group_user"/>
+										<button name="action_create_payment" string="Pay Installment" class="btn-primary" type="object" style="background-color:#0080ff;margin:0;font-weight:bold" attrs="{'invisible':[('state','=','paid')]}" groups="account.group_account_user,base.group_user"/>
 									</tree>
+									<form>
+										<group>
+											<group>
+												<field name="name"/>
+												<field name="installment_amount"/>
+												<field name="asset_leasing_id"/>												
+											</group>
+											<group>
+												<field name="state"/>
+												<field name="installment_date"/>
+											</group>
+										</group>
+										<field name="voucher_line_ids"/>
+									</form>
 								</field>
 							</page>
 						</notebook>
@@ -98,8 +118,8 @@
 			<field name="view_type">form</field>
 	</record>
 
-	<menuitem name="Leasing" id="menu_open_leasing" sequence="103" web_icon="c10i_account_asset_leasing,static/description/icon.png" groups="account.group_account_user"/>
-	<menuitem name="Procurement Leasing" id="menu_open_leasing_1" parent="menu_open_leasing" sequence="1"/>
-	<menuitem name="Procurement Leasing" parent="menu_open_leasing_1" id="menu_leasing" action="request_leasing" sequence="1"/>
+<!-- 	<menuitem name="Leasing" id="menu_open_leasing" sequence="103" web_icon="c10i_account_asset_leasing,static/description/icon.png" groups="account.group_account_user"/> -->
+<!-- 	<menuitem name="Procurement Leasing" id="menu_open_leasing_1" parent="menu_open_leasing" sequence="1"/> -->
+	<menuitem name="Procurement Leasing" parent="account.menu_finance_entries" id="menu_leasing" action="request_leasing" sequence="105"/>
 	
 </odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_voucher_form_leasing">
+        <field name="name">account.voucher.form</field>
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="c10i_account.view_voucher_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="before">
+                <field name='account_asset_installment_line_id' invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

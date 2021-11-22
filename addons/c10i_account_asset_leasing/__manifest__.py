@@ -15,6 +15,7 @@
 		'data/account_asset_leasing_data.xml',
 		'wizard/wizard_leasing_views.xml',
 		'views/account_asset_leasing_views.xml',
+		'views/account_voucher_view.xml',
 	],
 	'installable': True,
 	'application': True,
