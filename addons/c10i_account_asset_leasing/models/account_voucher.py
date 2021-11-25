@@ -31,10 +31,16 @@ class AccountVoucher(models.Model):
 				# update first installment payment 
 				current_search_installment_line.write({'is_installment_payment':True})
 
+	@api.model
+	def create(self, vals):
+		journal = self.env['account.journal'].browse(vals['journal_id'])
+		vals['account_id'] = journal.default_credit_account_id.id
+		return super(AccountVoucher, self).create(vals)
+
 
 	@api.multi
-	def action_move_line_create(self):
-		res = super(AccountVoucher, self).action_move_line_create()
+	def proforma_voucher(self):
+		res = super(AccountVoucher, self).proforma_voucher()
 		self.action_installment_update_state()
 		self.action_dp_update_state()
 		return res
