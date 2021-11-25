@@ -18,7 +18,7 @@ class AccountVoucher(models.Model):
 	@api.multi
 	def action_installment_update_state(self):
 		if self.asset_leasing_id:
-			if 'not_paid' not in self.asset_leasing_id.account_asset_installment_line_ids.mapped('state'):
+			if 'not_paid' not in self.asset_leasing_id.account_asset_installment_line_ids.mapped('state') and self.asset_leasing_id.state == 'ongoing':
 				self.asset_leasing_id.state='finished'
 
 	@api.one
