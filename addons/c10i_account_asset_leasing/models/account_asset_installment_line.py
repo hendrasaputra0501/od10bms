@@ -62,7 +62,7 @@ class AccountAssetLeasing(models.Model):
                 'default_payment_type': 'purchase',
                 'default_partner_id': self.asset_leasing_id.partner_id.id,
                 'default_asset_leasing_id': self.asset_leasing_id.id,
-                'default_account_id'    : self.asset_leasing_id.invoice_id.account_id.id,
+                # 'default_account_id'    : self.asset_leasing_id.invoice_id.account_id.id,
                 'default_pay_now'   : 'pay_now',
                 'default_line_ids': [{
                         'name'          : 'Installment Asset [%s]: %s'%(self.installment_date, self.asset_leasing_id.name.name),

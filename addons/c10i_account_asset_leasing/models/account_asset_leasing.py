@@ -95,7 +95,7 @@ class AccountAssetLeasing(models.Model):
 					'default_payment_type': 'purchase',
 					'default_partner_id': self.partner_id.id,
 					'default_asset_leasing_id': self.id,
-					'default_account_id'	: self.invoice_id.account_id.id,
+					# 'default_account_id'	: self.invoice_id.account_id.id,
 					'default_pay_now'	: 'pay_now',
 					'default_line_ids': [{
 							'name'			: 'DP Asset: %s'%(self.name.name),
