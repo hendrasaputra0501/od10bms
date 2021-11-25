@@ -43,7 +43,6 @@ class AccountAssetLeasing(models.Model):
     def _get_status(self):
         for line in self:
             value = sum(line.voucher_line_ids.filtered(lambda l: l.voucher_id.state=='posted').mapped('price_subtotal'))
-            print 'ddddddddddddddddddddddddddddddddddddd', line.installment_amount==value, line.installment_amount,value
             line.state= 'paid' if line.installment_amount==value else 'not_paid'
 
     @api.multi
@@ -64,6 +63,7 @@ class AccountAssetLeasing(models.Model):
                 'default_partner_id': self.asset_leasing_id.partner_id.id,
                 'default_asset_leasing_id': self.asset_leasing_id.id,
                 'default_account_id'    : self.asset_leasing_id.invoice_id.account_id.id,
+                'default_pay_now'   : 'pay_now',
                 'default_line_ids': [{
                         'name'          : 'Installment Asset [%s]: %s'%(self.installment_date, self.asset_leasing_id.name.name),
                         'account_id'    : self.asset_leasing_id.invoice_id.account_id.id,
