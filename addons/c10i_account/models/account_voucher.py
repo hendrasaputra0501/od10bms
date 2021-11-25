@@ -305,6 +305,8 @@ class AccountVoucher(models.Model):
                 ctx['payment_id'] = self.env['account.payment'].create(self.voucher_pay_now_payment_create()).id
             # Create the account move record.
             move = self.env['account.move'].create(voucher.account_move_get())
+            if move.line_ids.filtered(lambda x:x.debit == 0 and x.credit==0):
+                move.line_ids.filtered(lambda x:x.debit == 0 and x.credit==0).unlink()
             # Get the name of the account_move just created
             # Create the first line of the voucher
             move_line = self.env['account.move.line'].with_context(ctx).create(voucher.with_context(ctx).first_move_line_get(move.id, company_currency, current_currency))
