@@ -150,6 +150,7 @@ class hr_minimum_wage(models.Model):
     work_day            = fields.Integer(string="Hari Kerja", default=25)
     employee_id         = fields.Many2one(comodel_name="hr.employee", string="Karyawan", ondelete="restrict")
     employee_type_id    = fields.Many2one(comodel_name="hr.employee.type", string="Type Karyawan", ondelete="restrict")
+    date_to     = fields.Date("Tanggal Berakhir", default=lambda self:time.strftime(time.strftime('%Y') + '-12-31'))
 
     @api.depends('umr_month', 'work_day')
     def _compute_worked_hours(self):
@@ -203,7 +204,7 @@ class hr_minimum_wage(models.Model):
             elif self.year and not other_ids:
                 res = {}
                 self.date_from  = time.strftime(str(self.year) + '-01-01')
-                self.date_to    = time.strftime(str(self.year) + '-12-31')
+                # self.date_to    = time.strftime(str(self.year) + '-12-31')
 
 class hr_employee_type(models.Model):
     _name           = 'hr.employee.type'
